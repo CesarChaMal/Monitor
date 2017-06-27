@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<h:body>
+	<ui:repeat value="#{monitorControlerBean.paginacionMonitor.model}" var="foto">
+		<div class="ui-g" id="divMain">
+			<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<p:graphicImage
+					value="/images/menu_servicios/AsignacionEquipo_opt.png" />
+			</div>
+			<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<p:outputLabel>Cve Sitio:</p:outputLabel>
+				<p:spacer width="10" height="10" />
+				<h:outputText value="#{foto.sitio.id.cveSitio}"/>
+				<br />
+				<p:outputLabel>Dirección:</p:outputLabel>
+				<p:spacer width="10" height="10" />
+				<h:outputText value="#{foto.sitio.ubicacion}"  />
+				<br />
+				<p:outputLabel>Campaña:</p:outputLabel>
+				<p:spacer width="10" height="10" />
+				<h:outputText value="#{foto.sitio.campana.nombre}" />
+				<br />
+				<p:outputLabel>Plaza:</p:outputLabel>
+				<p:spacer width="10" height="10" />
+				<h:outputText value="#{foto.sitio.plaza.nombre}"  />
+
+			</div>
+			<div class="ui-g-12 ui-md-6 ui-lg-4">
+				<p:panel>
+					<p:outputLabel>Vigencia Campaña</p:outputLabel>
+					<hr />
+					<p:outputLabel>INICIA:</p:outputLabel>
+					<h:outputText value="#{foto.sitio.inicia}" />
+					<br />
+					<p:outputLabel>TERMINA:</p:outputLabel>
+					<h:outputText value="#{foto.sitio.termina}" />
+					<hr />
+				</p:panel>
+			</div>
+		</div>
+		<br />
+
+		<hr />
+	</ui:repeat>
+
+
+
+</h:body>
+</html>

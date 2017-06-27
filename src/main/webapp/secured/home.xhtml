@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Home</title>
+</h:head>
+
+<h:body onload="#{home.init()}">
+
+	<h:form>
+		<p:panel header="Home">
+
+			<input class="burger-check" id="burger-check" type="checkbox"/>
+			
+			<label
+				for="burger-check" class="burger"></label> <nav id="navigation1" class="navigation">
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">catalogo Usuarios</a></li>
+					<li><a href="#">catalogo 2</a></li>
+					<li><a href="#">Fotos</a></li>
+					<li><h:link outcome="/pages/monitorizacion.xhtml">Monitorización</h:link></li>
+				</ul>
+				</nav>
+			<p>
+				<h:outputText value="Welcome, #{home.mensaje}!" />
+			</p>
+
+			<p:commandButton value="Logout" action="#{userManager.logout()}" />
+		</p:panel>
+	</h:form>
+
+
+	<ui:include src="/WEB-INF/template/links.xhtml" />
+
+
+</h:body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+
+</h:head>
+<h:body>
+	<p:dataGrid style="border:10px;" value="#{monitorControlerBean.paginacionMonitor.model}"
+		var="foto" columns="3" layout="grid">
+		<br/>
+		<div align="center">
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+					<p:graphicImage
+						value="#{foto.sitio.id.cveSitio}" />
+					<br />
+					<h:outputText value="Cve Sitio:" />
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.sitio.id.cveSitio}" />
+				</f:facet>
+				<h:outputText value="Campaña:" />
+				<h:outputText value="#{foto.sitio.campana.id.cveCampana}" />
+
+				<h:outputText value="Plaza:" />
+				<h:outputText value="#{foto.sitio.plaza.nombre}" />
+
+				<h:outputText value="Dirección:" />
+				<h:outputText value="#{foto.sitio.ubicacion}" />
+				<f:facet name="footer">
+					<div align="center">
+						<h:outputText value="Del #{foto.sitio.inicia} Al #{foto.sitio.termina}" />
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</div>
+		<br/>
+	</p:dataGrid>
+</h:body>
+</html>

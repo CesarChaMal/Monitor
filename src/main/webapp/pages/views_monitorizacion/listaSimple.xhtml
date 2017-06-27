@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<h:body>
+	<p:dataTable value="#{monitorControlerBean.paginacionMonitor.model}" var="foto">
+		<p:column headerText="Cve Sitio">
+			<h:outputText value="#{foto.sitio.id.cveSitio}"/>
+		</p:column>
+
+		<p:column headerText="Campaña">
+			<h:outputText value="#{foto.sitio.campana.nombre}"  />
+		</p:column>
+
+		<p:column headerText="Plaza">
+			<h:outputText value="#{foto.sitio.plaza.nombre}" />
+		</p:column>
+
+		<p:column headerText="Dirección">
+				<h:outputText value="#{foto.sitio.ubicacion}"  />
+		</p:column>
+		<p:column headerText="Vigencia Campaña">
+			<h:outputText value="Inicia:#{foto.sitio.inicia} Termina: #{foto.sitio.termina}" />
+		</p:column>
+	
+	</p:dataTable>
+
+
+
+
+</h:body>
+</html>
