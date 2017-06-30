@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+ 	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui">
+
+    <body>
+	    <ui:composition>
+
+<!-- 
+			<h1>This is the header</h1>
+-->
+
+			<h:form>
+				<b:navBar brand="Monitoreo Exacto" brandHref="#">
+					<p><h:outputText value="Bienvenido, #{home.mensaje}!" /></p>
+	    			<b:navbarLinks>
+	        			<b:navLink value="Logo" href="#"></b:navLink>
+	        			<b:dropMenu value="Menu" iconAwesome="align-justify">
+				            <b:navLink value="Home" href="#{request.contextPath}/secured/home.xhtml"></b:navLink>
+				            <b:navLink value="Catalogo Usuarios" href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml"></b:navLink>
+				            <b:navLink value="catalogo 2" href="#"></b:navLink>
+				            <b:navLink value="Monitorización" href="#{request.contextPath}/pages/monitorizacion.xhtml"></b:navLink>
+				            <b:navLink></b:navLink>
+<ui:remove>
+				            <b:navLink value="Logout" href="#{userManager.logout()}"></b:navLink>
+</ui:remove>
+	        			</b:dropMenu>
+	    			</b:navbarLinks>
+	    		</b:navBar>
+			</h:form>
+	        
+	    </ui:composition>
+    </body>
+</html>

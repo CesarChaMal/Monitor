@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(LoginFilter.class);
 
-    public static final String LOGIN_PAGE = "/login.xhtml";
+    public static final String LOGIN_PAGE = "Monitor/login.xhtml";
 
     @Override
     public void doFilter(ServletRequest servletRequest,
@@ -58,7 +58,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void init(FilterConfig arg0) throws ServletException {
-        LOGGER.debug("LoginFilter iciciado");
+        LOGGER.debug("LoginFilter iniciado");
     }
 
     @Override

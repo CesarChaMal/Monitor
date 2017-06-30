@@ -1,0 +1,59 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	background-color: #E5EAF8;
+	margin: 0;
+	font-family: Helvetica, sans-serif;;
+	overflow: hidden;
+}
+
+a {
+	color: #ffffff;
+}
+
+.ui-message-info,.ui-message-error,.ui-message-warn,.ui-message-fatal {
+	border: 0!important;
+	margin: 0!important;
+	padding: 0!important;
+}
+
+.ui-messages-error,.ui-message-error {
+	color: #D8000C;
+	background-color: #fff!important;
+}
+
+.ui-widget-content {
+	/* 
+	border: 1px solid black;	
+	*/
+	border: none!important;	
+}
+
+.ui-layout-unit-content {
+	border: none!important;	
+}
+
+.ui-widget-header, .blueGradient {
+	/* standard */
+    background: #E5EAF8 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0))!important;
+
+	/* chrome */
+    background: #E5EAF8 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)))!important;
+
+	/* opera */
+    background: #E5EAF8 -o-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0!important;
+
+	/* firefox */
+    background: #E5EAF8 -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0!important;
+
+    border: 1px solid #a8a8a8;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.login {
+	margin: 20%;
+}

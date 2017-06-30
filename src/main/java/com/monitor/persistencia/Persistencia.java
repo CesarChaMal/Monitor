@@ -22,27 +22,16 @@ public class Persistencia implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static EntityManager entityManager;
 
-	
-	
 	public Persistencia() {
-
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Monitor");
 		entityManager = emf.createEntityManager();
-
 	}
-
-	
 
 	@SuppressWarnings("rawtypes")
 	public List busqueda(Entidad entidad) {
-
 		Query query = entidad.traerQuery(entityManager);
-
-		
 		List datos = query.getResultList();
-
 		return datos;
-
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -50,7 +39,6 @@ public class Persistencia implements Serializable {
 
 		Query query = entidad.traerQuery(entityManager);
 		query.setMaxResults(1);
-
 		
 		List datos = query.getResultList();
 
@@ -61,11 +49,9 @@ public class Persistencia implements Serializable {
 		Entidad e = (Entidad) datos.get(0);
 
 		return e;
-
 	}
 
 	public Entidad insertar(Entidad entidad) {
-		
 		try 
 		{
 			entityManager.getTransaction().begin();
@@ -77,31 +63,19 @@ public class Persistencia implements Serializable {
 		{
 			e.printStackTrace();
 		}
-		
-		 
-		 
-		 
 		 return entidad;
 
 	}
 
 	public Entidad cambiar(Entidad entidad)
 	{
-		
 		entidad.consultaPorId();
-		
 		Entidad  entidadUpdate = busquedaUnitaria(entidad);
-		
-		
 		entityManager.getTransaction().begin();
 		 entidadUpdate.copiaDatos(entidad);
 		entityManager.getTransaction().commit();
 		entidad= busquedaUnitaria(entidad);
 		return entidad;
-		
 	}
-	
-	
-	
 	
 }

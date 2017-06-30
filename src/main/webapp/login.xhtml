@@ -4,10 +4,11 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+ 	xmlns:b="http://bootsfaces.net/ui"
     xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Login</title>
     <f:metadata>
         <f:viewAction action="#{userManager.isLoggedInForwardHome()}" />
     </f:metadata>
@@ -15,31 +16,59 @@
 
 <h:body>
 
-    <h:form>
-        <p:messages id="messages" showDetail="false" />
+    <ui:composition template="/WEB-INF/template/layout.xhtml">
 
-        <p:panel id="panel" header="Iniciar Sesión">
+        <ui:define name="title">Login</ui:define>
 
-            <h:panelGrid columns="3" cellpadding="5">
-                <p:outputLabel for="userName" value="Email:" />
-                <p:inputText id="userName" value="#{userManager.email}" required="true" label="User name">
-                    <f:validateLength minimum="3" />
-                </p:inputText>
-                <p:message for="userName" display="icon" />
+        <ui:define name="header">
+        </ui:define>
 
-                <p:outputLabel for="password" value="Password:" />
-                <p:password id="password" value="#{userManager.userPassword}" required="true" label="Password">
-                    <f:validateLength minimum="3" />
-                </p:password>
-                <p:message for="password" display="icon" />
-            </h:panelGrid>
+        <ui:define name="content">
+            <div class="login">
+                <h:form>
+                    <p:messages id="messages" showDetail="false" />
 
-            <p:commandButton value="Iniciar Sesión" update="panel messages" action="#{userManager.login()}" />
-        </p:panel>
-    </h:form>
+                    <p:panel id="panel" header="Iniciar Sesión">
+
+                        <h:panelGrid columns="3" cellpadding="5">
+<ui:remove>
+<!-- 
+							<b:inputText placeholder="Username" id="username" value="#{userManager.email}" required="true" label="Username" colMd="10" labelColMd="2">
+-->
+</ui:remove>                                        
+	                        <h:panelGroup>
+								<b:inputText placeholder="Username" id="username" value="#{userManager.email}" required="true" colMd="10" labelColMd="2">
+		        					<f:facet name="prepend">
+		            					<b:icon name="user" />
+		        					</f:facet>
+	    						</b:inputText>
+	 
+								<b:inputSecret placeholder="Password" id="password" value="#{userManager.userPassword}" colMd="10" labelColMd="2">
+								    <f:facet name="prepend">
+								        <b:iconAwesome name="key" />
+								    </f:facet>
+								</b:inputSecret>
+	                        </h:panelGroup>
+    
+                        </h:panelGrid>
+                        
+						<b:commandButton value="Iniciar Sesión" update="panel messages" action="#{userManager.login()}" look="primary"/>
+                    </p:panel>
+                </h:form>
+            </div>
+        </ui:define>
+
+        <ui:define name="footer">
+        </ui:define>
+        
+    </ui:composition>
 
 
+<ui:remove>
+<!-- 
     <ui:include src="/WEB-INF/template/links.xhtml" />
+-->
+</ui:remove>                                        
 
 </h:body>
 </html>

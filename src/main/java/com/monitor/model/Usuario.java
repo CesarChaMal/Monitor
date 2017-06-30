@@ -200,7 +200,6 @@ public class Usuario extends Entidad {
 
 	public void consultaTodos() {
 		consulta = "consultaTodos";
-
 	}
 
 	private Query consultaTodos(EntityManager entityManager) {

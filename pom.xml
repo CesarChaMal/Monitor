@@ -30,7 +30,6 @@
 		</repository>
 	</repositories>
 
-
 	<dependencies>
 		<!--slf4j-api -->
 		<dependency>
@@ -195,6 +194,23 @@
 				<version>${springframework.version}</version>
 				<scope>test</scope>
 			</dependency>
+			
+	        <!-- WebJars -->
+			<dependency>
+			    <groupId>org.webjars</groupId>
+			    <artifactId>bootstrap</artifactId>
+			    <version>3.3.5</version>
+			</dependency>
+			
+	        <!-- Bootsfaces -->
+			<dependency>
+			    <groupId>net.bootsfaces</groupId>
+			    <artifactId>bootsfaces</artifactId>
+			    <version>1.0.1</version>
+			    <scope>compile</scope>
+			</dependency>			
+	
+			
 	</dependencies>
 	<build>
 		<resources>
@@ -218,4 +234,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 </project>

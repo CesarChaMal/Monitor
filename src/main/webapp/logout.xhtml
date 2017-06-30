@@ -12,19 +12,27 @@
 
 <h:body>
 
-    <h:form>
-        <p:panel header="Logout" rendered="#{!userManager.isLoggedIn()}">
-            <p>Adios.</p>
-        </p:panel>
+    <ui:composition template="/WEB-INF/template/layout.xhtml">
 
-        <p:panel header="Logout" rendered="#{userManager.isLoggedIn()}">
-            <p>You are still logged in, click below button to log out!</p>
-            <p:commandButton value="Logout"
-                action="#{userManager.logout()}" />
-        </p:panel>
-    </h:form>
+        <ui:define name="title">Logout</ui:define>
 
-    <ui:include src="/WEB-INF/template/links.xhtml" />
+        <ui:define name="content">
+		    <h:form>
+		        <p:panel header="Logout" rendered="#{!userManager.isLoggedIn()}">
+		            <p>Adios.</p>
+		        </p:panel>
+		
+		        <p:panel header="Logout" rendered="#{userManager.isLoggedIn()}">
+		            <p>You are still logged in, click below button to log out!</p>
+		            <p:commandButton value="Logout"
+		                action="#{userManager.logout()}" />
+		        </p:panel>
+		    </h:form>
+		    <f:metadata>
+		        <f:viewAction action="login.xhtml?faces-redirect=true" />
+		    </f:metadata>
+        </ui:define>
 
+    </ui:composition>
 </h:body>
 </html>

@@ -4,6 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+ 	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -12,32 +13,44 @@
 
 <h:body onload="#{home.init()}">
 
-	<h:form>
-		<p:panel header="Home">
+    <ui:composition template="/WEB-INF/template/layout.xhtml">
 
-			<input class="burger-check" id="burger-check" type="checkbox"/>
-			
-			<label
-				for="burger-check" class="burger"></label> <nav id="navigation1" class="navigation">
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">catalogo Usuarios</a></li>
-					<li><a href="#">catalogo 2</a></li>
-					<li><a href="#">Fotos</a></li>
-					<li><h:link outcome="/pages/monitorizacion.xhtml">Monitorización</h:link></li>
-				</ul>
-				</nav>
-			<p>
-				<h:outputText value="Welcome, #{home.mensaje}!" />
-			</p>
+        <ui:define name="title">Home</ui:define>
 
-			<p:commandButton value="Logout" action="#{userManager.logout()}" />
-		</p:panel>
-	</h:form>
+        <ui:define name="content">
+			<h:form>
+				<p:panel header="Home">
+				</p:panel>
+			</h:form>
+        </ui:define>
 
-
-	<ui:include src="/WEB-INF/template/links.xhtml" />
-
+<ui:remove>
+<!-- 
+		<h:form>
+			<p:panel header="Home">
+	
+				<input class="burger-check" id="burger-check" type="checkbox"/>
+				
+				<label for="burger-check" class="burger"></label> <nav id="navigation1" class="navigation">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">catalogo Usuarios</a></li>
+						<li><a href="#">catalogo 2</a></li>
+						<li><a href="#">Fotos</a></li>
+						<li><h:link outcome="/pages/monitorizacion.xhtml">Monitorización</h:link></li>
+					</ul>
+					</nav>
+				<p>
+					<h:outputText value="Bienvenido, #{home.mensaje}!" />
+				</p>
+	
+				<p:commandButton value="Logout" action="#{userManager.logout()}" />
+			</p:panel>
+		</h:form>
+-->
+</ui:remove>                                        
+		
+    </ui:composition>
 
 </h:body>
 </html>
