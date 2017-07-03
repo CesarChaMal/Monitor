@@ -14,7 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.monitor.filter.FiltrosUsuario;
-import com.monitor.filter.PaginacionUsuario;
+import com.monitor.filter.Paginacion;
+import com.monitor.model.Navigation;
 import com.monitor.model.dto.UsuarioDTO;
 import com.monitor.persistencia.Persistencia;
 import com.monitor.service.UsuarioService;
@@ -23,7 +24,7 @@ import com.monitor.util.Util;
 
 @ManagedBean
 @ViewScoped
-public class CatalogoUsuarios {
+public class CatalogoUsuarios implements Navigation {
 	
 	@ManagedProperty("#{persistencia}")
 	public Persistencia persistencia;
@@ -37,7 +38,7 @@ public class CatalogoUsuarios {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoUsuarios.class);
 	public UsuarioDTO usuario;
 	private List<UsuarioDTO> usuariosDTOList;
-	private PaginacionUsuario paginacion;
+	private Paginacion paginacion;
 	private UsuarioService usuarioService;
 	private HttpServletRequest request;
 
@@ -47,7 +48,7 @@ public class CatalogoUsuarios {
 		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			usuarioService = new UsuarioService(persistencia.getEntityManager());
 			usuariosDTOList = usuarioService.consultarUsuarios(filtrosUsuario);
-			paginacion = new PaginacionUsuario();
+			paginacion = new Paginacion();
 			paginacion.setModel(usuariosDTOList);
 			paginacion.setPageIndex(0);
 			if (usuariosDTOList.size() > 0)
@@ -57,11 +58,11 @@ public class CatalogoUsuarios {
 		}
 	}
 
-	public PaginacionUsuario getPaginacion() {
+	public Paginacion getPaginacion() {
 		return paginacion;
 	}
 
-	public void setPaginacion(PaginacionUsuario paginacion) {
+	public void setPaginacion(Paginacion paginacion) {
 		this.paginacion = paginacion;
 	}
 

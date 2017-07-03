@@ -139,6 +139,7 @@ public class UsuarioDao {
 			}
 			
 			queryString.append(" where email = :email;");
+//			q.setParameter("email", Arrays.asList(filtrosUsuario.getEmail()));
 			q.setParameter("email", Arrays.asList(filtrosUsuario.getEmail()));
 			
 			q.executeUpdate();

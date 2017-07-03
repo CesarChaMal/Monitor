@@ -23,10 +23,12 @@
 		
 						<h:panelGrid id="pnlBotones" columns="4">
 		
-							<p:commandButton icon="ui-icon-search" title="Busqueda"></p:commandButton>
+							<p:commandButton icon="ui-icon-search" title="Busqueda"  title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.busqueda()}"  ></p:commandButton>
 							<p:commandButton icon="ui-icon-trash" title="Eliminar"></p:commandButton>
-							<p:commandButton icon="ui-icon-seek-first" title="Anterior"></p:commandButton>
-							<p:commandButton icon="ui-icon-seek-end" title="Siguiente"></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-first" title="Anterior"  title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.prev}" ></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.next}"></p:commandButton>
+							<p:commandButton icon="ui-icon-arrowreturn-1-e" title="Logout" action="#{userManager.logout()}"></p:commandButton>
+							<p:outputLabel style="position:relative; left: 10%;" id="paginacion-info">#{catalogoSitios.paginacion.pageIndex+1} of #{catalogoSitios.paginacion.recordsTotal} records</p:outputLabel>
 						</h:panelGrid>
 		
 		

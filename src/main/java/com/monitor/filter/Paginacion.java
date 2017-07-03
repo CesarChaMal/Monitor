@@ -2,7 +2,7 @@ package com.monitor.filter;
 
 import java.util.List;
 
-public class PaginacionUsuario {
+public class Paginacion {
 	private int defaultRegistros = 10;
 	private static final int DEFAULT_PAGE_INDEX = 0;
 	private int records;
@@ -12,7 +12,7 @@ public class PaginacionUsuario {
 	private List<?> origModel;
 	private List<?> model;
 
-	public PaginacionUsuario() {
+	public Paginacion() {
 		this.pageIndex = DEFAULT_PAGE_INDEX;
 	}
 
@@ -97,16 +97,6 @@ public class PaginacionUsuario {
 		this.pageIndex = pageIndex;
 	}
 
-	public String getViewListDetalle() {
-		System.out.println("get view listaDetalle");
-		return "listaDetalle";
-	}
-
-	public String getViewCuadricula() {
-		System.out.println("get view cuadriculaView");
-		return "cuadriculaView";
-	}
-
 	public int getDefaultRegistros() {
 		System.out.println("getDefaultRegistros " + defaultRegistros);
 		return defaultRegistros;
@@ -117,10 +107,5 @@ public class PaginacionUsuario {
 		this.defaultRegistros = defaultRegistros;
 		records = defaultRegistros;
 		updateModel();
-	}
-
-	public void updateIrPagina() {
-		updateModel();
-
 	}
 }

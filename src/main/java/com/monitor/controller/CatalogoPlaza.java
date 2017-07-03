@@ -4,12 +4,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import com.monitor.model.Navigation;
 import com.monitor.persistencia.Persistencia;
 
 
 @ManagedBean
 @SessionScoped
-public class CatalogoPlaza {
+public class CatalogoPlaza implements Navigation {
 	
 	private Integer idUsuario;
 	
@@ -89,6 +90,55 @@ public class CatalogoPlaza {
 
 	public void setPlaza(String plaza) {
 		this.plaza = plaza;
+	}
+
+
+	@Override
+	public void next() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void prev() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void irA() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void busqueda() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void eliminar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void actualizar() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
