@@ -37,16 +37,16 @@ a {
 
 .ui-widget-header, .blueGradient {
 	/* standard */
-    background: #E5EAF8 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0))!important;
+    background: #AAC4DB linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0))!important;
 
 	/* chrome */
-    background: #E5EAF8 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)))!important;
+    background: #AAC4DB -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)))!important;
 
 	/* opera */
-    background: #E5EAF8 -o-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0!important;
+    background: #AAC4DB -o-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0!important;
 
 	/* firefox */
-    background: #E5EAF8 -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0!important;
+    background: #AAC4DB -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0!important;
 
     border: 1px solid #a8a8a8;
     color: #333;
@@ -57,3 +57,97 @@ a {
 .login {
 	margin: 20%;
 }
+
+.monitor-background {
+	background-color: #AAC4DB!important;
+}
+
+.nav a:active, .nav a:hover, .nav a:visited {
+	background-color: #AAC4DB!important;
+	/* standard */
+    background: #AAC4DB linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0))!important;
+
+	/* chrome */
+    background: #AAC4DB -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)))!important;
+
+	/* opera */
+    background: #AAC4DB -o-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0!important;
+
+	/* firefox */
+    background: #AAC4DB -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0!important;
+
+    color: #333;
+}
+
+button:active {
+    color: #CEDCE7;
+}
+
+/* .dropdown-menu a:link { */
+.dropdown-menu {
+	background-color: #AAC4DB!important;
+}
+
+/* 
+#formCatalogo\3A pnlCliente, #formCatalogo\3A pnlCliente2, #formCatalogo\3A pnlRbnTipo, #formCatalogo\3A pnlRbnStatus {
+	padding: 20px;
+	border-spacing: 20px;
+    border-collapse: collapse;
+}
+
+#formCatalogo\3A pnlCliente tr, #formCatalogo\3A pnlCliente2 tr, #formCatalogo\3A pnlRbnTipo tr, #formCatalogo\3A pnlRbnStatus tr {
+    border-bottom: 1px solid #C4CCD0;
+}
+*/
+
+#formCatalogo\3A pnlCliente, #formCatalogo\3A pnlCliente2, #formCatalogo\3A pnlRbnTipo, #formCatalogo\3A pnlRbnStatus {
+	padding: 5px;
+	border-spacing: 5px;
+    border-collapse: separate;
+}
+
+#formCatalogo\3A pnlCliente input, #formCatalogo\3A pnlCliente2 input, #formCatalogo\3A pnlRbnTipo input, #formCatalogo\3A pnlRbnStatus input {
+	position: relative;
+	bottom: 7px;
+}
+
+.ui-outputlabel {
+    /* border-bottom: 1px solid #C4CCD0; */
+}
+
+#formCatalogo\3A grid label { 
+    border-bottom: 1px solid #C4CCD0;
+}
+
+#formCatalogo\3A grid2 tr > td > .ui-outputlabel { 
+    border-bottom: 1px solid #C4CCD0;
+}
+
+.tipos {
+	background: #DDEBF4; 
+	width:90%
+}
+
+.botones {
+	margin: 10px;
+	padding: 10px;
+}
+
+div > #formCatalogo\3A grid, div > #formCatalogo\3A grid2 {
+	background: #E8F0F4;
+	width:100%
+}
+
+div > #formCatalogo\3A gridBotones {
+	background: #CEDCE7;
+	width:100%;
+}
+
+#paginacion-info {
+	float: right;
+}
+
+#formCatalogo\3A irA {
+	width:40px;
+}
+

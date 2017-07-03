@@ -6,66 +6,76 @@
 
 <h:head>
 </h:head>
-<h:body onload="#{catalogoCampanas.init()}">
-	<p:growl id="mensajes" showDetail="true" life="2000" />
+<h:body onload="#{catalogoCampana.init()}">
+    <ui:composition template="/WEB-INF/template/layout.xhtml">
 
+        <ui:define name="title">Campañas</ui:define>
 
-	<h:form id="formCatalogo" style="height:100%;">
-
-		<p:panel header="Campañas" style="width:100%">
-
-			<h:panelGrid id="grid" columns="1">
-
-				<h:panelGrid id="pnlBotones" columns="4">
-
-					<p:commandButton icon="ui-icon-search" title="Busqueda"></p:commandButton>
-					<p:commandButton icon="ui-icon-trash" title="Eliminar"></p:commandButton>
-					<p:commandButton icon="ui-icon-seek-first" title="Anterior"></p:commandButton>
-					<p:commandButton icon="ui-icon-seek-end" title="Siguiente"></p:commandButton>
-				</h:panelGrid>
-
-
-				<h:panelGrid id="pnlCliente" columns="3">
-
-					<p:outputLabel>Cliente</p:outputLabel>
-					<p:inputNumber id="txtId" value="#{catalogoCampana.idUsuario}" readonly="true"></p:inputNumber>
-					<p:inputText id="txtEmailInfo" value="#{catalogoCampana.email}" readonly="true"></p:inputText>
-				</h:panelGrid>
-
-
-				<h:panelGrid id="pnlCampana1" columns="2">
-
-					<p:outputLabel>Clave Campaña</p:outputLabel>
-					<p:inputText id="txtCampana" value="#{catalogoCampana.claveCampana}" ></p:inputText>
-				</h:panelGrid>
-
-
-				<h:panelGrid id="pnlCampana2" columns="4">
-
-					<p:outputLabel>Nombre Campaña</p:outputLabel>
-					<p:inputText id="txtnombreCampana" value="#{catalogoCampana.nombreCampana}" ></p:inputText>
-					
-					
-				<p:outputLabel>Fecha Alta</p:outputLabel>
-				<p:calendar id="txtFechaAlta" value="#{catalogoCampana.fechaAlta}" ></p:calendar>
-					
-				</h:panelGrid>
-				
-				
-				<h:panelGrid id="pnlRbnEstatus" columns="1">
-
-					<p:outputLabel for="statusCampana" value="Estatus Campaña" />
-				<p:selectOneRadio id="statusCampana" value="#{catalogoCampana.estatusCampana}">
-					<f:selectItem itemLabel="Activo" itemValue="activo" />
-					<f:selectItem itemLabel="Inactivo" itemValue="inactivo" />
-
-				</p:selectOneRadio>
-				
-				</h:panelGrid>
-
-
-			</h:panelGrid>
-		</p:panel>
-	</h:form>
+        <ui:define name="content">
+			<p:growl id="mensajes" showDetail="true" life="2000" />
+		
+		
+			<h:form id="formCatalogo" style="height:100%;">
+		
+				<p:panel header="Campañas" style="width:100%">
+		
+					<h:panelGrid id="grid" columns="1">
+		
+						<h:panelGrid id="pnlBotones" columns="6" styleClass="botones">
+		
+							<p:commandButton icon="ui-icon-search" title="Busqueda"  process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoCampana.busqueda()}" ></p:commandButton>
+							<p:commandButton icon="ui-icon-trash" title="Eliminar"></p:commandButton>
+							<p:commandButton icon="ui-icon-document" title="Guardar"></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoCampana.prev}" ></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoCampana.next}" ></p:commandButton>
+							<p:commandButton icon="ui-icon-arrowreturn-1-e" title="Logout" action="#{userManager.logout()}"></p:commandButton>
+							<p:outputLabel style="position:relative; left: 10%;" id="paginacion-info">#{catalogoCampana.paginacionCampana.pageIndex+1} of #{catalogoCampana.paginacionCampana.recordsTotal} records</p:outputLabel>
+						</h:panelGrid>
+		
+		
+						<h:panelGrid id="pnlCliente" columns="3">
+		
+							<p:outputLabel>Cliente</p:outputLabel>
+							<p:inputNumber id="txtId" value="#{catalogoCampana.idUsuario}" readonly="true"></p:inputNumber>
+							<p:inputText id="txtEmailInfo" value="#{catalogoCampana.email}" readonly="true"></p:inputText>
+						</h:panelGrid>
+		
+		
+						<h:panelGrid id="pnlCampana1" columns="2">
+		
+							<p:outputLabel>Clave Campaña</p:outputLabel>
+							<p:inputText id="txtCampana" value="#{catalogoCampana.claveCampana}" ></p:inputText>
+						</h:panelGrid>
+		
+		
+						<h:panelGrid id="pnlCampana2" columns="4">
+		
+							<p:outputLabel>Nombre Campaña</p:outputLabel>
+							<p:inputText id="txtnombreCampana" value="#{catalogoCampana.nombreCampana}" ></p:inputText>
+							
+							
+						<p:outputLabel>Fecha Alta</p:outputLabel>
+						<p:calendar id="txtFechaAlta" value="#{catalogoCampana.fechaAlta}" ></p:calendar>
+							
+						</h:panelGrid>
+						
+						
+						<h:panelGrid id="pnlRbnEstatus" columns="1">
+		
+							<p:outputLabel for="statusCampana" value="Estatus Campaña" />
+						<p:selectOneRadio id="statusCampana" value="#{catalogoCampana.estatusCampana}">
+							<f:selectItem itemLabel="Activo" itemValue="activo" />
+							<f:selectItem itemLabel="Inactivo" itemValue="inactivo" />
+		
+						</p:selectOneRadio>
+						
+						</h:panelGrid>
+		
+		
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+        </ui:define>
+    </ui:composition>
 </h:body>
 </html>

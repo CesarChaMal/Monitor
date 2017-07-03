@@ -1,65 +1,126 @@
+function Main()
+{	
+	if(typeof System == undefined)
 
-$(function() {
-	 
-//  $("#demo_pag1").bs_pagination({
-//    totalPages: 100
-//  });
-	 
-$("#paginador").bs_pagination({
-	  currentPage: 1,
-	  rowsPerPage: 10,
-	  maxRowsPerPage: 100,
-	  totalPages: 100,
-	  totalRows: 0,
-	 
-	  visiblePageLinks: 5,
-	 
-	  showGoToPage: true,
-	  showRowsPerPage: true,
-	  showRowsInfo: true,
-	  showRowsDefaultInfo: true,
-	 
-	  directURL: false, // or a function with current page as argument
-	  disableTextSelectionInNavPane: true, // disable text selection and double click
-	 
-	  bootstrap_version: "3",
-	 
-	  // bootstrap 3
-	  containerClass: "well",
-	 
-	  mainWrapperClass: "row",
-	 
-	  navListContainerClass: "col-xs-12 col-sm-12 col-md-6",
-	  navListWrapperClass: "",
-	  navListClass: "pagination pagination_custom",
-	  navListActiveItemClass: "active",
-	 
-	  navGoToPageContainerClass: "col-xs-6 col-sm-4 col-md-2 row-space",
-	  navGoToPageIconClass: "glyphicon glyphicon-arrow-right",
-	  navGoToPageClass: "form-control small-input",
-	 
-	  navRowsPerPageContainerClass: "col-xs-6 col-sm-4 col-md-2 row-space",
-	  navRowsPerPageIconClass: "glyphicon glyphicon-th-list",
-	  navRowsPerPageClass: "form-control small-input",
-	 
-	  navInfoContainerClass: "col-xs-12 col-sm-4 col-md-2 row-space",
-	  navInfoClass: "",
-	 
-	  // element IDs
-	  nav_list_id_prefix: "nav_list_",
-	  nav_top_id_prefix: "top_",
-	  nav_prev_id_prefix: "prev_",
-	  nav_item_id_prefix: "nav_item_",
-	  nav_next_id_prefix: "next_",
-	  nav_last_id_prefix: "last_",
-	 
-	  nav_goto_page_id_prefix: "goto_page_",
-	  nav_rows_per_page_id_prefix: "rows_per_page_",
-	  nav_rows_info_id_prefix: "rows_info_",
-	 
-	  onChangePage: function() { // returns page_num and rows_per_page after a link has clicked
-	  },
-	  onLoad: function() { // returns page_num and rows_per_page on plugin load
-	  }
-	});	
-});
+	this.object = null
+	this.message = "";
+	
+	this.test1 = testing1;
+	this.test2 = testing2;
+	this.test3 = testing3;
+	this.clearValues = mainClearValues;
+	this.changeBackgroundColor = mainChangeBackgroundColor;
+	this.changeBackgroundTransparent = mainChangeBackgroundTransparent;
+}
+
+function testing1(message)
+{	
+	this.message += 'Hello ' + message;
+}
+
+function testing2()
+{	
+	alert(this.message);
+}
+
+function testing3()
+{	
+	this.test2();
+}
+
+function mainClearValues(id)
+{	
+	var container = $(PrimeFaces.escapeClientId(id));
+	container.each(
+		function(){
+			//alert($(this).html())
+	    	$(this).find(':input').each(
+				function(){
+					var input = $(this);
+					//alert(input.val())
+					input.val('');
+				}
+	    	);
+		}
+	);
+	//$(PrimeFaces.escapeClientId('formMain:newTitle')).val('');
+	var messages = $(PrimeFaces.escapeClientId('formMain:messages'));
+	//alert(messages.html())
+	messages.hide();
+}
+
+function mainChangeBackgroundColor(id)
+{	
+//	alert(id)
+//	var container = $('#'+id);
+	var container = $(PrimeFaces.escapeClientId(id));
+//	alert(typeof txt)
+	for (var key in container) {
+	    var obj = container[key];
+//	    alert(key + ": " + obj)
+	}
+	container.css("background-color", "#FBEE9A");
+}
+
+function mainChangeBackgroundTransparent(id)
+{	
+//	alert(id)
+//	var container = $('#'+id);
+	var container = $(PrimeFaces.escapeClientId(id));
+//	alert(typeof txt)
+	for (var key in container) {
+	    var obj = container[key];
+//	    alert(key + ": " + obj)
+	}
+	container.css("background-color", "#FFFFFF");
+}
+
+var mainHelper = new Main();
+//alert(mainHelper)
+//mainHelper.test1('Cesar');
+//mainHelper.test2();
+//mainHelper.test3();
+//mainHelper.clearValues('formMain:newTask');
+
+mainStaticHelper = function(){
+}
+
+mainStaticHelper.test1 = function(message){
+	this.message = ' Hello ' + message;
+}
+
+mainStaticHelper.test2 = function()
+{    
+	alert(this.message);
+}
+
+mainStaticHelper.test3 = function()
+{    
+	mainStaticHelper.test2();
+}
+
+mainStaticHelper.clearValues = function(id)
+{	
+	var container = $(PrimeFaces.escapeClientId(id));
+	container.each(
+		function(){
+			//alert($(this).html())
+	    	$(this).find(':input').each(
+				function(){
+					var input = $(this);
+					//alert(input.val())
+					input.val('');
+				}
+	    	);
+		}
+	);
+	//$(PrimeFaces.escapeClientId('formMain:newTitle')).val('');
+	var messages = $(PrimeFaces.escapeClientId('formMain:messages'));
+	//alert(messages.html())
+	messages.hide();
+}
+
+//mainStaticHelper.test1('Cesar');
+//mainStaticHelper.test2(); 
+//mainStaticHelper.test3(); 
+//mainStaticHelper.clearValues('formMain:newTask');

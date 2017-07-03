@@ -3,7 +3,6 @@
 CARGA DE DATOS
 conectarse con MONITOR/monitor
 ******************************************************************
-use monitor;
 
 --proveedor
 insert into monitor.cli_pro (cve_clipro,nombre,tipo,padre) values ('GIM','GIM',1,NULL);
@@ -33,6 +32,9 @@ values ('aosornio@yahoo.com','angel','leon osornio', 'Khm64', 3,sysdate,1,'GIM')
 
 insert into monitor.usuario (email,nombre,apellidos,contrasena,tipo,fechaalta,status,cve_clipro)
 values ('cuervo2@yahoo.com','angel','leon osornio', 'A_?#22', 2,sysdate,1,'GIM_FEMSA');
+
+insert into monitor.usuario (email,nombre,apellidos,contrasena,tipo,fechaalta,status,cve_clipro)
+values ('ces_ch@hotmail.com','Cesar','Chavez', '123', 1,sysdate,1,'GIM');
 
 
 
@@ -74,15 +76,15 @@ insert into monitor.plaza (cve_plaza,nombre,status,padre,tipo,cve_clipro) values
 
 
 --campana
-insert into monitor.campana(cve_campana,cve_clipro,nombre,status) values ('AAA','MON_CUER','BLACK CUERVO ESPECIAL',1);
-insert into monitor.campana(cve_campana,cve_clipro,nombre,status) values ('BBB','MON_CUER','PLATINO CUERVO',1);
-insert into monitor.campana(cve_campana,cve_clipro,nombre,status) values ('CCC','MON_CUER','AMIGOS CUERVO',1);
-insert into monitor.campana(cve_campana,cve_clipro,nombre,status) values ('DDD','MON_CUER','CUERVO NUEVO',2);
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('AAA','BLACK CUERVO ESPECIAL',sysdate,1,'MON_CUER');
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('BBB','PLATINO CUERVO',sysdate,1,'MON_CUER');
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('CCC','AMIGOS CUERVO',sysdate,1,'MON_CUER');
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('DDD','CUERVO NUEVO',sysdate,2,'MON_CUER');
 
 
-insert into monitor.campana(cve_campana,cve_clipro,nombre,status) values ('PRO','GIM_LALA','LALA PROTEINA',1);
-insert into monitor.campana(cve_campana,cve_clipro,nombre,status) values ('SIN','GIM_FEMSA','COCA SIN AZUCAR',1);
-insert into monitor.campana(cve_campana,cve_clipro,nombre,status) values ('CLA','GIM_FEMSA','COCACOLA CLASICA',2);
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('PRO','LALA PROTEINA',sysdate,1,'GIM_LALA');
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('SIN','COCA SIN AZUCAR',sysdate,1,'GIM_FEMSA');
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('CLA','COCACOLA CLASICA',sysdate,2,'GIM_FEMSA');
 
 
 
@@ -91,7 +93,7 @@ insert into monitor.sitio (cve_campana,cve_clipro,cve_plaza,cve_sitio,inicia,ter
 values ('PRO','GIM_LALA','CAB','GGSTY7635G',sysdate,sysdate+30,1,'ubicacion del sitio uno',1);
 
 
-insert monitor.into sitio (cve_campana,cve_clipro,cve_plaza,cve_sitio,inicia,termina,status,ubicacion,iluminacion)
+insert into monitor.sitio (cve_campana,cve_clipro,cve_plaza,cve_sitio,inicia,termina,status,ubicacion,iluminacion)
 values ('BBB','MON_CUER','ORI','S44TY7635G',sysdate,sysdate+30,1,'ubicacion del sitio dos',1);
 
 

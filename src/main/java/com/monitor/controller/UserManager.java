@@ -5,8 +5,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +26,8 @@ public class UserManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserManager.class);
 
-    public static final String HOME_PAGE_REDIRECT =  "/secured/home.xhtml";
+
+    public static final String HOME_PAGE_REDIRECT = "/secured/home.xhtml";
     public static final String LOGOUT_PAGE_REDIRECT = "/logout.xhtml?faces-redirect=true";
     
     private String email;
@@ -36,6 +35,7 @@ public class UserManager {
 
 	private String userPassword;
     private Usuario currentUser;
+    
 
     public String login() {
         // lookup the user based on user name and user password
@@ -44,8 +44,7 @@ public class UserManager {
         if (currentUser != null) 
         {
             LOGGER.info("login successful for '{}'", email);
-            
-            System.out.println(HOME_PAGE_REDIRECT);
+
             return HOME_PAGE_REDIRECT;
         } else {
             LOGGER.info("login failed for '{}'", email);

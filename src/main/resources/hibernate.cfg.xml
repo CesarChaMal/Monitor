@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-        <property name="hibernate.connection.password">monitor</property>
         <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
-        <property name="hibernate.connection.username">monitor</property>
+        <property name="hibernate.connection.username">system</property>
+        <property name="hibernate.connection.password">pass</property>
         <property name="hibernate.default_schema">monitor</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
     </session-factory>

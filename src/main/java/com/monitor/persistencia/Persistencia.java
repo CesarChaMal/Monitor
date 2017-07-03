@@ -77,5 +77,13 @@ public class Persistencia implements Serializable {
 		entidad= busquedaUnitaria(entidad);
 		return entidad;
 	}
-	
+
+	public static EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public static void setEntityManager(EntityManager entityManager) {
+		Persistencia.entityManager = entityManager;
+	}
+
 }

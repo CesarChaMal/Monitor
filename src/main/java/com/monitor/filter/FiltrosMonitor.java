@@ -1,13 +1,20 @@
 package com.monitor.filter;
 
+import java.util.Date;
+
+import com.monitor.util.Util;
+
 public class FiltrosMonitor {
 
-	private String ordenarPor = "0";
+	private String ordenarPor = "";
 	private String[] filterPlaza;
 	private String[] filterCampana;
 	private String[] filterSitio;
 	private String emailUser;
-
+    private Date fechaInicio = null;
+    private Date fechaFin = null;
+    private Util util = new Util();
+    
 	public String getOrdenarPor() {
 		System.out.println("getOrdenarPor " + ordenarPor);
 		return ordenarPor;
@@ -48,6 +55,22 @@ public class FiltrosMonitor {
 
 	public void setEmailUser(String emailUser) {
 		this.emailUser = emailUser;
+	}
+
+	public Date getFechaInicio() throws Exception {
+		return util.formatDate(fechaInicio);
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() throws Exception {		
+		return util.formatDate(fechaFin);
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 
 }

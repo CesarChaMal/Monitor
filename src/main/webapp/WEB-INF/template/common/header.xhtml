@@ -15,14 +15,15 @@
 -->
 
 			<h:form>
-				<b:navBar brand="Monitoreo Exacto" brandHref="#">
+				<b:navBar brand="Monitoreo Exacto" brandHref="#" styleClass="blueGradient">
 					<p><h:outputText value="Bienvenido, #{home.mensaje}!" /></p>
 	    			<b:navbarLinks>
-	        			<b:navLink value="Logo" href="#"></b:navLink>
+	        			<b:navLink value="" href="#"><h:graphicImage value="../resources/img/logo.png" width="100px" height="100px"/></b:navLink>
 	        			<b:dropMenu value="Menu" iconAwesome="align-justify">
 				            <b:navLink value="Home" href="#{request.contextPath}/secured/home.xhtml"></b:navLink>
 				            <b:navLink value="Catalogo Usuarios" href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml"></b:navLink>
-				            <b:navLink value="catalogo 2" href="#"></b:navLink>
+				            <b:navLink value="Catalogo Campañas" href="#{request.contextPath}/pages/CatalogoCampana.xhtml"></b:navLink>
+				            <b:navLink value="Catalogo Sitios" href="#{request.contextPath}/pages/CatalogoSitios.xhtml"></b:navLink>
 				            <b:navLink value="Monitorización" href="#{request.contextPath}/pages/monitorizacion.xhtml"></b:navLink>
 				            <b:navLink></b:navLink>
 <ui:remove>

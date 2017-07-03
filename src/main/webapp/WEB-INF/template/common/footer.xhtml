@@ -17,13 +17,13 @@
 <ui:remove>
 <!-- 
 			<h:outputScript library="webjars" name="bootstrap/3.3.5/js/bootstrap.min.js" />
+			<h:outputScript library="js" name="script.js" />
+			<h:form>
+				<b:commandButton value="Logout" action="#{userManager.logout()}" styleClass="blueGradient"/>
+			</h:form>
 -->
 </ui:remove>                                        
 			
-			<h:outputScript library="js" name="script.js" />
-			<h:form>
-				<b:commandButton value="Logout" action="#{userManager.logout()}" />
-			</h:form>
 
 	    </ui:composition>
     </body>

@@ -7,110 +7,117 @@
 <h:head>
 </h:head>
 <h:body onload="#{catalogoSitios.init()}">
-	<p:growl id="mensajes" showDetail="true" life="2000" />
+    <ui:composition template="/WEB-INF/template/layout.xhtml">
 
+        <ui:define name="title">Sitios</ui:define>
 
-	<h:form id="formCatalogo" style="height:100%;">
-
-		<p:panel header="Campañas" style="width:100%">
-
-			<h:panelGrid id="grid" columns="1">
-
-				<h:panelGrid id="pnlBotones" columns="4">
-
-					<p:commandButton icon="ui-icon-search" title="Busqueda"></p:commandButton>
-					<p:commandButton icon="ui-icon-trash" title="Eliminar"></p:commandButton>
-					<p:commandButton icon="ui-icon-seek-first" title="Anterior"></p:commandButton>
-					<p:commandButton icon="ui-icon-seek-end" title="Siguiente"></p:commandButton>
-				</h:panelGrid>
-
-
-				<h:panelGrid id="pnlCliente" columns="3">
-
-					<p:outputLabel>Cliente</p:outputLabel>
-					<p:inputNumber id="txtId" value="#{catalogoSitios.idUsuario}"
-						readonly="true"></p:inputNumber>
-					<p:inputText id="txtEmailInfo" value="#{catalogoSitios.email}"
-						readonly="true"></p:inputText>
-				</h:panelGrid>
-
-
-				<h:panelGrid id="pnlSubPanel" columns="2">
-
-
-					<h:panelGrid id="pnlIzquierdo" columns="1">
-
-						<p:tree value="#{catalogoSitios.root}" var="node">
-							<p:treeNode>
-								<h:outputText value="#{node}" />
-							</p:treeNode>
-						</p:tree>
-						
-						
-						
-						
-				<p:outputLabel for="ordenarCampana" value="Ordenar Por" />
-				<p:selectOneRadio id="ordenarCampana" value="#{catalogoSitios.ordenarPlazaCampana}">
-					<f:selectItem itemLabel="Plaza" itemValue="plaza" />
-					<f:selectItem itemLabel="Campaña" itemValue="campana" />
-
-				</p:selectOneRadio>
-
+        <ui:define name="content">
+			<p:growl id="mensajes" showDetail="true" life="2000" />
+		
+		
+			<h:form id="formCatalogo" style="height:100%;">
+		
+				<p:panel header="Campañas" style="width:100%">
+		
+					<h:panelGrid id="grid" columns="1">
+		
+						<h:panelGrid id="pnlBotones" columns="4">
+		
+							<p:commandButton icon="ui-icon-search" title="Busqueda"></p:commandButton>
+							<p:commandButton icon="ui-icon-trash" title="Eliminar"></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-first" title="Anterior"></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end" title="Siguiente"></p:commandButton>
+						</h:panelGrid>
+		
+		
+						<h:panelGrid id="pnlCliente" columns="3">
+		
+							<p:outputLabel>Cliente</p:outputLabel>
+							<p:inputNumber id="txtId" value="#{catalogoSitios.idUsuario}"
+								readonly="true"></p:inputNumber>
+							<p:inputText id="txtEmailInfo" value="#{catalogoSitios.email}"
+								readonly="true"></p:inputText>
+						</h:panelGrid>
+		
+		
+						<h:panelGrid id="pnlSubPanel" columns="2">
+		
+		
+							<h:panelGrid id="pnlIzquierdo" columns="1">
+		
+								<p:tree value="#{catalogoSitios.root}" var="node">
+									<p:treeNode>
+										<h:outputText value="#{node}" />
+									</p:treeNode>
+								</p:tree>
+								
+								
+								
+								
+						<p:outputLabel for="ordenarCampana" value="Ordenar Por" />
+						<p:selectOneRadio id="ordenarCampana" value="#{catalogoSitios.ordenarPlazaCampana}">
+							<f:selectItem itemLabel="Plaza" itemValue="plaza" />
+							<f:selectItem itemLabel="Campaña" itemValue="campana" />
+		
+						</p:selectOneRadio>
+		
+							</h:panelGrid>
+		
+		
+							<h:panelGrid id="pnlDerecho" columns="2">
+		
+		
+								<p:outputLabel>Codigo Sitio</p:outputLabel>
+								<p:inputNumber id="txtCodigoSitio"
+									value="#{catalogoSitios.codigoSitio}"></p:inputNumber>
+		
+		
+								<p:outputLabel>Campaña</p:outputLabel>
+								<p:selectOneMenu id="cboCampana" value="#{catalogoSitios.campana}"
+									style="width:125px">
+									<f:selectItem itemLabel="Seleccione una" itemValue="" />
+									<f:selectItem itemLabel="Black" itemValue="Black" />
+									<f:selectItem itemLabel="Platino" itemValue="Platino" />
+									<f:selectItem itemLabel="Especial" itemValue="Especial" />
+								</p:selectOneMenu>
+		
+								<p:outputLabel>Plaza</p:outputLabel>
+								<p:selectOneMenu id="cboPlaza" value="#{catalogoSitios.plaza}" style="width:125px">
+									<f:selectItem itemLabel="Seleccione una" itemValue="" />
+									<f:selectItem itemLabel="Aguascalientes" itemValue="Aguascalientes" />
+									<f:selectItem itemLabel="Sonora" itemValue="Sonora" />
+									<f:selectItem itemLabel="Guerrero" itemValue="Guerrero" />
+								</p:selectOneMenu>
+								
+								
+								
+								
+						<p:outputLabel for="rbnIluminacion" value="Cuenta con iluminación" />
+						<p:selectOneRadio id="rbnIluminacion" value="#{catalogoSitios.iluminacion}">
+							<f:selectItem itemLabel="Si" itemValue="si" />
+							<f:selectItem itemLabel="No" itemValue="no" />
+		
+						</p:selectOneRadio>
+								
+						<p:outputLabel for="rbnEstatusSitio" value="Estatus Sitio" />
+						<p:selectOneRadio id="rbnEstatusSitio" value="#{catalogoSitios.estatusSitio}">
+							<f:selectItem itemLabel="Activo" itemValue="activo" />
+							<f:selectItem itemLabel="Inactivo" itemValue="inactivo" />
+		
+						</p:selectOneRadio>
+								
+							</h:panelGrid>
+		
+						</h:panelGrid>
+		
+		
+		
+		
+		
 					</h:panelGrid>
-
-
-					<h:panelGrid id="pnlDerecho" columns="2">
-
-
-						<p:outputLabel>Codigo Sitio</p:outputLabel>
-						<p:inputNumber id="txtCodigoSitio"
-							value="#{catalogoSitios.codigoSitio}"></p:inputNumber>
-
-
-						<p:outputLabel>Campaña</p:outputLabel>
-						<p:selectOneMenu id="cboCampana" value="#{catalogoSitios.campana}"
-							style="width:125px">
-							<f:selectItem itemLabel="Seleccione una" itemValue="" />
-							<f:selectItem itemLabel="Black" itemValue="Black" />
-							<f:selectItem itemLabel="Platino" itemValue="Platino" />
-							<f:selectItem itemLabel="Especial" itemValue="Especial" />
-						</p:selectOneMenu>
-
-						<p:outputLabel>Plaza</p:outputLabel>
-						<p:selectOneMenu id="cboPlaza" value="#{catalogoSitios.plaza}" style="width:125px">
-							<f:selectItem itemLabel="Seleccione una" itemValue="" />
-							<f:selectItem itemLabel="Aguascalientes" itemValue="Aguascalientes" />
-							<f:selectItem itemLabel="Sonora" itemValue="Sonora" />
-							<f:selectItem itemLabel="Guerrero" itemValue="Guerrero" />
-						</p:selectOneMenu>
-						
-						
-						
-						
-				<p:outputLabel for="rbnIluminacion" value="Cuenta con iluminación" />
-				<p:selectOneRadio id="rbnIluminacion" value="#{catalogoSitios.iluminacion}">
-					<f:selectItem itemLabel="Si" itemValue="si" />
-					<f:selectItem itemLabel="No" itemValue="no" />
-
-				</p:selectOneRadio>
-						
-				<p:outputLabel for="rbnEstatusSitio" value="Estatus Sitio" />
-				<p:selectOneRadio id="rbnEstatusSitio" value="#{catalogoSitios.estatusSitio}">
-					<f:selectItem itemLabel="Activo" itemValue="activo" />
-					<f:selectItem itemLabel="Inactivo" itemValue="inactivo" />
-
-				</p:selectOneRadio>
-						
-					</h:panelGrid>
-
-				</h:panelGrid>
-
-
-
-
-
-			</h:panelGrid>
-		</p:panel>
-	</h:form>
+				</p:panel>
+			</h:form>
+        </ui:define>
+    </ui:composition>
 </h:body>
 </html>
