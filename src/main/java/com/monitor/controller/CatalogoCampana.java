@@ -6,8 +6,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.flow.FlowScoped;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -26,7 +29,8 @@ import com.monitor.util.Util;
 
 
 @ManagedBean
-@ViewScoped
+//@ViewScoped
+@SessionScoped
 public class CatalogoCampana implements Navigation {
 	
 	@ManagedProperty("#{persistencia}")
@@ -123,8 +127,11 @@ public class CatalogoCampana implements Navigation {
 	
 	public void busqueda() {
 		String txtCliente = request.getParameter("formCatalogo:txtCliente");
+		String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
 		LOGGER.debug("txtCliente: " + txtCliente);
+		LOGGER.debug("txtCveCampana: " + txtCveCampana);
 		filtrosCampana.setCveClipro(txtCliente);
+		filtrosCampana.setCveCampana(txtCveCampana);
 //		filtrosCampana.setCveClipro(campana.getClipro().getCveClipro());
 		update();
 	}
@@ -145,7 +152,7 @@ public class CatalogoCampana implements Navigation {
 		try {
 			String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
 			LOGGER.debug("txtCveCampana: " + txtCveCampana);
-			filtrosCampana.setCve_campana(txtCveCampana);
+			filtrosCampana.setCveCampana(txtCveCampana);
 //			filtrosCampana.setCve_campana(campana.getCveCampana());
 			campanaService.eliminaCampana(filtrosCampana);
 			update();
@@ -162,12 +169,16 @@ public class CatalogoCampana implements Navigation {
 			String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
 			String txtNombre = request.getParameter("formCatalogo:txtNombre");
 			String txtFechaAlta = request.getParameter("formCatalogo:txtFechaAlta_input");
-			String statusUsuario = request.getParameter("formCatalogo:statusUsuario");
+			String statusCampana = request.getParameter("formCatalogo:statusCampana");
 
-			filtrosCampana.setCve_campana(txtCveCampana);
+			filtrosCampana.setCveCampana(txtCveCampana);
 			filtrosCampana.setNombre(txtNombre);
-			filtrosCampana.setFechaAlta(formatter.parse(txtFechaAlta));
-			filtrosCampana.setStatus(Integer.parseInt(statusUsuario));
+			if (txtFechaAlta != null){
+				filtrosCampana.setFechaAlta(formatter.parse(txtFechaAlta));
+			}
+	        if (Util.isParsable(statusCampana)) {
+				filtrosCampana.setStatus(Integer.parseInt(statusCampana));
+	        }
 			
 //			filtrosCampana.setCve_campana(campana.getCveCampana());
 //			filtrosCampana.setNombre(campana.getNombre());

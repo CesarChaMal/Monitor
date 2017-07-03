@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,9 @@ import com.monitor.util.Util;
 
 
 @ManagedBean
+//@RequestScoped
 @ViewScoped
+//@SessionScoped
 public class CatalogoUsuarios implements Navigation {
 	
 	@ManagedProperty("#{persistencia}")
@@ -131,8 +135,10 @@ public class CatalogoUsuarios implements Navigation {
 	
 	public void busqueda() {
 		String txtCliente = request.getParameter("formCatalogo:txtCliente");
+		String txtEmail = request.getParameter("formCatalogo:txtEmail");
 		LOGGER.debug("txtCliente: " + txtCliente);
 		filtrosUsuario.setCveClipro(txtCliente);
+		filtrosUsuario.setEmail(txtEmail);
 
 //		filtrosUsuario.setCveClipro(usuario.getClipro().getCveClipro());
 		update();
@@ -186,7 +192,12 @@ public class CatalogoUsuarios implements Navigation {
 			filtrosUsuario.setApellidos(txtApellidos);
 			filtrosUsuario.setFechaAlta(formatter.parse(txtFechaAlta));
 			filtrosUsuario.setTipo(Integer.parseInt(tipoUsuario));
-			filtrosUsuario.setStatus(Integer.parseInt(statusUsuario));
+			if (txtFechaAlta != null){
+				filtrosUsuario.setStatus(Integer.parseInt(statusUsuario));
+			}
+	        if (Util.isParsable(statusUsuario)) {
+	        	filtrosUsuario.setStatus(Integer.parseInt(statusUsuario));
+	        }
 			
 //			filtrosUsuario.setCveClipro(usuario.getClipro().getCveClipro());
 //			filtrosUsuario.setCveCliproNombre(usuario.getClipro().getCveClipro());

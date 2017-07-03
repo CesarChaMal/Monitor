@@ -12,7 +12,7 @@ import com.monitor.util.Util;
 @SessionScoped
 public class FiltrosCampana extends Filtros {
 
-	private String cve_campana;
+	private String cveCampana;
 	private String nombre;
 	private Date fechaAlta;
 	private Integer status;
@@ -21,11 +21,11 @@ public class FiltrosCampana extends Filtros {
 	
 	private Util util= new Util();
 
-	public String getCve_campana() {
-		return cve_campana;
+	public String getCveCampana() {
+		return cveCampana;
 	}
-	public void setCve_campana(String cve_campana) {
-		this.cve_campana = cve_campana;
+	public void setCveCampana(String cveCampana) {
+		this.cveCampana = cveCampana;
 	}
 	public String getNombre() {
 		return nombre;

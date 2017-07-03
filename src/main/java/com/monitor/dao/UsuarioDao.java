@@ -31,14 +31,23 @@ public class UsuarioDao implements MonitorDao {
 			queryString.append(" and ");
 			queryString.append(" lower(u.id.cliPro) like lower(:cliente)");
 		}
+		if (((FiltrosUsuario) filtrosUsuario).getEmail() != null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
+			queryString.append(" and ");
+			queryString.append(" lower(u.email) like lower(:email)");
+		}
 		queryString.append(" order by fechaalta DESC");
 		
 		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
 		if (((FiltrosUsuario) filtrosUsuario).getCveClipro() != null && ((FiltrosUsuario) filtrosUsuario).getCveClipro().length() > 0) {
 			CliPro clipro = new CliPro();
-			clipro.setCveClipro("%"+((FiltrosUsuario) filtrosUsuario).getCveClipro()+"%");
+			clipro.setCveClipro(((FiltrosUsuario) filtrosUsuario).getCveClipro()+"%");
 			
 			q.setParameter("cliente", Arrays.asList(clipro));
+		}
+		if (((FiltrosUsuario) filtrosUsuario).getEmail() != null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
+			String email = ((FiltrosUsuario) filtrosUsuario).getEmail()+"%";
+			
+			q.setParameter("email", Arrays.asList(email));
 		}
 		
 		return q.getResultList();

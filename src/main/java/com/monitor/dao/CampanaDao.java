@@ -48,14 +48,21 @@ public class CampanaDao implements MonitorDao {
 			queryString.append(" and ");
 			queryString.append(" lower(c.cliPro) like lower(:cliente)");
 		}
+		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
+			queryString.append(" and ");
+			queryString.append(" lower(c.cve_campana) like lower(:cve_campana)");
+		}
 		queryString.append(" order by fechaalta DESC");
 		
 		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
 		if (((FiltrosCampana) filtrosCampana).getCveClipro() != null && ((FiltrosCampana) filtrosCampana).getCveClipro().length() > 0) {
 			CliPro clipro = new CliPro();
 			clipro.setCveClipro("%"+((FiltrosCampana) filtrosCampana).getCveClipro()+"%");
-			
 			q.setParameter("cliente", Arrays.asList(clipro));
+		}
+		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
+			String cve_campana = ((FiltrosCampana) filtrosCampana).getCveClipro()+"%";
+			q.setParameter("cve_campana", Arrays.asList(cve_campana));
 		}
 		
 		return q.getResultList();
@@ -67,20 +74,43 @@ public class CampanaDao implements MonitorDao {
 		entityManager.getTransaction().begin();
 		
 		Query q = null;
-		StringBuffer queryString = new StringBuffer("delete from Campana where cve_campana = :cve_campana");
+		StringBuffer queryString = new StringBuffer("update Campana set");
+		queryString.append(" status = 2 ");
+		queryString.append(" where cve_campana = :cve_campana");
 		
 		try {
 			q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
-			q.setParameter("cve_campana", Arrays.asList(((FiltrosCampana) filtrosCampana).getCve_campana()));
+			q.setParameter("cve_campana", Arrays.asList(((FiltrosCampana) filtrosCampana).getCveCampana()));
+			
 			q.executeUpdate();
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
-			e.getStackTrace();
 			LOGGER.error(e.getMessage());
+			e.getStackTrace();
 			entityManager.getTransaction().rollback();
 		}
 	}
 	
+//	@Override
+//	public void eliminar(Filtros filtrosCampana) throws Exception {
+//		entityManager.clear();
+//		entityManager.getTransaction().begin();
+//		
+//		Query q = null;
+//		StringBuffer queryString = new StringBuffer("delete from Campana where cve_campana = :cve_campana");
+//		
+//		try {
+//			q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
+//			q.setParameter("cve_campana", Arrays.asList(((FiltrosCampana) filtrosCampana).getCve_campana()));
+//			q.executeUpdate();
+//			entityManager.getTransaction().commit();
+//		} catch (Exception e) {
+//			e.getStackTrace();
+//			LOGGER.error(e.getMessage());
+//			entityManager.getTransaction().rollback();
+//		}
+//	}
+//	
 	@Override
 	public void actualizar(Filtros filtrosCampana) throws Exception {
 		entityManager.clear();
@@ -113,7 +143,7 @@ public class CampanaDao implements MonitorDao {
 				q.setParameter("status", Arrays.asList(((FiltrosCampana) filtrosCampana).getStatus()));
 			}
 			
-			q.setParameter("cve_campana", Arrays.asList(((FiltrosCampana) filtrosCampana).getCve_campana()));
+			q.setParameter("cve_campana", Arrays.asList(((FiltrosCampana) filtrosCampana).getCveCampana()));
 			
 			q.executeUpdate();
 			entityManager.getTransaction().commit();
