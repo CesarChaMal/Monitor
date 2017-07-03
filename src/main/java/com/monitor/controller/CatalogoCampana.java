@@ -169,8 +169,6 @@ public class CatalogoCampana implements Navigation {
 
 			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 
-			filtrosCampana.setCveClipro(campana.getClipro().getCveClipro());
-			filtrosCampana.setCveCliproNombre(campana.getClipro().getNombre());
 			filtrosCampana.setCve_campana(campana.getCveCampana());
 			filtrosCampana.setNombre(campana.getNombre());
 			filtrosCampana.setFechaAlta(campana.getFechaalta());

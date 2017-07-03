@@ -30,7 +30,6 @@
 							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.busqueda()}"></p:commandButton>
 							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.actualizar()}"></p:commandButton>
 							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.eliminar()}">
-								<p:confirm header="Confirmation" message="Estas seguro?" icon="ui-icon-alert"/>
 							</p:commandButton>
 							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.prev}"></p:commandButton>
 							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.next}"></p:commandButton>

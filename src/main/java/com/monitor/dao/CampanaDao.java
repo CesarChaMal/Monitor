@@ -46,7 +46,7 @@ public class CampanaDao implements MonitorDao {
 
 		if (((FiltrosCampana) filtrosCampana).getCveClipro() != null && ((FiltrosCampana) filtrosCampana).getCveClipro().length() > 0) {
 			queryString.append(" and ");
-			queryString.append(" lower(u.id.cliPro) like lower(:cliente)");
+			queryString.append(" lower(c.cliPro) like lower(:cliente)");
 		}
 		queryString.append(" order by fechaalta DESC");
 		

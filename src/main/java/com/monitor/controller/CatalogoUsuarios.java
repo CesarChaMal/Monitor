@@ -187,8 +187,8 @@ public class CatalogoUsuarios implements Navigation {
 //			filtrosUsuario.setTipo(Integer.parseInt(tipoUsuario));
 //			filtrosUsuario.setStatus(Integer.parseInt(statusUsuario));
 			
-			filtrosUsuario.setCveClipro(usuario.getClipro().getCveClipro());
-			filtrosUsuario.setCveCliproNombre(usuario.getClipro().getCveClipro());
+//			filtrosUsuario.setCveClipro(usuario.getClipro().getCveClipro());
+//			filtrosUsuario.setCveCliproNombre(usuario.getClipro().getCveClipro());
 			filtrosUsuario.setEmail(usuario.getEmail());
 			filtrosUsuario.setContrasena(usuario.getContrasena());
 			filtrosUsuario.setNombre(usuario.getNombre());
