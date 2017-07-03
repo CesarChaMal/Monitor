@@ -27,18 +27,18 @@
 			
 					<h:panelGrid id="gridBotones" columns="1">
 						<h:panelGrid id="pnlBotones" columns="10" styleClass="botones">
-							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoUsuarios.busqueda()}"></p:commandButton>
-							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoUsuarios.actualizar}"></p:commandButton>
-							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoUsuarios.eliminar}">
-								<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert"/>
+							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.busqueda()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.actualizar()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.eliminar()}">
+								<p:confirm header="Confirmation" message="Estas seguro?" icon="ui-icon-alert"/>
 							</p:commandButton>
-							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoUsuarios.prev}"></p:commandButton>
-							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoUsuarios.next}"></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.prev}"></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.next}"></p:commandButton>
 							<p:commandButton icon="ui-icon-power" title="Logout" action="#{userManager.logout()}"></p:commandButton>
 							<p:outputLabel style="position:relative; left: 10px;" id="paginacion-info">#{catalogoUsuarios.paginacion.pageIndex+1} of #{catalogoUsuarios.paginacion.recordsTotal} records</p:outputLabel>
 							<p:outputLabel style="position:relative; left: 30px;"> ir a: </p:outputLabel>
-							<p:inputText id="irA" value="" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
-							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoUsuarios.irA}"></p:commandButton>
+							<p:inputText id="irA" value="#{catalogoUsuarios.paginacion.irA}" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.irA}"></p:commandButton>
 						</h:panelGrid>
 					</h:panelGrid>
 

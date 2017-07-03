@@ -34,7 +34,7 @@ insert into monitor.usuario (email,nombre,apellidos,contrasena,tipo,fechaalta,st
 values ('cuervo2@yahoo.com','angel','leon osornio', 'A_?#22', 2,sysdate,1,'GIM_FEMSA');
 
 insert into monitor.usuario (email,nombre,apellidos,contrasena,tipo,fechaalta,status,cve_clipro)
-values ('ces_ch@hotmail.com','Cesar','Chavez', '123', 1,sysdate,1,'GIM');
+values ('ces_ch@hotmail.com','Cesar','Chavez', '123', 2,sysdate,1,'GIM');
 
 
 

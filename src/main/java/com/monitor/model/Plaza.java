@@ -52,7 +52,6 @@ public class Plaza implements Serializable{
 	}
 
 	@Id
-
 	@Column(name = "CVE_PLAZA", unique = true, nullable = false, length = 10)
 	public String getCvePlaza() {
 		return this.cvePlaza;

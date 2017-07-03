@@ -34,7 +34,6 @@ public class Soporte implements java.io.Serializable {
 	}
 
 	@Id
-
 	@Column(name = "ID_SOPORTE", unique = true, nullable = false, precision = 6, scale = 0)
 	public int getIdSoporte() {
 		return this.idSoporte;

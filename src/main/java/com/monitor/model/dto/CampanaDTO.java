@@ -7,13 +7,13 @@ public class CampanaDTO {
 	private String nombre;
 	private Date fechaalta;
 	private Integer status;
-	private String cveClipro;
+	private CliProDTO clipro;
 	
-	public String getCveClipro() {
-		return cveClipro;
+	public CliProDTO getClipro() {
+		return clipro;
 	}
-	public void setCveClipro(String cveClipro) {
-		this.cveClipro = cveClipro;
+	public void setClipro(CliProDTO clipro) {
+		this.clipro = clipro;
 	}
 	public String getCveCampana() {
 		return cveCampana;

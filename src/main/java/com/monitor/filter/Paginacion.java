@@ -2,13 +2,20 @@ package com.monitor.filter;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.monitor.dao.UsuarioDao;
+
 public class Paginacion {
+	private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioDao.class);
 	private int defaultRegistros = 10;
 	private static final int DEFAULT_PAGE_INDEX = 0;
 	private int records;
 	private int recordsTotal;
 	private int pageIndex;
 	private int pages;
+	private int irA;
 	private List<?> origModel;
 	private List<?> model;
 
@@ -22,7 +29,7 @@ public class Paginacion {
 		this.records = model.size();
 		this.recordsTotal = model.size();
 
-		updateModel();
+//		updateModel();
 	}
 
 	public void updateModel() {
@@ -51,21 +58,25 @@ public class Paginacion {
 	}
 
 	public void next() {
-		System.out.println("Entra a next");
-		if (this.pageIndex <= pages) {
+		LOGGER.debug("Entra a next");
+//		if (this.pageIndex <= pages) {
+//			this.pageIndex++;
+//		}
+
+		if (this.pageIndex < recordsTotal-1) {
 			this.pageIndex++;
 		}
-
-		updateModel();
+		
+//		updateModel();
 	}
 
 	public void prev() {
-		System.out.println("Entra a prev");
-		if (this.pageIndex >= 0) {
+		LOGGER.debug("Entra a prev");
+		if (this.pageIndex > 0) {
 			this.pageIndex--;
 		}
 
-		updateModel();
+//		updateModel();
 	}
 
 	public int getRecords() {
@@ -93,19 +104,27 @@ public class Paginacion {
 	}
 
 	public void setPageIndex(int pageIndex) {
-		System.out.println("pageIndex" + pageIndex);
+		LOGGER.debug("pageIndex" + pageIndex);
 		this.pageIndex = pageIndex;
 	}
 
 	public int getDefaultRegistros() {
-		System.out.println("getDefaultRegistros " + defaultRegistros);
+		LOGGER.debug("getDefaultRegistros " + defaultRegistros);
 		return defaultRegistros;
 	}
 
 	public void setDefaultRegistros(int defaultRegistros) {
-		System.out.println("setDefaultRegistros " + defaultRegistros);
+		LOGGER.debug("setDefaultRegistros " + defaultRegistros);
 		this.defaultRegistros = defaultRegistros;
 		records = defaultRegistros;
 		updateModel();
+	}
+
+	public int getIrA() {
+		return irA;
+	}
+
+	public void setIrA(int irA) {
+		this.irA = irA;
 	}
 }

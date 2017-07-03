@@ -15,7 +15,6 @@ public class CampanaService {
 	private Util util;
 
 	public CampanaService(EntityManager entityManager) {
-		// TODO Auto-generated constructor stub
 		this.entityManager = entityManager;
 		campanaDao = new CampanaDao(entityManager);
 		util= new Util();
@@ -29,9 +28,23 @@ public class CampanaService {
 		this.entityManager = entityManager;
 	}
 
+	public ArrayList<CampanaDTO> consultarCampanas(FiltrosCampana filtrosCampana) throws Exception {
+		ArrayList<Object[]> campanasList = (ArrayList<Object[]>)campanaDao.consultar(filtrosCampana);
+		ArrayList<CampanaDTO> campanasDTOList = util.getCampanasDTO(campanasList);		
+		return campanasDTOList;
+	}
+
 	public ArrayList<CampanaDTO> consultaCampanasActivas(String cveClipro) {
 		ArrayList<Object[]> campanaList=(ArrayList<Object[]>)campanaDao.consultaCampanasActivas(cveClipro);
-		ArrayList<CampanaDTO> campanaDTOList = util.getCampanaDTO(campanaList);		
+		ArrayList<CampanaDTO> campanaDTOList = util.getCampanasDTO(campanaList);		
 		return campanaDTOList;
 	}
+	public void eliminaCampana(FiltrosCampana filtrosCampana) throws Exception {
+		campanaDao.eliminar(filtrosCampana);
+	}
+	
+	public void actualizaCampana(FiltrosCampana filtrosCampana) throws Exception {
+		campanaDao.actualizar(filtrosCampana);
+	}
 }
+

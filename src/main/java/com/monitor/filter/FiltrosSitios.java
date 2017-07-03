@@ -7,16 +7,17 @@ import org.primefaces.model.TreeNode;
 
 @ManagedBean(name="filtrosSitios")
 @SessionScoped
-public class FiltrosSitios {
-	
-	
+public class FiltrosSitios extends Filtros {
+
 	private String email;
-	
-	
+	private String codigoSitio;
+	private String plaza;
+	private String campana;
+	private String ordenarPlazaCampana;
+	private String iluminacion;
+	private String estatusSitio;
 	private TreeNode root;
 	
-	
-
 	public String getEmail() {
 		return email;
 	}
@@ -80,19 +81,5 @@ public class FiltrosSitios {
 	public void setEstatusSitio(String estatusSitio) {
 		this.estatusSitio = estatusSitio;
 	}
-
-	private String codigoSitio;
-	
-	private String plaza;
-	
-	private String campana;
-	
-	private String ordenarPlazaCampana;
-	
-	private String iluminacion;
-	
-	private String estatusSitio;
-	
-	
 
 }

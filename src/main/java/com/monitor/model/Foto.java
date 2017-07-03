@@ -54,7 +54,6 @@ public class Foto implements java.io.Serializable {
 	}
 
 	@EmbeddedId
-
 	@AttributeOverrides({
 			@AttributeOverride(name = "fechaHora", column = @Column(name = "FECHA_HORA", nullable = false, length = 7)),
 			@AttributeOverride(name = "cveCampana", column = @Column(name = "CVE_CAMPANA", nullable = false, length = 12)),

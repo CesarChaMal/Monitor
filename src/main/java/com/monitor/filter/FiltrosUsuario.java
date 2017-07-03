@@ -9,7 +9,7 @@ import com.monitor.util.Util;
 
 @ManagedBean(name="filtrosUsuario")
 @SessionScoped
-public class FiltrosUsuario {
+public class FiltrosUsuario extends Filtros {
 
 	private String cveClipro;
 	private String cveCliproNombre;

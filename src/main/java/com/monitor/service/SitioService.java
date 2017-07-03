@@ -18,7 +18,7 @@ public class SitioService {
 
 	public ArrayList<SitioDTO> consultaSitiosActivos(String cveClipro) {
 		ArrayList<Object[]> sitioList = (ArrayList<Object[]>)sitioDao.consultaSitiosActivos(cveClipro);
-		ArrayList<SitioDTO> sitioDTOList = util.getSitioDTO(sitioList);		
+		ArrayList<SitioDTO> sitioDTOList = util.getSitiosDTO(sitioList);		
 		return sitioDTOList;
 	}
 }

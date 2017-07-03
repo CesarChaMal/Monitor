@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.monitor.model.Campana;
+import com.monitor.model.CampanaId;
 import com.monitor.model.CliPro;
 import com.monitor.model.Usuario;
 import com.monitor.model.dto.CampanaDTO;
@@ -30,22 +32,32 @@ public class Util {
 		return plazaDTOList;
 	}
 	
-	public ArrayList<CampanaDTO> getCampanaDTO(ArrayList<Object[]> campanaList) {
+	public ArrayList<CampanaDTO> getCampanasDTO(ArrayList<Object[]> campanasList) {
 		ArrayList<CampanaDTO> campanaDTOList = new ArrayList<CampanaDTO>();
-		for (Object[] result : campanaList) {
+		for (Object[] result : campanasList) {
+			Campana campana = (Campana) result[0];
+			CampanaId id = (CampanaId) campana.getId();
+			CliPro clipro = (CliPro) result[1];
+			
 			CampanaDTO campanaDTO = new CampanaDTO();
-			campanaDTO.setCveCampana((String) result[0]);
-			campanaDTO.setNombre((String) result[1]);
-			campanaDTO.setFechaalta((Date) result[2]);
-			campanaDTO.setStatus((Integer) result[3]);
-			campanaDTO.setCveClipro((String) result[4]);
+			campanaDTO.setCveCampana(id.getCveCampana());
+			campanaDTO.setNombre(campana.getNombre());
+			campanaDTO.setFechaalta(campana.getFechaalta());
+			campanaDTO.setStatus(campana.getStatus());
+			
+			CliProDTO cliproDTO = new CliProDTO();
+			cliproDTO.setCveClipro(clipro.getCveClipro());
+			cliproDTO.setNombre(clipro.getNombre());
+			cliproDTO.setTipo(clipro.getTipo());
+			cliproDTO.setPadre(clipro.getPadre());
+			
+			campanaDTO.setClipro(cliproDTO);
 			campanaDTOList.add(campanaDTO);
 		}
 		return campanaDTOList;
-
 	}
 
-	public ArrayList<SitioDTO> getSitioDTO(ArrayList<Object[]> sitioList) {
+	public ArrayList<SitioDTO> getSitiosDTO(ArrayList<Object[]> sitioList) {
 		ArrayList<SitioDTO> sitioDTOList = new ArrayList<SitioDTO>();
 		for (Object[] result : sitioList) {
 			SitioDTO sitioDTO = new SitioDTO();

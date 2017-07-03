@@ -21,16 +21,16 @@ public class UsuarioService {
 	}
 
 	public ArrayList<UsuarioDTO> consultarUsuarios(FiltrosUsuario filtrosUsuario) throws Exception {
-		ArrayList<Object[]> usuariosList = (ArrayList<Object[]>)usuarioDao.consultarUsuarios(filtrosUsuario);
+		ArrayList<Object[]> usuariosList = (ArrayList<Object[]>)usuarioDao.consultar(filtrosUsuario);
 		ArrayList<UsuarioDTO> usuariosDTOList = util.getUsuariosDTO(usuariosList);		
 		return usuariosDTOList;
 	}
 	
 	public void eliminaUsuario(FiltrosUsuario filtrosUsuario) throws Exception {
-		usuarioDao.eliminaUsuario(filtrosUsuario);
+		usuarioDao.eliminar(filtrosUsuario);
 	}
 	
 	public void actualizaUsuario(FiltrosUsuario filtrosUsuario) throws Exception {
-		usuarioDao.actualizaUsuario(filtrosUsuario);
+		usuarioDao.actualizar(filtrosUsuario);
 	}
 }

@@ -15,10 +15,10 @@ import org.slf4j.LoggerFactory;
 
 import com.monitor.filter.FiltrosSitios;
 import com.monitor.filter.Paginacion;
-import com.monitor.model.Navigation;
 import com.monitor.model.dto.SitioDTO;
 import com.monitor.persistencia.Persistencia;
 import com.monitor.service.SitioService;
+import com.monitor.util.Navigation;
 
  
 

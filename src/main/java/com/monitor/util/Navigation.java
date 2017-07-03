@@ -1,8 +1,4 @@
-package com.monitor.model;
-
-import java.text.SimpleDateFormat;
-
-import com.monitor.util.Util;
+package com.monitor.util;
 
 public interface Navigation {
 	public void next();

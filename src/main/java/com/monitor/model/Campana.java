@@ -12,9 +12,14 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -28,9 +33,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Campana  implements Serializable{
 
 	private CampanaId id;
+//	private String cveCampana;
 	private String nombre;
 	private Date fechaalta;
 	private Integer status;
+	private CliPro cliPro;
 
 	private Set<Sitio> sitios = new HashSet<Sitio>(0);
 
@@ -49,17 +56,25 @@ public class Campana  implements Serializable{
 	}
 
 	@EmbeddedId
-
 	@AttributeOverrides({
 			@AttributeOverride(name = "cveCampana", column = @Column(name = "CVE_CAMPANA", nullable = false, length = 12)),
 			@AttributeOverride(name = "cveClipro", column = @Column(name = "CVE_CLIPRO", nullable = false, length = 10)) })
 	public CampanaId getId() {
 		return this.id;
 	}
-
 	public void setId(CampanaId id) {
 		this.id = id;
 	}
+
+//	@Id
+//	@Column(name = "CVE_CAMPANA", unique = true, nullable = false, length = 12)
+//	public String getCveCampana() {
+//		return cveCampana;
+//	}
+//
+//	public void setCveCampana(String cveCampana) {
+//		this.cveCampana = cveCampana;
+//	}
 
 	@Column(name = "NOMBRE", length = 80)
 	public String getNombre() {
@@ -88,12 +103,24 @@ public class Campana  implements Serializable{
 		this.sitios = sitios;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "FECHAALTA", length = 7)
 	public Date getFechaalta() {
-		return fechaalta;
+		return this.fechaalta;
 	}
 
 	public void setFechaalta(Date fechaalta) {
 		this.fechaalta = fechaalta;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CVE_CLIPRO", referencedColumnName = "CVE_CLIPRO", nullable = false, insertable = false, updatable = false)
+	public CliPro getCliPro() {
+		return this.cliPro;
+	}
+
+	public void setCliPro(CliPro cliPro) {
+		this.cliPro = cliPro;
 	}
 
 }

@@ -4,8 +4,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import com.monitor.model.Navigation;
 import com.monitor.persistencia.Persistencia;
+import com.monitor.util.Navigation;
 
 
 @ManagedBean

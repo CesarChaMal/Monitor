@@ -24,6 +24,12 @@
 			</h:form>
         </ui:define>
 
+        <ui:define name="footer">
+			<h:form>
+				<b:commandButton value="Logout" action="#{userManager.logout()}" styleClass="blueGradient"/>
+			</h:form>
+        </ui:define>
+
 <ui:remove>
 <!-- 
 		<h:form>
