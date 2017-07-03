@@ -99,6 +99,7 @@ public class UsuarioDao {
 		if (filtrosUsuario.getStatus()!= null && (filtrosUsuario.getStatus() > 0 && filtrosUsuario.getStatus() < 3)) {
 			queryString.append(" status = :status ");
 		}
+		queryString.append(" where email = :email");
 		
 		try {
 			q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
@@ -138,8 +139,6 @@ public class UsuarioDao {
 				q.setParameter("status", Arrays.asList(filtrosUsuario.getStatus()));
 			}
 			
-			queryString.append(" where email = :email;");
-//			q.setParameter("email", Arrays.asList(filtrosUsuario.getEmail()));
 			q.setParameter("email", Arrays.asList(filtrosUsuario.getEmail()));
 			
 			q.executeUpdate();
