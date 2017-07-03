@@ -24,9 +24,9 @@
 					<h:panelGrid id="gridBotones" columns="1">
 		
 						<h:panelGrid id="pnlBotones" columns="10" styleClass="botones">
-							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoCampana.busqueda()}"></p:commandButton>
-							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoCampana.actualizar()}"></p:commandButton>
-							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoCampana.eliminar()}">
+							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoCampana.busqueda()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoCampana.actualizar()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoCampana.eliminar()}">
 								<p:confirm header="Confirmation" message="Estas seguro?" icon="ui-icon-alert"/>
 							</p:commandButton>
 							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoCampana.prev}"></p:commandButton>

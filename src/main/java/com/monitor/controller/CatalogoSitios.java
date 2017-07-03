@@ -19,6 +19,7 @@ import com.monitor.model.dto.SitioDTO;
 import com.monitor.persistencia.Persistencia;
 import com.monitor.service.SitioService;
 import com.monitor.util.Navigation;
+import com.monitor.util.Util;
 
  
 
@@ -234,23 +235,76 @@ public class CatalogoSitios implements Navigation {
 
 	@Override
 	public void irA() {
-		// TODO Auto-generated method stub
-		
+	  String irA = request.getParameter("formCatalogo:irA");
+	  if (Util.isParsable(irA)) {
+		  paginacion.setPageIndex(Integer.parseInt(irA)-1);
+		  update();
+	  }
 	}
 
 
 	@Override
 	public void eliminar() {
-		// TODO Auto-generated method stub
-		
+		try {
+			String txtEmail = request.getParameter("formCatalogo:txtEmail");
+			
+			LOGGER.debug("txtEmail: " + txtEmail);
+			filtroSitios.setEmail(txtEmail);
+			sitioService.eliminaUsuario(filtroSitios);
+			update();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 	}
 
 
 	@Override
 	public void actualizar() {
-		// TODO Auto-generated method stub
-		
 	}
+
+
+	public FiltrosSitios getFiltroSitios() {
+		return filtroSitios;
+	}
+
+
+	public void setFiltroSitios(FiltrosSitios filtroSitios) {
+		this.filtroSitios = filtroSitios;
+	}
+
+
+	public SitioDTO getSitioDTO() {
+		return sitioDTO;
+	}
+
+
+	public void setSitioDTO(SitioDTO sitioDTO) {
+		this.sitioDTO = sitioDTO;
+	}
+
+
+	public List<SitioDTO> getSitioDTOList() {
+		return sitioDTOList;
+	}
+
+
+	public void setSitioDTOList(List<SitioDTO> sitioDTOList) {
+		this.sitioDTOList = sitioDTOList;
+	}
+
+
+	public Paginacion getPaginacion() {
+		return paginacion;
+	}
+
+
+	public void setPaginacion(Paginacion paginacion) {
+		this.paginacion = paginacion;
+	}
+
+
+
 
 
 }

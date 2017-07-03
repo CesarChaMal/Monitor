@@ -112,20 +112,20 @@ public class CatalogoCampana implements Navigation {
 	}
 
 	public void irA() {
-//        String irA = request.getParameter("formCatalogo:irA");
-//        if (Util.isParsable(irA)) {
-//        	paginacion.setPageIndex(Integer.parseInt(irA)-1);
-//        	update();
-//        }
-    	paginacion.setPageIndex(paginacion.getIrA()-1);
-    	update();
+        String irA = request.getParameter("formCatalogo:irA");
+        if (Util.isParsable(irA)) {
+        	paginacion.setPageIndex(Integer.parseInt(irA)-1);
+        	update();
+        }
+//    	paginacion.setPageIndex(paginacion.getIrA()-1);
+//    	update();
 	}
 	
 	public void busqueda() {
-//		String txtCliente = request.getParameter("formCatalogo:txtCliente");
-//		LOGGER.debug("txtCliente: " + txtCliente);
-//		filtrosCampana.setCveClipro(txtCliente);
-		filtrosCampana.setCveClipro(campana.getClipro().getCveClipro());
+		String txtCliente = request.getParameter("formCatalogo:txtCliente");
+		LOGGER.debug("txtCliente: " + txtCliente);
+		filtrosCampana.setCveClipro(txtCliente);
+//		filtrosCampana.setCveClipro(campana.getClipro().getCveClipro());
 		update();
 	}
 	
@@ -143,11 +143,10 @@ public class CatalogoCampana implements Navigation {
 
 	public void eliminar() {
 		try {
-//			String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
-			
-//			LOGGER.debug("txtCveCampana: " + txtCveCampana);
-//			filtrosCampana.setCve_campana(txtCveCampana);
-			filtrosCampana.setCve_campana(campana.getCveCampana());
+			String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
+			LOGGER.debug("txtCveCampana: " + txtCveCampana);
+			filtrosCampana.setCve_campana(txtCveCampana);
+//			filtrosCampana.setCve_campana(campana.getCveCampana());
 			campanaService.eliminaCampana(filtrosCampana);
 			update();
 		} catch (Exception e) {
@@ -157,22 +156,24 @@ public class CatalogoCampana implements Navigation {
 	
 	public void actualizar() {
 		try {
-//	        String txtCliente = request.getParameter("formCatalogo:txtCliente");
-//	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombre");
-//			String txtEmail = request.getParameter("formCatalogo:txtEmail");
-//			String txtContrasena = request.getParameter("formCatalogo:txtContrasena");
-//			String txtNombre = request.getParameter("formCatalogo:txtNombre");
-//			String txtApellidos = request.getParameter("formCatalogo:txtApellidos");
-//			String txtFechaAlta = request.getParameter("formCatalogo:txtFechaAlta_input");
-//			String tipoUsuario = request.getParameter("formCatalogo:tipoUsuario");
-//			String statusUsuario = request.getParameter("formCatalogo:statusUsuario");
-
 			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+	        String txtCliente = request.getParameter("formCatalogo:txtCliente");
+	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombre");
+			String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
+			String txtNombre = request.getParameter("formCatalogo:txtNombre");
+			String txtFechaAlta = request.getParameter("formCatalogo:txtFechaAlta_input");
+			String statusUsuario = request.getParameter("formCatalogo:statusUsuario");
 
-			filtrosCampana.setCve_campana(campana.getCveCampana());
-			filtrosCampana.setNombre(campana.getNombre());
-			filtrosCampana.setFechaAlta(campana.getFechaalta());
-			filtrosCampana.setStatus(campana.getStatus());
+			filtrosCampana.setCve_campana(txtCveCampana);
+			filtrosCampana.setNombre(txtNombre);
+			filtrosCampana.setFechaAlta(formatter.parse(txtFechaAlta));
+			filtrosCampana.setStatus(Integer.parseInt(statusUsuario));
+			
+//			filtrosCampana.setCve_campana(campana.getCveCampana());
+//			filtrosCampana.setNombre(campana.getNombre());
+//			filtrosCampana.setFechaAlta(campana.getFechaalta());
+//			filtrosCampana.setStatus(campana.getStatus());
+			
 			campanaService.actualizaCampana(filtrosCampana);
 			update();
 		} catch (Exception e) {

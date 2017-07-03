@@ -120,20 +120,21 @@ public class CatalogoUsuarios implements Navigation {
 	}
 
 	public void irA() {
-//        String irA = request.getParameter("formCatalogo:irA");
-//        if (Util.isParsable(irA)) {
-//        	paginacion.setPageIndex(Integer.parseInt(irA)-1);
-//        	update();
-//        }
-    	paginacion.setPageIndex(paginacion.getIrA()-1);
-    	update();
+        String irA = request.getParameter("formCatalogo:irA");
+        if (Util.isParsable(irA)) {
+        	paginacion.setPageIndex(Integer.parseInt(irA)-1);
+        	update();
+        }
+//    	paginacion.setPageIndex(paginacion.getIrA()-1);
+//    	update();
 	}
 	
 	public void busqueda() {
-//		String txtCliente = request.getParameter("formCatalogo:txtCliente");
-//		LOGGER.debug("txtCliente: " + txtCliente);
-//		filtrosUsuario.setCveClipro(txtCliente);
-		filtrosUsuario.setCveClipro(usuario.getClipro().getCveClipro());
+		String txtCliente = request.getParameter("formCatalogo:txtCliente");
+		LOGGER.debug("txtCliente: " + txtCliente);
+		filtrosUsuario.setCveClipro(txtCliente);
+
+//		filtrosUsuario.setCveClipro(usuario.getClipro().getCveClipro());
 		update();
 	}
 	
@@ -151,11 +152,11 @@ public class CatalogoUsuarios implements Navigation {
 
 	public void eliminar() {
 		try {
-//			String txtEmail = request.getParameter("formCatalogo:txtEmail");
+			String txtEmail = request.getParameter("formCatalogo:txtEmail");
+			LOGGER.debug("txtEmail: " + txtEmail);
+			filtrosUsuario.setEmail(txtEmail);
 			
-//			LOGGER.debug("txtEmail: " + txtEmail);
-//			filtrosUsuario.setEmail(txtEmail);
-			filtrosUsuario.setEmail(usuario.getEmail());
+//			filtrosUsuario.setEmail(usuario.getEmail());
 			usuarioService.eliminaUsuario(filtrosUsuario);
 			update();
 		} catch (Exception e) {
@@ -165,37 +166,37 @@ public class CatalogoUsuarios implements Navigation {
 	
 	public void actualizar() {
 		try {
-//			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 			
-//	        String txtCliente = request.getParameter("formCatalogo:txtCliente");
-//	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombre");
-//			String txtEmail = request.getParameter("formCatalogo:txtEmail");
-//			String txtContrasena = request.getParameter("formCatalogo:txtContrasena");
-//			String txtNombre = request.getParameter("formCatalogo:txtNombre");
-//			String txtApellidos = request.getParameter("formCatalogo:txtApellidos");
-//			String txtFechaAlta = request.getParameter("formCatalogo:txtFechaAlta_input");
-//			String tipoUsuario = request.getParameter("formCatalogo:tipoUsuario");
-//			String statusUsuario = request.getParameter("formCatalogo:statusUsuario");
+	        String txtCliente = request.getParameter("formCatalogo:txtCliente");
+	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombre");
+			String txtEmail = request.getParameter("formCatalogo:txtEmail");
+			String txtContrasena = request.getParameter("formCatalogo:txtContrasena");
+			String txtNombre = request.getParameter("formCatalogo:txtNombre");
+			String txtApellidos = request.getParameter("formCatalogo:txtApellidos");
+			String txtFechaAlta = request.getParameter("formCatalogo:txtFechaAlta_input");
+			String tipoUsuario = request.getParameter("formCatalogo:tipoUsuario");
+			String statusUsuario = request.getParameter("formCatalogo:statusUsuario");
 
-//			filtrosUsuario.setCveClipro(txtCliente);
-//			filtrosUsuario.setCveCliproNombre(txtClienteNombre);
-//			filtrosUsuario.setEmail(txtEmail);
-//			filtrosUsuario.setContrasena(txtContrasena);
-//			filtrosUsuario.setNombre(txtNombre);
-//			filtrosUsuario.setApellidos(txtApellidos);
-//			filtrosUsuario.setFechaAlta(formatter.parse(txtFechaAlta));
-//			filtrosUsuario.setTipo(Integer.parseInt(tipoUsuario));
-//			filtrosUsuario.setStatus(Integer.parseInt(statusUsuario));
+			filtrosUsuario.setCveClipro(txtCliente);
+			filtrosUsuario.setCveCliproNombre(txtClienteNombre);
+			filtrosUsuario.setEmail(txtEmail);
+			filtrosUsuario.setContrasena(txtContrasena);
+			filtrosUsuario.setNombre(txtNombre);
+			filtrosUsuario.setApellidos(txtApellidos);
+			filtrosUsuario.setFechaAlta(formatter.parse(txtFechaAlta));
+			filtrosUsuario.setTipo(Integer.parseInt(tipoUsuario));
+			filtrosUsuario.setStatus(Integer.parseInt(statusUsuario));
 			
 //			filtrosUsuario.setCveClipro(usuario.getClipro().getCveClipro());
 //			filtrosUsuario.setCveCliproNombre(usuario.getClipro().getCveClipro());
-			filtrosUsuario.setEmail(usuario.getEmail());
-			filtrosUsuario.setContrasena(usuario.getContrasena());
-			filtrosUsuario.setNombre(usuario.getNombre());
-			filtrosUsuario.setApellidos(usuario.getApellidos());
-			filtrosUsuario.setFechaAlta(usuario.getFechaalta());
-			filtrosUsuario.setTipo(usuario.getTipo());
-			filtrosUsuario.setStatus(usuario.getStatus());
+//			filtrosUsuario.setEmail(usuario.getEmail());
+//			filtrosUsuario.setContrasena(usuario.getContrasena());
+//			filtrosUsuario.setNombre(usuario.getNombre());
+//			filtrosUsuario.setApellidos(usuario.getApellidos());
+//			filtrosUsuario.setFechaAlta(usuario.getFechaalta());
+//			filtrosUsuario.setTipo(usuario.getTipo());
+//			filtrosUsuario.setStatus(usuario.getStatus());
 			usuarioService.actualizaUsuario(filtrosUsuario);
 			update();
 		} catch (Exception e) {
