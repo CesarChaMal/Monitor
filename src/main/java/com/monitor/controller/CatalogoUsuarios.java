@@ -29,6 +29,7 @@ import com.monitor.util.Util;
 //@ViewScoped
 @SessionScoped
 public class CatalogoUsuarios implements Navigation {
+	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoUsuarios.class);
 	
 	@ManagedProperty("#{persistencia}")
 	public Persistencia persistencia;
@@ -37,12 +38,11 @@ public class CatalogoUsuarios implements Navigation {
 	public CurrentData currentData;
 
 	@ManagedProperty("#{filtrosUsuario}")
-	private FiltrosUsuario filtrosUsuario;
+	public FiltrosUsuario filtrosUsuario;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoUsuarios.class);
-	public UsuarioDTO usuario;
+	public Paginacion paginacion;
+	private UsuarioDTO usuario;
 	private List<UsuarioDTO> usuariosDTOList;
-	private Paginacion paginacion;
 	private UsuarioService usuarioService;
 	private HttpServletRequest request;
 
@@ -124,6 +124,7 @@ public class CatalogoUsuarios implements Navigation {
 	}
 
 	public void irA() {
+	    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String irA = request.getParameter("formCatalogo:irA");
         if (Util.isParsable(irA)) {
         	paginacion.setPageIndex(Integer.parseInt(irA)-1);
@@ -134,6 +135,8 @@ public class CatalogoUsuarios implements Navigation {
 	}
 	
 	public void busqueda() {
+		filtrosUsuario = new FiltrosUsuario();
+	    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String txtCliente = request.getParameter("formCatalogo:txtCliente");
 		String txtEmail = request.getParameter("formCatalogo:txtEmail");
 		LOGGER.debug("txtCliente: " + txtCliente);
@@ -147,7 +150,9 @@ public class CatalogoUsuarios implements Navigation {
 	
 	public void update() {
 		try {
+			filtrosUsuario = new FiltrosUsuario();
 			usuario = null;
+//			usuario = new UsuarioDTO();
 			usuariosDTOList = usuarioService.consultarUsuarios(filtrosUsuario);
 			paginacion.setModel(usuariosDTOList);
 			if (usuariosDTOList.size() > 0)
@@ -159,12 +164,15 @@ public class CatalogoUsuarios implements Navigation {
 
 	public void eliminar() {
 		try {
+			filtrosUsuario = new FiltrosUsuario();
+		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String txtEmail = request.getParameter("formCatalogo:txtEmail");
 			LOGGER.debug("txtEmail: " + txtEmail);
 			filtrosUsuario.setEmail(txtEmail);
 			
 //			filtrosUsuario.setEmail(usuario.getEmail());
 			usuarioService.eliminaUsuario(filtrosUsuario);
+			paginacion.setPageIndex(paginacion.getPageIndex()-1);
 			update();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -173,8 +181,10 @@ public class CatalogoUsuarios implements Navigation {
 	
 	public void actualizar() {
 		try {
+			filtrosUsuario = new FiltrosUsuario();
 			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 			
+		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	        String txtCliente = request.getParameter("formCatalogo:txtCliente");
 	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombre");
 			String txtEmail = request.getParameter("formCatalogo:txtEmail");
@@ -185,17 +195,18 @@ public class CatalogoUsuarios implements Navigation {
 			String tipoUsuario = request.getParameter("formCatalogo:tipoUsuario");
 			String statusUsuario = request.getParameter("formCatalogo:statusUsuario");
 
-			filtrosUsuario.setCveClipro(txtCliente);
-			filtrosUsuario.setCveCliproNombre(txtClienteNombre);
-			filtrosUsuario.setEmail(txtEmail);
+//			filtrosUsuario.setCveClipro(txtCliente);
+//			filtrosUsuario.setCveCliproNombre(txtClienteNombre);
+//			filtrosUsuario.setEmail(txtEmail);
 			filtrosUsuario.setContrasena(txtContrasena);
 			filtrosUsuario.setNombre(txtNombre);
 			filtrosUsuario.setApellidos(txtApellidos);
-			filtrosUsuario.setFechaAlta(formatter.parse(txtFechaAlta));
-			filtrosUsuario.setTipo(Integer.parseInt(tipoUsuario));
 			if (txtFechaAlta != null){
-				filtrosUsuario.setStatus(Integer.parseInt(statusUsuario));
+				filtrosUsuario.setFechaAlta(formatter.parse(txtFechaAlta));
 			}
+	        if (Util.isParsable(tipoUsuario)) {
+	        	filtrosUsuario.setTipo(Integer.parseInt(tipoUsuario));
+	        }
 	        if (Util.isParsable(statusUsuario)) {
 	        	filtrosUsuario.setStatus(Integer.parseInt(statusUsuario));
 	        }

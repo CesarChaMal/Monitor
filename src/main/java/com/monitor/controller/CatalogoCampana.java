@@ -32,6 +32,7 @@ import com.monitor.util.Util;
 //@ViewScoped
 @SessionScoped
 public class CatalogoCampana implements Navigation {
+	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoCampana.class);
 	
 	@ManagedProperty("#{persistencia}")
 	public Persistencia persistencia;
@@ -40,12 +41,11 @@ public class CatalogoCampana implements Navigation {
 	public CurrentData currentData;
 
 	@ManagedProperty("#{filtrosCampana}")
-	private FiltrosCampana filtrosCampana;
+	public FiltrosCampana filtrosCampana;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoCampana.class);
-	public CampanaDTO campana;
+	public Paginacion paginacion;
+	private CampanaDTO campana;
 	private List<CampanaDTO> campanasDTOList;
-	private Paginacion paginacion;
 	private CampanaService campanaService;
 	private HttpServletRequest request;
 
@@ -116,6 +116,7 @@ public class CatalogoCampana implements Navigation {
 	}
 
 	public void irA() {
+	    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String irA = request.getParameter("formCatalogo:irA");
         if (Util.isParsable(irA)) {
         	paginacion.setPageIndex(Integer.parseInt(irA)-1);
@@ -126,6 +127,8 @@ public class CatalogoCampana implements Navigation {
 	}
 	
 	public void busqueda() {
+		filtrosCampana = new FiltrosCampana();
+	    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String txtCliente = request.getParameter("formCatalogo:txtCliente");
 		String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
 		LOGGER.debug("txtCliente: " + txtCliente);
@@ -138,7 +141,9 @@ public class CatalogoCampana implements Navigation {
 	
 	public void update() {
 		try {
+			filtrosCampana = new FiltrosCampana();
 			campana = null;
+//			campana = new CampanaDTO();
 			campanasDTOList = campanaService.consultarCampanas(filtrosCampana);
 			paginacion.setModel(campanasDTOList);
 			if (campanasDTOList.size() > 0)
@@ -150,6 +155,8 @@ public class CatalogoCampana implements Navigation {
 
 	public void eliminar() {
 		try {
+			filtrosCampana = new FiltrosCampana();
+		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
 			LOGGER.debug("txtCveCampana: " + txtCveCampana);
 			filtrosCampana.setCveCampana(txtCveCampana);
@@ -163,7 +170,9 @@ public class CatalogoCampana implements Navigation {
 	
 	public void actualizar() {
 		try {
+			filtrosCampana = new FiltrosCampana();
 			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	        String txtCliente = request.getParameter("formCatalogo:txtCliente");
 	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombre");
 			String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");

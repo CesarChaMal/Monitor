@@ -1,11 +1,9 @@
 package com.monitor.filter;
 
-import java.util.Date;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.primefaces.model.TreeNode;
+import com.monitor.util.Util;
 
 @ManagedBean(name="filtrosSitios")
 @SessionScoped
@@ -20,6 +18,8 @@ public class FiltrosSitios extends Filtros {
 	private String cvePlaza;
 	private Integer orden; 
 	
+	private Util util= new Util();
+
 	public String getCveSitio() {
 		return cveSitio;
 	}
@@ -68,5 +68,10 @@ public class FiltrosSitios extends Filtros {
 	public void setOrden(Integer orden) {
 		this.orden = orden;
 	}
-	
+	public Util getUtil() {
+		return util;
+	}
+	public void setUtil(Util util) {
+		this.util = util;
+	}
 }

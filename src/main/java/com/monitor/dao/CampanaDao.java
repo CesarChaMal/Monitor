@@ -50,7 +50,7 @@ public class CampanaDao implements MonitorDao {
 		}
 		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
 			queryString.append(" and ");
-			queryString.append(" lower(c.cve_campana) like lower(:cve_campana)");
+			queryString.append(" lower(c.id.cveCampana) like lower(:cve_campana)");
 		}
 		queryString.append(" order by fechaalta DESC");
 		
@@ -61,7 +61,7 @@ public class CampanaDao implements MonitorDao {
 			q.setParameter("cliente", Arrays.asList(clipro));
 		}
 		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
-			String cve_campana = "%"+((FiltrosCampana) filtrosCampana).getCveClipro()+"%";
+			String cve_campana = "%"+((FiltrosCampana) filtrosCampana).getCveCampana()+"%";
 			q.setParameter("cve_campana", Arrays.asList(cve_campana));
 		}
 		

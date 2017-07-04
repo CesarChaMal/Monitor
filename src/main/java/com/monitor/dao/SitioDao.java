@@ -34,19 +34,18 @@ public class SitioDao implements MonitorDao {
 		entityManager.clear();
 
 		Query q = null;
-		StringBuffer queryString = new StringBuffer("SELECT cl.CVE_CLIPRO, cl.NOMBRE, s.CVE_SITIO, s.UBICACION, s.ILUMINACION, s.STATUS, c.CVE_CAMPANA, c.NOMBRE, p.CVE_PLAZA, p.NOMBRE");
-		queryString.append(" FROM (SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl");
+		StringBuffer queryString = new StringBuffer("select cl, s, c, p");
+		queryString.append(" from CliPro cl ");
+		queryString.append(" inner join Campana as c on cl.cveClipro = c.id.cveClipro");
+		queryString.append(" inner join Sitio as s on s.id.cveClipro = c.cliPro.cveClipro AND s.id.cveCampana = c.id.cveCampana");
+		queryString.append(" inner join Plaza as p on p.cvePlaza= s.id.cvePlaza");
 
 		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
-			queryString.append(" WHERE ");
-			queryString.append(" LOWER(ccl.CVE_CLIPRO) LIKE LOWER(:cliente)");
+			queryString.append(" where ");
+			queryString.append(" lower(c.id.cveClipro) like lower(:cliente) ");
 		}
 		
-		queryString.append(") cl");
-		queryString.append(" INNER JOIN monitor.CAMPANA c ON cl.CVE_CLIPRO = c.CVE_CLIPRO");
-		queryString.append(" INNER JOIN monitor.SITIO s ON s.CVE_CLIPRO = c.CVE_CLIPRO AND s.CVE_CAMPANA = c.CVE_CAMPANA");
-		queryString.append(" INNER JOIN monitor.PLAZA p ON p.CVE_PLAZA = s.CVE_PLAZA");
-		queryString.append(" ORDER BY s.CVE_SITIO");
+		queryString.append(" order by s.id.cveSitio");
 
 		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
 

@@ -8,8 +8,9 @@
 	<property name="logs" value="logs/" />
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${logs}monitor.log</file>
+        <file>monitor.log</file>
 		<!--
+        <file>${logs}monitor.log</file>
         <append>true</append>
 	    -->
         <append>false</append>

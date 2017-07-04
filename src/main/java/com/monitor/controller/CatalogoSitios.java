@@ -14,6 +14,7 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.monitor.filter.FiltrosCampana;
 import com.monitor.filter.FiltrosSitios;
 import com.monitor.filter.Paginacion;
 import com.monitor.model.dto.SitioDTO;
@@ -25,6 +26,7 @@ import com.monitor.util.Util;
 @ManagedBean
 @SessionScoped
 public class CatalogoSitios implements Navigation {
+	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoSitios.class);
 	
 	@ManagedProperty("#{persistencia}")
 	public Persistencia persistencia;
@@ -32,13 +34,12 @@ public class CatalogoSitios implements Navigation {
 	@ManagedProperty("#{currentData}")
 	public CurrentData currentData;
 
-	@ManagedProperty("#{filtrosSitios}")
-	private FiltrosSitios filtrosSitios;
+//	@ManagedProperty("#{filtrosSitios}")
+	public FiltrosSitios filtrosSitios;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoSitios.class);
-	public SitioDTO sitio;
+	public Paginacion paginacion;
+	private SitioDTO sitio;
 	private List<SitioDTO> sitiosDTOList;
-	private Paginacion paginacion;
 	private SitioService sitioService;
 	private HttpServletRequest request;
 	private Integer orden;
@@ -49,6 +50,7 @@ public class CatalogoSitios implements Navigation {
 	public void init() {
 		try {
 		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+			filtrosSitios = new FiltrosSitios();
 			sitioService = new SitioService(persistencia.getEntityManager());
 			sitiosDTOList = sitioService.consultarSitios(filtrosSitios);
 			paginacion = new Paginacion();
@@ -130,6 +132,7 @@ public class CatalogoSitios implements Navigation {
 	
 	@Override
 	public void irA() {
+	    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	  String irA = request.getParameter("formCatalogo:irA");
 	  if (Util.isParsable(irA)) {
 		  paginacion.setPageIndex(Integer.parseInt(irA)-1);
@@ -138,6 +141,7 @@ public class CatalogoSitios implements Navigation {
 	}
 
 	public void busqueda() {
+		filtrosSitios = new FiltrosSitios();
 	    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String txtCliente = request.getParameter("formCatalogo:txtCliente");
         LOGGER.debug("txtCliente: " + txtCliente);
@@ -146,6 +150,7 @@ public class CatalogoSitios implements Navigation {
 	}
 	
 	public void busquedaTree() {
+		filtrosSitios = new FiltrosSitios();
 		request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String txtCliente = request.getParameter("formCatalogo:txtCliente");
 		String rbnOrdenar = request.getParameter("formCatalogo:rbnOrdenar");
@@ -159,7 +164,9 @@ public class CatalogoSitios implements Navigation {
 	
 	public void update() {
 		try {
+			filtrosSitios = new FiltrosSitios();
 			sitio = null;
+			filtrosSitios = new FiltrosSitios();
 			sitiosDTOList = sitioService.consultarSitios(filtrosSitios);
 			paginacion.setModel(sitiosDTOList);
 			if (sitiosDTOList.size() > 0)
@@ -171,6 +178,7 @@ public class CatalogoSitios implements Navigation {
 	
 	public void updateTree() {
 		try {
+			filtrosSitios = new FiltrosSitios();
 			sitiosDTOList = sitioService.consultarTreeSitios(filtrosSitios);
 //			root = 
 		} catch (Exception e) {
@@ -181,6 +189,8 @@ public class CatalogoSitios implements Navigation {
 	@Override
 	public void eliminar() {
 		try {
+			filtrosSitios = new FiltrosSitios();
+		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String txtCveSitio = request.getParameter("formCatalogo:txtCveSitio");
 			LOGGER.debug("txtCveSitio: " + txtCveSitio);
 			
@@ -195,6 +205,8 @@ public class CatalogoSitios implements Navigation {
 
 	public void actualizar() {
 		try {
+			filtrosSitios = new FiltrosSitios();
+		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	        String txtCliente = request.getParameter("formCatalogo:txtCliente");
 	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombre");
 	        String txtCveSitio = request.getParameter("formCatalogo:txtCveSitio");

@@ -172,14 +172,14 @@ public class UsuarioDao implements MonitorDao {
 			}
 */
 			
-			if (((FiltrosUsuario) filtrosUsuario).getContrasena() != null && ((FiltrosUsuario) filtrosUsuario).getContrasena().length() > 0) {
-				q.setParameter("contrasena", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getContrasena()));
-			}
 			if (((FiltrosUsuario) filtrosUsuario).getNombre() != null && ((FiltrosUsuario) filtrosUsuario).getNombre().length() > 0) {
 				q.setParameter("nombre", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getNombre()));
 			}
 			if (((FiltrosUsuario) filtrosUsuario).getApellidos() != null && ((FiltrosUsuario) filtrosUsuario).getApellidos().length() > 0) {
 				q.setParameter("apellidos", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getApellidos()));
+			}
+			if (((FiltrosUsuario) filtrosUsuario).getContrasena() != null && ((FiltrosUsuario) filtrosUsuario).getContrasena().length() > 0) {
+				q.setParameter("contrasena", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getContrasena()));
 			}
 			if (((FiltrosUsuario) filtrosUsuario).getFechaAlta() != null) {
 				q.setParameter("fechaalta", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getFechaAlta()));
@@ -190,7 +190,6 @@ public class UsuarioDao implements MonitorDao {
 			if (((FiltrosUsuario) filtrosUsuario).getStatus()!= null && (((FiltrosUsuario) filtrosUsuario).getStatus() > 0 && ((FiltrosUsuario) filtrosUsuario).getStatus() < 3)) {
 				q.setParameter("status", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getStatus()));
 			}
-			
 			q.setParameter("email", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getEmail()));
 			
 			q.executeUpdate();

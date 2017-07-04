@@ -38,7 +38,7 @@
 							<p:outputLabel style="position:relative; left: 10px;" id="paginacion-info">#{catalogoUsuarios.paginacion.pageIndex+1} of #{catalogoUsuarios.paginacion.recordsTotal} records</p:outputLabel>
 							<p:outputLabel style="position:relative; left: 30px;"> ir a: </p:outputLabel>
 							<p:inputText id="irA" value="#{catalogoUsuarios.paginacion.irA}" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
-							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoUsuarios.irA}"></p:commandButton>
+							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoUsuarios.irA()}"></p:commandButton>
 						</h:panelGrid>
 					</h:panelGrid>
 

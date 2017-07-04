@@ -36,8 +36,6 @@ public class Sitio implements Serializable {
 	private CliPro cliPro;
 	private Plaza plaza;
 	private Campana campana;
-	private Date inicia;
-	private Date termina;
 	private Integer status;
 	private String ubicacion;
 	private Integer iluminacion;
@@ -52,13 +50,11 @@ public class Sitio implements Serializable {
 		this.campana = campana;
 	}
 
-	public Sitio(SitioId id, Plaza plaza, Campana campana, Date inicia, Date termina, Integer status, String ubicacion,
+	public Sitio(SitioId id, Plaza plaza, Campana campana, Integer status, String ubicacion,
 			Integer iluminacion, Set<Foto> fotos) {
 		this.id = id;
 		this.plaza = plaza;
 		this.campana = campana;
-		this.inicia = inicia;
-		this.termina = termina;
 		this.status = status;
 		this.ubicacion = ubicacion;
 		this.iluminacion = iluminacion;
@@ -100,26 +96,6 @@ public class Sitio implements Serializable {
 
 	public void setCampana(Campana campana) {
 		this.campana = campana;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "INICIA", length = 7)
-	public Date getInicia() {
-		return this.inicia;
-	}
-
-	public void setInicia(Date inicia) {
-		this.inicia = inicia;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "TERMINA", length = 7)
-	public Date getTermina() {
-		return this.termina;
-	}
-
-	public void setTermina(Date termina) {
-		this.termina = termina;
 	}
 
 	@Column(name = "STATUS", precision = 6, scale = 0)
