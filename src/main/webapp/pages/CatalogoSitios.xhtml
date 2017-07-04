@@ -31,34 +31,20 @@
 							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.prev}"></p:commandButton>
 							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.next}"></p:commandButton>
 							<p:commandButton icon="ui-icon-power" title="Logout" action="#{userManager.logout()}"></p:commandButton>
-<ui:remove>
-<!-- 
 							<p:outputLabel style="position:relative; left: 10px;" id="paginacion-info">#{catalogoSitios.paginacion.pageIndex+1} of #{catalogoSitios.paginacion.recordsTotal} records</p:outputLabel>
--->
-</ui:remove>
 							<p:outputLabel style="position:relative; left: 30px;"> ir a: </p:outputLabel>
 							<p:inputText id="irA" value="#{catalogoSitios.paginacion.irA}" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
-<ui:remove>
-<!-- 
 							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.irA}"></p:commandButton>
--->
-</ui:remove>                                        
 						</h:panelGrid>
 		
-<ui:remove>
-<!-- 
 						<h:panelGrid id="pnlCliente" columns="3">
 							<p:outputLabel>Cliente:</p:outputLabel>
 							<p:inputText id="txtCliente" value="#{catalogoSitios.sitio.clipro.cveClipro}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 							<p:inputText id="txtClienteNombre" value="#{catalogoSitios.sitio.clipro.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 						</h:panelGrid>
--->
-</ui:remove>                                        
 		
 						<h:panelGrid id="pnlSubPanel" columns="2">
 
-<ui:remove>
-<!-- 
 							<h:panelGrid id="pnlIzquierdo" columns="1">
 								<p:tree value="#{catalogoSitios.root}" var="node">
 									<p:treeNode>
@@ -75,7 +61,7 @@
 
 							<h:panelGrid id="pnlDerecho" columns="2">
 								<p:outputLabel>Codigo Sitio</p:outputLabel>
-								<p:inputNumber id="txtCveSitio" value="#{catalogoSitios.sitio.cveSitio}"></p:inputNumber>
+								<p:inputText id="txtCveSitio" value="#{catalogoSitios.sitio.cveSitio}"></p:inputText>
 
 								<p:outputLabel>Campaña</p:outputLabel>
 								<p:selectOneMenu id="cboCampana" value="#{catalogoSitios.sitio.cveCampana}" style="width:125px">
@@ -104,14 +90,12 @@
 								</p:selectOneRadio>
 								
 								<p:outputLabel for="rbnEstatus" value="Estatus Sitio" />
-								<p:selectOneRadio id="rbnEstatusSitio" value="#{catalogoSitios.sitio.status}">
+								<p:selectOneRadio id="rbnEstatus" value="#{catalogoSitios.sitio.status}">
 									<f:selectItem itemLabel="Activo" itemValue="1" />
 									<f:selectItem itemLabel="Inactivo" itemValue="2" />
 								</p:selectOneRadio>
 								
 							</h:panelGrid>
--->
-</ui:remove>                                        
 		
 						</h:panelGrid>
 		
@@ -123,5 +107,11 @@
         </ui:define>
         
     </ui:composition>
+    
+<ui:remove>
+<!-- 
+-->
+</ui:remove>
+                                        
 </h:body>
 </html>

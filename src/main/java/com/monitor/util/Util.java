@@ -63,11 +63,11 @@ public class Util {
 
 	public <T> ArrayList<SitioDTO> getSitiosDTO(ArrayList<T[]> sitiosList) {
 		ArrayList<SitioDTO> sitioDTOList = new ArrayList<SitioDTO>();
-		for (Object[] result : sitiosList) {
-			Sitio sitio = (Sitio) result[0];
-			Campana campana = (Campana) result[1];
-			Plaza plaza = (Plaza) result[2];
-			CliPro clipro = (CliPro) result[3];
+		for (T[] result : sitiosList) {
+			CliPro clipro = (CliPro) result[0];
+			Sitio sitio = (Sitio) result[1];
+			Campana campana = (Campana) result[2];
+			Plaza plaza = (Plaza) result[3];
 
 			SitioDTO sitioDTO = new SitioDTO();
 			sitioDTO.setCveSitio(sitio.getId().getCveSitio());
