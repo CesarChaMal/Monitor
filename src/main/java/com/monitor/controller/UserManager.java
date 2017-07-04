@@ -1,5 +1,7 @@
 package com.monitor.controller;
 
+import java.util.ArrayList;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -9,8 +11,11 @@ import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.monitor.filter.FiltrosUsuario;
 import com.monitor.model.Usuario;
+import com.monitor.model.dto.UsuarioDTO;
 import com.monitor.persistencia.Persistencia;
+import com.monitor.service.UsuarioService;
 
 @ManagedBean
 @SessionScoped
@@ -82,6 +87,32 @@ public class UserManager {
         return null;
     }
 
+//    private Usuario busca(String email, String password) {
+//    	FiltrosUsuario filtrosUsuario = new FiltrosUsuario();
+//    	filtrosUsuario.setEmail(email);
+//    	
+//    	UsuarioService usuarioService = new UsuarioService(persistencia.getEntityManager());
+//    	
+//    	ArrayList<UsuarioDTO> arrayListUsuario;
+//		try {
+//			arrayListUsuario = usuarioService.consultarUsuarios(filtrosUsuario);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//    	
+//    	if(arrayListUsuario!=null && arrayListUsuario.size()==1) 
+//    	{
+//    		UsuarioDTO usuarioDTO = arrayListUsuario.get(0);
+//			Usuario usuario = new Usuario();
+//    		if (usuario != null && usuario.getEmail().equalsIgnoreCase(email) && usuario.getContrasena().equals(password))
+//    		{
+//    			currentData.setUsuario(usuario);
+//    			return usuario;
+//    		}
+//    	}
+//        return null;
+//    }
+    
     private Usuario busca(String email, String password) {
     	
     	Usuario usuario = new Usuario();
@@ -90,16 +121,17 @@ public class UserManager {
     	
     	usuario = (Usuario) persistencia.busquedaUnitaria(usuario);
     	
-        
-        if (usuario != null && usuario.getEmail().equalsIgnoreCase(email) && usuario.getContrasena().equals(password))
-        {
-        	currentData.setUsuario(usuario);
-        	
-        	return usuario;
-        }
-
-        return null;
+    	
+    	if (usuario != null && usuario.getEmail().equalsIgnoreCase(email) && usuario.getContrasena().equals(password))
+    	{
+    		currentData.setUsuario(usuario);
+    		
+    		return usuario;
+    	}
+    	
+    	return null;
     }
+    
     
     public String getEmail() {
 		return email;

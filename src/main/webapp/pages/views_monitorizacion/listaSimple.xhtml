@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 
@@ -32,13 +33,27 @@
 			<h:outputText value="#{foto.sitio.inicia}">
 				<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
 			</h:outputText>
-			<br/>
+			<br />
 			<h:outputText value=" Al ">
 			</h:outputText>
 			<h:outputText value="#{foto.sitio.termina}">
 				<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
 			</h:outputText>
 		</p:column>
+		<p:column headerText="Iluminación">
+			<c:set var="iluminacionStr"
+				value="#{monitorControlerBean.getIluminacionStr(foto.sitio.iluminacion)}"></c:set>
+			<h:outputText value="#{iluminacionStr}" />
+		</p:column>
+		<p:column headerText="Comentario">
+			<h:outputText value="#{foto.comentario}" />
+		</p:column>
+		<p:column headerText="Fecha de creación">
+			<h:outputText value="#{foto.id.fechaHora}">
+				<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+			</h:outputText>
+		</p:column>
+
 
 	</p:dataTable>
 

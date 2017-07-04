@@ -10,7 +10,7 @@ public class FiltrosMonitor {
 	private String[] filterPlaza;
 	private String[] filterCampana;
 	private String[] filterSitio;
-	private String emailUser;
+	private String cveClipro;
     private Date fechaInicio = null;
     private Date fechaFin = null;
     private Util util = new Util();
@@ -71,6 +71,14 @@ public class FiltrosMonitor {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+	public String getCveClipro() {
+		return cveClipro;
+	}
+
+	public void setCveClipro(String cveClipro) {
+		this.cveClipro = cveClipro;
 	}
 
 }

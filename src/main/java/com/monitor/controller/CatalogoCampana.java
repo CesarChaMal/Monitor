@@ -152,8 +152,8 @@ public class CatalogoCampana implements Navigation {
 			String txtCveCampana = request.getParameter("formCatalogo:txtCveCampana");
 			LOGGER.debug("txtCveCampana: " + txtCveCampana);
 			filtrosCampana.setCveCampana(txtCveCampana);
-//			filtrosCampana.setCve_campana(campana.getCveCampana());
 			campanaService.eliminaCampana(filtrosCampana);
+			filtrosCampana.setCveCampana(null);
 			update(filtrosCampana);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -182,6 +182,7 @@ public class CatalogoCampana implements Navigation {
 	        }
 			
 			campanaService.actualizaCampana(filtrosCampana);
+			filtrosCampana.setCveCampana(null);
 			update(filtrosCampana);
 		} catch (Exception e) {
 			e.printStackTrace();

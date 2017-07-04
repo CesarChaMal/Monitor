@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 </h:head>
@@ -30,13 +31,13 @@
 						<f:param name="pathFoto" value="#{foto.fotoPath}"></f:param>
 					</p:graphicImage>
 				</p:commandLink>
+					<p:outputLabel>Fecha de creación:</p:outputLabel>
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.id.fechaHora}">
+						<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+					</h:outputText>
 			</div>
-			<div class="ui-g-12 ui-md-6 ui-lg-4">
-				<br />
-				<p:separator style="border: none;"></p:separator>
-				<p:separator style="border: none;"></p:separator>
-				<p:separator style="border: none;"></p:separator>
-				<p:separator style="border: none;"></p:separator>
+			<div class="ui-g-12 ui-md-6 ui-lg-4">			
 				<div>
 					<p:outputLabel>Cve Sitio:</p:outputLabel>
 					<p:spacer width="10" height="10" />
@@ -58,15 +59,20 @@
 					<h:outputText value="#{foto.sitio.plaza.nombre}" />
 					<br />
 					<p:separator style="border: none;"></p:separator>
-					<p:outputLabel>Fecha de creación:</p:outputLabel>
-					<p:spacer width="10" height="10" />
-					<h:outputText value="#{foto.id.fechaHora}">
-						<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
-					</h:outputText>
+					<p:outputLabel>Iluminación:</p:outputLabel>
+					<p:spacer width="10" height="10" />		
+					<c:set var="iluminacionStr" value="#{monitorControlerBean.getIluminacionStr(foto.sitio.iluminacion)}"></c:set>			
+					<h:outputText value="#{iluminacionStr}" />	
+					<p:separator style="border: none;"></p:separator>
+					<p:outputLabel>Comentario:</p:outputLabel>
+					<p:spacer width="10" height="10" />					
+					<h:outputText value="#{foto.comentario}" />			
+				
 				</div>
+				
 			</div>
 			<div class="ui-g-12 ui-md-6 ui-lg-4">
-				<p:panel>
+				<p:panel style="background: #c6d7d7;">
 					<div align="center">
 					<p:outputLabel>Vigencia Campaña</p:outputLabel>
 					</div>

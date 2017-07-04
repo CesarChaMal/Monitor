@@ -1,5 +1,6 @@
 package com.monitor.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,9 +84,9 @@ public class Util {
 			cliproDTO.setNombre(clipro.getNombre());
 			
 			CampanaDTO campanaDTO = new CampanaDTO();
-			campana.setCliPro(clipro);
-			campana.setNombre(campana.getNombre());
-			
+			campanaDTO.setClipro(cliproDTO);
+			campanaDTO.setNombre(campana.getNombre());
+
 			PlazaDTO plazaDTO = new PlazaDTO();
 			plazaDTO.setCveClipro(clipro.getCveClipro());
 			plazaDTO.setCvePlaza(plaza.getCvePlaza());
