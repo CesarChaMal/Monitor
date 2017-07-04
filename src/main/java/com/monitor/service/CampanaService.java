@@ -28,17 +28,19 @@ public class CampanaService {
 		this.entityManager = entityManager;
 	}
 
+	public ArrayList<CampanaDTO> consultaCampanasActivas(String cveClipro) {
+		ArrayList<Object[]> campanaList=(ArrayList<Object[]>)campanaDao.consultaCampanasActivas(cveClipro);
+		ArrayList<CampanaDTO> campanaDTOList = util.getCampanasDTO(campanaList);		
+		return campanaDTOList;
+	}
+	
 	public ArrayList<CampanaDTO> consultarCampanas(FiltrosCampana filtrosCampana) throws Exception {
 		ArrayList<Object[]> campanasList = (ArrayList<Object[]>)campanaDao.consultar(filtrosCampana);
 		ArrayList<CampanaDTO> campanasDTOList = util.getCampanasDTO(campanasList);		
 		return campanasDTOList;
 	}
 
-	public ArrayList<CampanaDTO> consultaCampanasActivas(String cveClipro) {
-		ArrayList<Object[]> campanaList=(ArrayList<Object[]>)campanaDao.consultaCampanasActivas(cveClipro);
-		ArrayList<CampanaDTO> campanaDTOList = util.getCampanasDTO(campanaList);		
-		return campanaDTOList;
-	}
+	
 	public void eliminaCampana(FiltrosCampana filtrosCampana) throws Exception {
 		campanaDao.eliminar(filtrosCampana);
 	}

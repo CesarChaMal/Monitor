@@ -9,9 +9,11 @@ import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.monitor.filter.Filtros;
 import com.monitor.filter.FiltrosSitios;
+import com.monitor.model.CliPro;
 
-public class SitioDao {
+public class SitioDao implements MonitorDao {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioDao.class);
 	private EntityManager entityManager;
@@ -27,50 +29,147 @@ public class SitioDao {
 		return q.getResultList();
 	}
 	
-	
-	
-	public void eliminaSitio(FiltrosSitios filtrosSitios) throws Exception {
+	@Override
+	public List consultar(Filtros filtrosSitios) throws Exception {
 		entityManager.clear();
-		entityManager.getTransaction().begin();
-		
+
 		Query q = null;
-		StringBuffer queryString = new StringBuffer("delete from sitio where id = combinacion");
-		
-		try {
-			q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
-			q.setParameter("email", Arrays.asList(filtrosSitios.getEmail()));
-			q.executeUpdate();
-			entityManager.getTransaction().commit();
-		} catch (Exception e) {
-			e.getStackTrace();
-			LOGGER.error(e.getMessage());
-			entityManager.getTransaction().rollback();
+		StringBuffer queryString = new StringBuffer("SELECT cl.CVE_CLIPRO, cl.NOMBRE, s.CVE_SITIO, s.UBICACION, s.ILUMINACION, s.STATUS, c.CVE_CAMPANA, c.NOMBRE, p.CVE_PLAZA, p.NOMBRE");
+		queryString.append(" FROM (SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl");
+
+		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
+			queryString.append(" WHERE ");
+			queryString.append(" LOWER(ccl.CVE_CLIPRO) LIKE LOWER(:cliente)");
 		}
+		
+		queryString.append(") cl");
+		queryString.append(" INNER JOIN monitor.CAMPANA c ON cl.CVE_CLIPRO = c.CVE_CLIPRO");
+		queryString.append(" INNER JOIN monitor.SITIO s ON s.CVE_CLIPRO = c.CVE_CLIPRO AND s.CVE_CAMPANA = c.CVE_CAMPANA");
+		queryString.append(" INNER JOIN monitor.PLAZA p ON p.CVE_PLAZA = s.CVE_PLAZA");
+		queryString.append(" ORDER BY s.CVE_SITIO");
+
+		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
+
+		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
+			CliPro clipro = new CliPro();
+			clipro.setCveClipro(((FiltrosSitios) filtrosSitios).getCveClipro()+"%");
+			q.setParameter("cliente", Arrays.asList(clipro));
+		}
+		
+		return q.getResultList();
 	}
 
-	public void actualizaUsuario(FiltrosSitios filtrosSitios) throws Exception {
-		// TODO Auto-generated method stub
+	public List consultarTree(Filtros filtrosSitios) throws Exception {
+		entityManager.clear();
 		
+		Query q = null;
+		StringBuffer queryString = new StringBuffer("SELECT  MAX(c.CVE_CLIPRO) CVE_CLIPRO, MAX(c.NOMBRE) CLIPRO, MAX(p.CVE_PLAZA) CVE_PLAZA, MAX(p.NOMBRE) PLAZA, MAX(c.CVE_CAMPANA) CVE_CAMPANA, MAX(c.NOMBRE) CAMPANA, MAX(s.CVE_SITIO) CVE_SITIO, COUNT(*) AS num_rows");
+		queryString.append(" FROM (SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl");
+
+		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
+			queryString.append(" WHERE ");
+			queryString.append(" LOWER(ccl.CVE_CLIPRO) LIKE LOWER(:cliente)");
+		}
+		
+		queryString.append(") cl");
+		queryString.append(") cl");
+
+		queryString.append(" INNER JOIN monitor.CAMPANA c ON  cl.CVE_CLIPRO = c.CVE_CLIPRO");
+		queryString.append(" INNER JOIN monitor.SITIO s ON s.CVE_CLIPRO = c.CVE_CLIPRO AND s.CVE_CAMPANA = c.CVE_CAMPANA"); 
+		queryString.append(" INNER JOIN monitor.PLAZA p ON p.CVE_PLAZA = s.CVE_PLAZA");
+		queryString.append(" GROUP BY");
+
+		if ( ((FiltrosSitios) filtrosSitios).getOrden() != null && ( ((FiltrosSitios) filtrosSitios).getOrden() >= 0) && ((FiltrosSitios) filtrosSitios).getOrden() <= 2 )  {
+			Integer order = ((FiltrosSitios) filtrosSitios).getOrden();
+			
+			switch (order) {
+			case 1:
+				queryString.append(" p.CVE_PLAZA,");
+				break;
+			case 2:
+				queryString.append(" c.CVE_CAMPANA,");
+				break;
+			default:
+				queryString.append(" p.CVE_PLAZA,");
+				break;
+			}
+		}
+		queryString.append(" s.CVE_SITIO");
+		queryString.append(" ORDER BY MAX(s.CVE_SITIO)");
+		
+		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
+		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
+			CliPro clipro = new CliPro();
+			clipro.setCveClipro(((FiltrosSitios) filtrosSitios).getCveClipro()+"%");
+			q.setParameter("cliente", Arrays.asList(clipro));
+		}
+		
+		return q.getResultList();
+	}
+	
+	@Override
+	public void eliminar(Filtros filtrosSitios) throws Exception {
 		entityManager.clear();
 		entityManager.getTransaction().begin();
 		
 		Query q = null;
 		StringBuffer queryString = new StringBuffer("update Sitio set");
-		
-		//////el codigo que nesecuitaes
+		queryString.append(" status = 2 ");
+		queryString.append(" where cve_sitio = :cve_sitio");
 		
 		try {
-		
-		q.executeUpdate();
-		entityManager.getTransaction().commit();
-	} catch (Exception e) {
-		LOGGER.error(e.getMessage());
-		e.getStackTrace();
-		entityManager.getTransaction().rollback();
+			q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
+			q.setParameter("cve_sitio", Arrays.asList(((FiltrosSitios) filtrosSitios).getCveSitio()));
+			
+			q.executeUpdate();
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			e.getStackTrace();
+			entityManager.getTransaction().rollback();
+		}
 	}
 
+	@Override
+	public void actualizar(Filtros filtrosSitios) throws Exception {
+		entityManager.clear();
+		entityManager.getTransaction().begin();
 		
+		Query q = null;
+		StringBuffer queryString = new StringBuffer("update Campana set");
 		
+		if (((FiltrosSitios) filtrosSitios).getUbicacion()!= null && ((FiltrosSitios) filtrosSitios).getUbicacion().length() > 0) {
+			queryString.append(" ubicacion = :ubicacion,");
+		}
+		if (((FiltrosSitios) filtrosSitios).getIluminacion()!= null && (((FiltrosSitios) filtrosSitios).getIluminacion() > 0 && ((FiltrosSitios) filtrosSitios).getIluminacion() < 3)) {
+			queryString.append(" iluminacion = :iluminacion,");
+		}
+		if (((FiltrosSitios) filtrosSitios).getStatus()!= null && (((FiltrosSitios) filtrosSitios).getStatus() > 0 && ((FiltrosSitios) filtrosSitios).getStatus() < 3)) {
+			queryString.append(" status = :status ");
+		}
+		queryString.append(" where cve_sitio = :cve_sitio");
+		
+		try {
+			q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
+			
+			if (((FiltrosSitios) filtrosSitios).getUbicacion()!= null && ((FiltrosSitios) filtrosSitios).getUbicacion().length() > 0) {
+				q.setParameter("ubicacion", Arrays.asList(((FiltrosSitios) filtrosSitios).getUbicacion()));
+			}
+			if (((FiltrosSitios) filtrosSitios).getIluminacion()!= null && (((FiltrosSitios) filtrosSitios).getIluminacion() > 0 && ((FiltrosSitios) filtrosSitios).getIluminacion() < 3)) {
+				q.setParameter("iluminacion", Arrays.asList(((FiltrosSitios) filtrosSitios).getIluminacion()));
+			}
+			if (((FiltrosSitios) filtrosSitios).getStatus()!= null && (((FiltrosSitios) filtrosSitios).getStatus() > 0 && ((FiltrosSitios) filtrosSitios).getStatus() < 3)) {
+				q.setParameter("status", Arrays.asList(((FiltrosSitios) filtrosSitios).getCveSitio()));
+			}
+			q.setParameter("cve_sitio", Arrays.asList(((FiltrosSitios) filtrosSitios).getCveSitio()));
+			
+			q.executeUpdate();
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			e.getStackTrace();
+			entityManager.getTransaction().rollback();
+		}
 	}
 	
 }

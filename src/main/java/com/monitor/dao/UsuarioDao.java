@@ -45,7 +45,7 @@ public class UsuarioDao implements MonitorDao {
 			q.setParameter("cliente", Arrays.asList(clipro));
 		}
 		if (((FiltrosUsuario) filtrosUsuario).getEmail() != null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
-			String email = ((FiltrosUsuario) filtrosUsuario).getEmail()+"%";
+			String email = "%"+((FiltrosUsuario) filtrosUsuario).getEmail()+"%";
 			
 			q.setParameter("email", Arrays.asList(email));
 		}

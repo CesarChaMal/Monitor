@@ -80,6 +80,9 @@ insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) valu
 insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('BBB','PLATINO CUERVO',sysdate,1,'MON_CUER');
 insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('CCC','AMIGOS CUERVO',sysdate,1,'MON_CUER');
 insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('DDD','CUERVO NUEVO',sysdate,2,'MON_CUER');
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('EEE','CUERVO NUEVO2',sysdate,2,'MON_CUER');
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('FFF','CUERVO NUEVO3',sysdate,2,'GIM');
+insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('GGG','CUERVO NUEVO4',sysdate,2,'GIM');
 
 
 insert into monitor.campana(cve_campana,nombre,fechaalta,status,cve_clipro) values ('PRO','LALA PROTEINA',sysdate,1,'GIM_LALA');
@@ -103,5 +106,14 @@ values ('CCC','MON_CUER','TOL','UGSTY7885G',sysdate,sysdate+30,1,'ubicacion del 
 
 insert into monitor.sitio (cve_campana,cve_clipro,cve_plaza,cve_sitio,inicia,termina,status,ubicacion,iluminacion)
 values ('DDD','MON_CUER','DF','LGSTY7635G',sysdate,sysdate+30,1,'ubicacion del sitio cuatro',2);
+
+insert into monitor.sitio (cve_campana,cve_clipro,cve_plaza,cve_sitio,inicia,termina,status,ubicacion,iluminacion)
+values ('EEE','MON_CUER','DF','LGSTY7635H',sysdate,sysdate+30,1,'ubicacion del sitio cinco',2);
+
+insert into monitor.sitio (cve_campana,cve_clipro,cve_plaza,cve_sitio,inicia,termina,status,ubicacion,iluminacion)
+values ('FFF','GIM','DF','LGSTY7635I',sysdate,sysdate+30,1,'ubicacion del sitio sexto',2);
+
+insert into monitor.sitio (cve_campana,cve_clipro,cve_plaza,cve_sitio,inicia,termina,status,ubicacion,iluminacion)
+values ('GGG','GIM','MER','LGSTY7635J',sysdate,sysdate+30,1,'ubicacion del sitio septimo',2);
 
 COMMIT;

@@ -9,13 +9,14 @@
 
 </h:head>
 <h:body>
-	<p:dataTable value="#{monitorControlerBean.paginacionMonitor.model}" var="foto">
+	<p:dataTable value="#{monitorControlerBean.paginacionMonitor.model}"
+		var="foto">
 		<p:column headerText="Cve Sitio">
-			<h:outputText value="#{foto.sitio.id.cveSitio}"/>
+			<h:outputText value="#{foto.sitio.id.cveSitio}" />
 		</p:column>
 
 		<p:column headerText="Campaña">
-			<h:outputText value="#{foto.sitio.campana.nombre}"  />
+			<h:outputText value="#{foto.sitio.campana.nombre}" />
 		</p:column>
 
 		<p:column headerText="Plaza">
@@ -23,12 +24,22 @@
 		</p:column>
 
 		<p:column headerText="Dirección">
-				<h:outputText value="#{foto.sitio.ubicacion}"  />
+			<h:outputText value="#{foto.sitio.ubicacion}" />
 		</p:column>
 		<p:column headerText="Vigencia Campaña">
-			<h:outputText value="Inicia:#{foto.sitio.inicia} Termina: #{foto.sitio.termina}" />
+			<h:outputText value="Del ">
+			</h:outputText>
+			<h:outputText value="#{foto.sitio.inicia}">
+				<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+			</h:outputText>
+			<br/>
+			<h:outputText value=" Al ">
+			</h:outputText>
+			<h:outputText value="#{foto.sitio.termina}">
+				<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+			</h:outputText>
 		</p:column>
-	
+
 	</p:dataTable>
 
 

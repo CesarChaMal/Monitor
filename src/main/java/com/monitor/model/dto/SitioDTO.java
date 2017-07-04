@@ -1,17 +1,16 @@
 package com.monitor.model.dto;
 
-import java.util.Date;
-
 public class SitioDTO {
-	private String cveCampana;
-	private String cveClipro;
-	private String cvePlaza;
 	private String cveSitio;
-	private Date inicia;
-	private Date termina;
-	private Integer status;
+	private String cveCampana;
+	private String cvePlaza;
+	private String cveClipro;
 	private String ubicacion;
 	private Integer iluminacion;
+	private Integer status;
+	private CliProDTO clipro;
+	private CampanaDTO campana;
+	private PlazaDTO plaza;
 	
 	public String getCveCampana() {
 		return cveCampana;
@@ -30,18 +29,6 @@ public class SitioDTO {
 	}
 	public void setCvePlaza(String cvePlaza) {
 		this.cvePlaza = cvePlaza;
-	}
-	public Date getInicia() {
-		return inicia;
-	}
-	public void setInicia(Date inicia) {
-		this.inicia = inicia;
-	}
-	public Date getTermina() {
-		return termina;
-	}
-	public void setTermina(Date termina) {
-		this.termina = termina;
 	}
 	public Integer getStatus() {
 		return status;
@@ -66,5 +53,23 @@ public class SitioDTO {
 	}
 	public void setUbicacion(String ubicacion) {
 		this.ubicacion = ubicacion;
+	}
+	public CliProDTO getClipro() {
+		return clipro;
+	}
+	public void setClipro(CliProDTO clipro) {
+		this.clipro = clipro;
+	}
+	public CampanaDTO getCampana() {
+		return campana;
+	}
+	public void setCampana(CampanaDTO campana) {
+		this.campana = campana;
+	}
+	public PlazaDTO getPlaza() {
+		return plaza;
+	}
+	public void setPlaza(PlazaDTO plaza) {
+		this.plaza = plaza;
 	}
 }

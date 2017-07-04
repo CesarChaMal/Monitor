@@ -6,51 +6,95 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
 </h:head>
 <h:body>
-	<ui:repeat value="#{monitorControlerBean.paginacionMonitor.model}" var="foto">
-		<div class="ui-g" id="divMain">
+	<ui:repeat value="#{monitorControlerBean.paginacionMonitor.model}"
+		var="foto">
+		<p:dialog widgetVar="viewImg" id="viewImgOriginal" width="1100px"
+			height="550px" maximizable="false" resizable="false"
+			position="center top">
+			<div align="center">
+				<p:graphicImage value="#{loadImgServiceControllerBean.fotoOriginal}"
+					id="imgView">
+					<f:param name="pathFoto" value="#{foto.fotoPath}"></f:param>
+				</p:graphicImage>
+			</div>
+		</p:dialog>
+		<div class="ui-g">
 			<div class="ui-g-12 ui-md-6 ui-lg-4">
-				<p:graphicImage
-					value="/images/menu_servicios/AsignacionEquipo_opt.png" />
+				<p:commandLink oncomplete="PF('viewImg').show()"
+					action="#{loadImgServiceControllerBean.setFoto(foto)}"
+					update="viewImgOriginal">
+					<p:graphicImage
+						value="#{loadImgServiceControllerBean.fotoMainPage}">
+						<f:param name="pathFoto" value="#{foto.fotoPath}"></f:param>
+					</p:graphicImage>
+				</p:commandLink>
 			</div>
 			<div class="ui-g-12 ui-md-6 ui-lg-4">
-				<p:outputLabel>Cve Sitio:</p:outputLabel>
-				<p:spacer width="10" height="10" />
-				<h:outputText value="#{foto.sitio.id.cveSitio}"/>
 				<br />
-				<p:outputLabel>Dirección:</p:outputLabel>
-				<p:spacer width="10" height="10" />
-				<h:outputText value="#{foto.sitio.ubicacion}"  />
-				<br />
-				<p:outputLabel>Campaña:</p:outputLabel>
-				<p:spacer width="10" height="10" />
-				<h:outputText value="#{foto.sitio.campana.nombre}" />
-				<br />
-				<p:outputLabel>Plaza:</p:outputLabel>
-				<p:spacer width="10" height="10" />
-				<h:outputText value="#{foto.sitio.plaza.nombre}"  />
-
+				<p:separator style="border: none;"></p:separator>
+				<p:separator style="border: none;"></p:separator>
+				<p:separator style="border: none;"></p:separator>
+				<p:separator style="border: none;"></p:separator>
+				<div>
+					<p:outputLabel>Cve Sitio:</p:outputLabel>
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.sitio.id.cveSitio}" />
+					<br />
+					<p:separator style="border: none;"></p:separator>
+					<p:outputLabel>Dirección:</p:outputLabel>
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.sitio.ubicacion}" />
+					<br />
+					<p:separator style="border: none;"></p:separator>
+					<p:outputLabel>Campaña:</p:outputLabel>
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.sitio.campana.nombre}" />
+					<br />
+					<p:separator style="border: none;"></p:separator>
+					<p:outputLabel>Plaza:</p:outputLabel>
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.sitio.plaza.nombre}" />
+					<br />
+					<p:separator style="border: none;"></p:separator>
+					<p:outputLabel>Fecha de creación:</p:outputLabel>
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.id.fechaHora}">
+						<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+					</h:outputText>
+				</div>
 			</div>
 			<div class="ui-g-12 ui-md-6 ui-lg-4">
 				<p:panel>
+					<div align="center">
 					<p:outputLabel>Vigencia Campaña</p:outputLabel>
+					</div>
 					<hr />
 					<p:outputLabel>INICIA:</p:outputLabel>
-					<h:outputText value="#{foto.sitio.inicia}" />
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.sitio.inicia}">
+						<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+					</h:outputText>
 					<br />
 					<p:outputLabel>TERMINA:</p:outputLabel>
-					<h:outputText value="#{foto.sitio.termina}" />
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.sitio.termina}">
+						<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+					</h:outputText>
 					<hr />
+					<h:outputText value="Ver en mapa:" />
+					<p:spacer width="10" height="10" />
+					<p:commandButton icon="fa fa-map-marker"
+						action="#{loadMapControllerBean.setFoto(foto)}"
+						oncomplete="PF('viewMap').show();"
+						update="principalForm:viewMapId" />
 				</p:panel>
 			</div>
 		</div>
 		<br />
-
 		<hr />
 	</ui:repeat>
-
 
 
 </h:body>

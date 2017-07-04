@@ -26,8 +26,8 @@ import com.monitor.util.Util;
 
 @ManagedBean
 //@RequestScoped
-@ViewScoped
-//@SessionScoped
+//@ViewScoped
+@SessionScoped
 public class CatalogoUsuarios implements Navigation {
 	
 	@ManagedProperty("#{persistencia}")
@@ -137,6 +137,7 @@ public class CatalogoUsuarios implements Navigation {
 		String txtCliente = request.getParameter("formCatalogo:txtCliente");
 		String txtEmail = request.getParameter("formCatalogo:txtEmail");
 		LOGGER.debug("txtCliente: " + txtCliente);
+		LOGGER.debug("txtEmail: " + txtEmail);
 		filtrosUsuario.setCveClipro(txtCliente);
 		filtrosUsuario.setEmail(txtEmail);
 

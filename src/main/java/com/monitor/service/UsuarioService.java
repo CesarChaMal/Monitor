@@ -20,8 +20,8 @@ public class UsuarioService {
 		util = new Util();
 	}
 
-	public ArrayList<UsuarioDTO> consultarUsuarios(FiltrosUsuario filtrosUsuario) throws Exception {
-		ArrayList<Object[]> usuariosList = (ArrayList<Object[]>)usuarioDao.consultar(filtrosUsuario);
+	public <T> ArrayList<UsuarioDTO> consultarUsuarios(FiltrosUsuario filtrosUsuario) throws Exception {
+		ArrayList<T[]> usuariosList = (ArrayList<T[]>)usuarioDao.consultar(filtrosUsuario);
 		ArrayList<UsuarioDTO> usuariosDTOList = util.getUsuariosDTO(usuariosList);		
 		return usuariosDTOList;
 	}

@@ -2,6 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
+ 	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"	
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
@@ -13,76 +15,70 @@
 
         <ui:define name="content">
 			<p:growl id="mensajes" showDetail="true" life="2000" />
-		
-		
+
 			<h:form id="formCatalogo" style="height:100%;">
 		
-				<p:panel header="Campañas" style="width:100%">
+				<p:panel header="Sitios" style="width:100%">
 		
 					<h:panelGrid id="grid" columns="1">
 		
-						<h:panelGrid id="pnlBotones" columns="4">
-		
-							<p:commandButton icon="ui-icon-search" title="Busqueda"  title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.busqueda()}"  ></p:commandButton>
-							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.actualizar}"></p:commandButton>
-							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.eliminar}">
-								<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert"/>
+						<h:panelGrid id="pnlBotones" columns="10">
+							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.busqueda()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.actualizar()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.eliminar()}">
+								<p:confirm header="Confirmation" message="Estas seguro?" icon="ui-icon-alert"/>
 							</p:commandButton>
-							<p:commandButton icon="ui-icon-seek-first" title="Anterior"  title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.prev}" ></p:commandButton>
-							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.next}"></p:commandButton>
-							<p:commandButton icon="ui-icon-arrowreturn-1-e" title="Logout" action="#{userManager.logout()}"></p:commandButton>
-							<p:outputLabel style="position:relative; left: 10%;" id="paginacion-info">#{catalogoSitios.paginacion.pageIndex+1} of #{catalogoSitios.paginacion.recordsTotal} records</p:outputLabel>
+							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.prev}"></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.next}"></p:commandButton>
+							<p:commandButton icon="ui-icon-power" title="Logout" action="#{userManager.logout()}"></p:commandButton>
+<ui:remove>
+<!-- 
+							<p:outputLabel style="position:relative; left: 10px;" id="paginacion-info">#{catalogoSitios.paginacion.pageIndex+1} of #{catalogoSitios.paginacion.recordsTotal} records</p:outputLabel>
+-->
+</ui:remove>
 							<p:outputLabel style="position:relative; left: 30px;"> ir a: </p:outputLabel>
-							<p:inputText id="irA" value="" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+							<p:inputText id="irA" value="#{catalogoSitios.paginacion.irA}" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+<ui:remove>
+<!-- 
 							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.irA}"></p:commandButton>
+-->
+</ui:remove>                                        
 						</h:panelGrid>
 		
-		
+<ui:remove>
+<!-- 
 						<h:panelGrid id="pnlCliente" columns="3">
-		
-							<p:outputLabel>Cliente</p:outputLabel>
-							<p:inputNumber id="txtId" value="#{catalogoSitios.idUsuario}"
-								readonly="true"></p:inputNumber>
-							<p:inputText id="txtEmailInfo" value="#{catalogoSitios.email}"
-								readonly="true"></p:inputText>
+							<p:outputLabel>Cliente:</p:outputLabel>
+							<p:inputText id="txtCliente" value="#{catalogoSitios.sitio.clipro.cveClipro}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+							<p:inputText id="txtClienteNombre" value="#{catalogoSitios.sitio.clipro.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 						</h:panelGrid>
-		
+-->
+</ui:remove>                                        
 		
 						<h:panelGrid id="pnlSubPanel" columns="2">
-		
-		
+
+<ui:remove>
+<!-- 
 							<h:panelGrid id="pnlIzquierdo" columns="1">
-		
 								<p:tree value="#{catalogoSitios.root}" var="node">
 									<p:treeNode>
 										<h:outputText value="#{node}" />
 									</p:treeNode>
 								</p:tree>
-								
-								
-								
-								
-						<p:outputLabel for="ordenarCampana" value="Ordenar Por" />
-						<p:selectOneRadio id="ordenarCampana" value="#{catalogoSitios.ordenarPlazaCampana}">
-							<f:selectItem itemLabel="Plaza" itemValue="plaza" />
-							<f:selectItem itemLabel="Campaña" itemValue="campana" />
-		
-						</p:selectOneRadio>
-		
+							
+								<p:outputLabel for="rbnOrdenar" value="Ordenar Por" />
+								<p:selectOneRadio id="rbnOrdenar" value="#{catalogoSitios.orden}">
+									<f:selectItem itemLabel="Plaza" itemValue="1" />
+									<f:selectItem itemLabel="Campaña" itemValue="2" />
+								</p:selectOneRadio>
 							</h:panelGrid>
-		
-		
+
 							<h:panelGrid id="pnlDerecho" columns="2">
-		
-		
 								<p:outputLabel>Codigo Sitio</p:outputLabel>
-								<p:inputNumber id="txtCodigoSitio"
-									value="#{catalogoSitios.codigoSitio}"></p:inputNumber>
-		
-		
+								<p:inputNumber id="txtCveSitio" value="#{catalogoSitios.sitio.cveSitio}"></p:inputNumber>
+
 								<p:outputLabel>Campaña</p:outputLabel>
-								<p:selectOneMenu id="cboCampana" value="#{catalogoSitios.campana}"
-									style="width:125px">
+								<p:selectOneMenu id="cboCampana" value="#{catalogoSitios.sitio.cveCampana}" style="width:125px">
 									<f:selectItem itemLabel="Seleccione una" itemValue="" />
 									<f:selectItem itemLabel="Black" itemValue="Black" />
 									<f:selectItem itemLabel="Platino" itemValue="Platino" />
@@ -90,42 +86,42 @@
 								</p:selectOneMenu>
 		
 								<p:outputLabel>Plaza</p:outputLabel>
-								<p:selectOneMenu id="cboPlaza" value="#{catalogoSitios.plaza}" style="width:125px">
+								<p:selectOneMenu id="cboPlaza" value="#{catalogoSitios.sitio.cvePlaza}" style="width:125px">
 									<f:selectItem itemLabel="Seleccione una" itemValue="" />
 									<f:selectItem itemLabel="Aguascalientes" itemValue="Aguascalientes" />
 									<f:selectItem itemLabel="Sonora" itemValue="Sonora" />
 									<f:selectItem itemLabel="Guerrero" itemValue="Guerrero" />
 								</p:selectOneMenu>
 								
+								<h:outputLabel for="txtUbicacion" value="Ubicacion"/>
+							    <p:inputTextarea id="txtUbicacion" value="#{catalogoSitios.sitio.ubicacion}" rows="2" cols="20" label="Ubicacion">
+							    </p:inputTextarea>
+
+								<p:outputLabel for="rbnIluminacion" value="Cuenta con iluminación" />
+								<p:selectOneRadio id="rbnIluminacion" value="#{catalogoSitios.sitio.iluminacion}">
+									<f:selectItem itemLabel="Si" itemValue="1" />
+									<f:selectItem itemLabel="No" itemValue="2" />
+								</p:selectOneRadio>
 								
-								
-								
-						<p:outputLabel for="rbnIluminacion" value="Cuenta con iluminación" />
-						<p:selectOneRadio id="rbnIluminacion" value="#{catalogoSitios.iluminacion}">
-							<f:selectItem itemLabel="Si" itemValue="si" />
-							<f:selectItem itemLabel="No" itemValue="no" />
-		
-						</p:selectOneRadio>
-								
-						<p:outputLabel for="rbnEstatusSitio" value="Estatus Sitio" />
-						<p:selectOneRadio id="rbnEstatusSitio" value="#{catalogoSitios.estatusSitio}">
-							<f:selectItem itemLabel="Activo" itemValue="activo" />
-							<f:selectItem itemLabel="Inactivo" itemValue="inactivo" />
-		
-						</p:selectOneRadio>
+								<p:outputLabel for="rbnEstatus" value="Estatus Sitio" />
+								<p:selectOneRadio id="rbnEstatusSitio" value="#{catalogoSitios.sitio.status}">
+									<f:selectItem itemLabel="Activo" itemValue="1" />
+									<f:selectItem itemLabel="Inactivo" itemValue="2" />
+								</p:selectOneRadio>
 								
 							</h:panelGrid>
+-->
+</ui:remove>                                        
 		
 						</h:panelGrid>
 		
-		
-		
-		
-		
 					</h:panelGrid>
+
 				</p:panel>
+
 			</h:form>
         </ui:define>
+        
     </ui:composition>
 </h:body>
 </html>

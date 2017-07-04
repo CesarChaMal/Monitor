@@ -8,6 +8,8 @@ import java.util.Locale;
 import com.monitor.model.Campana;
 import com.monitor.model.CampanaId;
 import com.monitor.model.CliPro;
+import com.monitor.model.Plaza;
+import com.monitor.model.Sitio;
 import com.monitor.model.Usuario;
 import com.monitor.model.dto.CampanaDTO;
 import com.monitor.model.dto.CliProDTO;
@@ -19,11 +21,13 @@ public class Util {
 
 	public ArrayList<PlazaDTO> getPlazasDTO(ArrayList<Object[]> plazasList) {
 		ArrayList<PlazaDTO> plazaDTOList = new ArrayList<PlazaDTO>();
+		plazaDTOList.forEach(System.out::println);
+		
 		for (Object[] result : plazasList) {
 			PlazaDTO plazaDTO = new PlazaDTO();
-			plazaDTO.setCvePlaza((String) result[0]);
+			plazaDTO.setCvePlaza(result[0].toString());
 			plazaDTO.setNombre((String) result[1]);
-			plazaDTO.setStatus((Integer) result[2]);
+			plazaDTO.setStatus(Integer.parseInt(result[2].toString()));
 			plazaDTO.setPadre((String) result[3]);
 			plazaDTO.setTipo((Integer) result[4]);
 			plazaDTO.setCveClipro((String) result[5]);
@@ -57,29 +61,49 @@ public class Util {
 		return campanaDTOList;
 	}
 
-	public ArrayList<SitioDTO> getSitiosDTO(ArrayList<Object[]> sitioList) {
+	public <T> ArrayList<SitioDTO> getSitiosDTO(ArrayList<T[]> sitiosList) {
 		ArrayList<SitioDTO> sitioDTOList = new ArrayList<SitioDTO>();
-		for (Object[] result : sitioList) {
+		for (Object[] result : sitiosList) {
+			Sitio sitio = (Sitio) result[0];
+			Campana campana = (Campana) result[1];
+			Plaza plaza = (Plaza) result[2];
+			CliPro clipro = (CliPro) result[3];
+
 			SitioDTO sitioDTO = new SitioDTO();
-			sitioDTO.setCveSitio((String) result[0]);
-			sitioDTO.setCveCampana((String) result[1]);
-			sitioDTO.setCveClipro((String) result[2]);
-			sitioDTO.setCvePlaza((String) result[3]);
-			sitioDTO.setInicia((Date) result[4]);
-			sitioDTO.setTermina((Date) result[5]);
-			sitioDTO.setUbicacion((String) result[6]);
-			sitioDTO.setStatus((Integer) result[7]);
-			sitioDTO.setUbicacion((String) result[8]);
-			sitioDTO.setIluminacion((Integer) result[9]);
+			sitioDTO.setCveSitio(sitio.getId().getCveSitio());
+			sitioDTO.setCveCampana(sitio.getId().getCveCampana());
+			sitioDTO.setCvePlaza(sitio.getId().getCvePlaza());
+			sitioDTO.setCveClipro(sitio.getId().getCveClipro());
+			sitioDTO.setUbicacion(sitio.getUbicacion());
+			sitioDTO.setIluminacion(sitio.getIluminacion());
+			sitioDTO.setStatus(sitio.getStatus());
+			
+			CliProDTO cliproDTO = new CliProDTO();
+			cliproDTO.setCveClipro(clipro.getCveClipro());
+			cliproDTO.setNombre(clipro.getNombre());
+			
+			CampanaDTO campanaDTO = new CampanaDTO();
+			campana.setCliPro(clipro);
+			campana.setNombre(campana.getNombre());
+			
+			PlazaDTO plazaDTO = new PlazaDTO();
+			plazaDTO.setCveClipro(clipro.getCveClipro());
+			plazaDTO.setCvePlaza(plaza.getCvePlaza());
+			plazaDTO.setNombre(plaza.getNombre());
+			
+			sitioDTO.setClipro(cliproDTO);
+			sitioDTO.setCampana(campanaDTO);
+			sitioDTO.setPlaza(plazaDTO);
 			sitioDTOList.add(sitioDTO);
 		}
 		return sitioDTOList;
 
 	}
 
-	public ArrayList<UsuarioDTO> getUsuariosDTO(ArrayList<Object[]> usuariosList) {
+	public <T> ArrayList<UsuarioDTO> getUsuariosDTO(ArrayList<T[]> usuariosList) {
 		ArrayList<UsuarioDTO> usuarioDTOList = new ArrayList<UsuarioDTO>();
-		for (Object[] result : usuariosList) {
+//		for (Object[] result : usuariosList) {
+		for (T[] result : usuariosList) {
 			Usuario usuario = (Usuario) result[0];
 			CliPro clipro = (CliPro) result[1];
 			

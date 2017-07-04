@@ -941,4 +941,641 @@ SELECT * FROM monitor.PLAZA;
 SELECT * FROM monitor.SITIO;
 SELECT * FROM monitor.FOTO
 
-SELECT email, nombre, apellidos, contrasena, tipo, fechaalta, status, cve_clipro FROM monitor.usuario
+SELECT 
+	email, nombre, apellidos, contrasena, tipo, fechaalta, status, cve_clipro 
+FROM 
+	monitor.usuario
+	
+SELECT  
+	cl.CVE_CLIPRO,
+	cl.NOMBRE,
+	s.CVE_SITIO,
+	s.UBICACION,
+	s.CVE_PLAZA,
+	c.CVE_CAMPANA,
+	c.NOMBRE
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = cl.CVE_CLIPRO
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	s.CVE_CAMPANA = c.CVE_CAMPANA;
+
+SELECT  
+	cl.CVE_CLIPRO,
+	cl.NOMBRE,
+	s.CVE_SITIO,
+	s.UBICACION,
+	s.CVE_CAMPANA,
+	p.CVE_PLAZA,
+	p.NOMBRE
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = cl.CVE_CLIPRO
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+	s.CVE_PLAZA = p.CVE_PLAZA;
+
+SELECT  
+	cl.CVE_CLIPRO,
+	cl.NOMBRE,
+	s.CVE_SITIO,
+	s.UBICACION,
+	c.CVE_CAMPANA,
+	c.NOMBRE,
+	p.CVE_PLAZA,
+	p.NOMBRE
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA; 
+
+	
+	
+-- Plazas children	
+SELECT  
+	cl.CVE_CLIPRO,
+	cl.NOMBRE,
+	s.CVE_SITIO,
+	s.UBICACION,
+	c.CVE_CAMPANA,
+	c.NOMBRE,
+	p.CVE_PLAZA,
+	p.NOMBRE,
+	p.PADRE,
+	pp.NOMBRE
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA 
+INNER JOIN 
+	monitor.PLAZA pp
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.PADRE = pp.CVE_PLAZA; 
+	
+	
+-- Todas las Plazas que cumplen la relacion con las otras tablas incluyendo padre si tienen	
+SELECT  
+	cl.CVE_CLIPRO,
+	cl.NOMBRE,
+	s.CVE_SITIO,
+	s.UBICACION,
+	c.CVE_CAMPANA,
+	c.NOMBRE,
+	p.CVE_PLAZA,
+	p.NOMBRE,
+	p.PADRE,
+	pp.NOMBRE
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA 
+LEFT OUTER JOIN 
+	monitor.PLAZA pp
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.PADRE = pp.CVE_PLAZA; 
+
+-- Todas las Plazas de la tabla plazas incluyendo padre si tienen	
+SELECT  
+	cl.CVE_CLIPRO,
+	cl.NOMBRE,
+	s.CVE_SITIO,
+	s.UBICACION,
+	c.CVE_CAMPANA,
+	c.NOMBRE,
+	p.CVE_PLAZA,
+	p.NOMBRE,
+	pp.PADRE,
+	pp.NOMBRE
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA 
+RIGHT OUTER JOIN 
+	monitor.PLAZA pp
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.PADRE = pp.CVE_PLAZA; 
+
+	
+-- Query monitor catalogo sitios	
+SELECT  
+	cl.CVE_CLIPRO,
+	cl.NOMBRE,
+	s.CVE_SITIO,
+	s.UBICACION,
+	s.ILUMINACION,
+	s.STATUS,
+	c.CVE_CAMPANA,
+	c.NOMBRE,
+	p.CVE_PLAZA,
+	p.NOMBRE
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+ORDER BY
+	s.CVE_SITIO; 
+	
+-- Query monitor app catalog sitios tree group by por campaña	
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+--	c.CVE_CAMPANA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+--	s.CVE_SITIO,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	c.CVE_CAMPANA, s.CVE_SITIO 
+ORDER BY
+	MAX(s.CVE_SITIO);
+	
+	
+-- Query monitor app catalog sitios tree group by por plaza	
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+	p.CVE_PLAZA,
+--	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+--	s.CVE_SITIO,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	p.CVE_PLAZA, s.CVE_SITIO
+ORDER BY
+	MAX(s.CVE_SITIO);
+	
+
+-- union all to compare the two queries result	
+SELECT
+	t.*
+FROM
+(	
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+--	c.CVE_CAMPANA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	c.CVE_CAMPANA, s.CVE_SITIO 
+	
+UNION ALL		
+
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+--	p.CVE_PLAZA,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	p.CVE_PLAZA, s.CVE_SITIO 
+) t
+ORDER BY t.CVE_SITIO;
+
+
+-- with roll up by plaza and showing number of plazas
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+--	p.CVE_PLAZA,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	ROLLUP (p.CVE_PLAZA), s.CVE_SITIO
+ORDER BY
+	MAX(s.CVE_SITIO);
+
+
+
+-- with roll up and cube by plaza and cliente and showing number of plazas and clientes
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+--	p.CVE_PLAZA,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	monitor.CLI_PRO cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	ROLLUP (cl.CVE_CLIPRO), CUBE(p.CVE_PLAZA)
+ORDER BY
+	MAX(s.CVE_SITIO);
+
+
+-- Query monitor app catalog sitios tree group by por plaza for specific client	
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+--	c.CVE_CAMPANA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	(SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl
+--	WHERE ccl.CVE_CLIPRO = 'MON_CUER'
+--	WHERE ccl.CVE_CLIPRO = 'GIM'
+	) cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	p.CVE_PLAZA, s.CVE_SITIO
+ORDER BY
+	MAX(s.CVE_SITIO);
+
+-- Query monitor app catalog sitios tree group by por campaña for specific client	
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+--	c.CVE_CAMPANA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	(SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl
+--	WHERE ccl.CVE_CLIPRO = 'MON_CUER'
+--	WHERE ccl.CVE_CLIPRO = 'GIM'
+	) cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	c.CVE_CAMPANA, s.CVE_SITIO
+ORDER BY
+	MAX(s.CVE_SITIO);
+	
+	
+	
+-- Query monitor app catalog sitios tree group by por plaza for specific client	including users
+SELECT  
+	MAX(s.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+	MAX(u.EMAIL) EMAIL,
+	MAX(u.NOMBRE) USUARIO,
+	MAX(s.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+--	c.CVE_CAMPANA,
+	MAX(s.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	(SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl
+-- 	WHERE ccl.CVE_CLIPRO LIKE 'MON_CUER'
+ 	WHERE ccl.CVE_CLIPRO LIKE 'GIM'
+	) cl
+INNER JOIN 
+	(SELECT uu.EMAIL, uu.NOMBRE, uu.CVE_CLIPRO FROM monitor.USUARIO uu
+	WHERE uu.EMAIL LIKE 'ces_ch@hotmail.com'
+	) u
+ON 
+	u.CVE_CLIPRO = cl.CVE_CLIPRO
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	c.CVE_CLIPRO = cl.CVE_CLIPRO 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+	p.CVE_CLIPRO = cl.CVE_CLIPRO 
+RIGHT OUTER JOIN
+-- INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = cl.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA AND 
+	s.CVE_PLAZA = p.CVE_PLAZA 
+GROUP BY 
+	c.CVE_CAMPANA, s.CVE_SITIO
+ORDER BY
+	MAX(s.CVE_SITIO);
+	
+	
+------------------------------------------------------------------------------	
+
+-- Query monitor catalogo sitios	
+SELECT  
+	cl.CVE_CLIPRO,
+	cl.NOMBRE,
+	s.CVE_SITIO,
+	s.UBICACION,
+	s.ILUMINACION,
+	s.STATUS,
+	c.CVE_CAMPANA,
+	c.NOMBRE,
+	p.CVE_PLAZA,
+	p.NOMBRE
+FROM 
+	(SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl
+--	WHERE ccl.CVE_CLIPRO = 'MON_CUER'
+--	WHERE ccl.CVE_CLIPRO = 'GIM'
+	
+--	WHERE LOWER(ccl.CVE_CLIPRO) LIKE LOWER('MON_CUER%')
+	WHERE LOWER(ccl.CVE_CLIPRO) LIKE LOWER('GIM%')
+	) cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+ORDER BY
+	s.CVE_SITIO; 
+
+	
+-- Query monitor app catalog sitios tree group by por plaza for specific client	
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+--	c.CVE_CAMPANA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	(SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl
+--	WHERE LOWER(ccl.CVE_CLIPRO) LIKE LOWER('MON_CUER%')
+--	WHERE LOWER(ccl.CVE_CLIPRO) LIKE LOWER('GIM%')
+	) cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	p.CVE_PLAZA, s.CVE_SITIO
+ORDER BY
+	MAX(s.CVE_SITIO);
+
+-- Query monitor app catalog sitios tree group by por campaña for specific client	
+SELECT  
+	MAX(c.CVE_CLIPRO) CVE_CLIPRO,
+	MAX(c.NOMBRE) CLIPRO,
+	MAX(p.CVE_PLAZA) CVE_PLAZA,
+	MAX(p.NOMBRE) PLAZA,
+--	c.CVE_CAMPANA,
+	MAX(c.CVE_CAMPANA) CVE_CAMPANA,
+	MAX(c.NOMBRE) CAMPANA,
+	MAX(s.CVE_SITIO) CVE_SITIO,
+	COUNT(*) AS num_rows
+FROM 
+	(SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl
+--	WHERE LOWER(ccl.CVE_CLIPRO) LIKE LOWER('MON_CUER%')
+--	WHERE LOWER(ccl.CVE_CLIPRO) LIKE LOWER('GIM%')
+	) cl
+INNER JOIN 
+	monitor.CAMPANA c
+ON 
+	cl.CVE_CLIPRO = c.CVE_CLIPRO
+INNER JOIN 
+	monitor.SITIO s
+ON 
+	s.CVE_CLIPRO = c.CVE_CLIPRO AND 
+	s.CVE_CAMPANA = c.CVE_CAMPANA 
+INNER JOIN 
+	monitor.PLAZA p
+ON 
+--	p.CVE_CLIPRO = s.CVE_CLIPRO AND 
+	p.CVE_PLAZA = s.CVE_PLAZA
+GROUP BY 
+	c.CVE_CAMPANA, s.CVE_SITIO
+ORDER BY
+	MAX(s.CVE_SITIO);
+	
+	
+	

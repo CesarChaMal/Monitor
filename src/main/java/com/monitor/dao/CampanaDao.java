@@ -57,11 +57,11 @@ public class CampanaDao implements MonitorDao {
 		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
 		if (((FiltrosCampana) filtrosCampana).getCveClipro() != null && ((FiltrosCampana) filtrosCampana).getCveClipro().length() > 0) {
 			CliPro clipro = new CliPro();
-			clipro.setCveClipro("%"+((FiltrosCampana) filtrosCampana).getCveClipro()+"%");
+			clipro.setCveClipro(((FiltrosCampana) filtrosCampana).getCveClipro()+"%");
 			q.setParameter("cliente", Arrays.asList(clipro));
 		}
 		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
-			String cve_campana = ((FiltrosCampana) filtrosCampana).getCveClipro()+"%";
+			String cve_campana = "%"+((FiltrosCampana) filtrosCampana).getCveClipro()+"%";
 			q.setParameter("cve_campana", Arrays.asList(cve_campana));
 		}
 		
@@ -142,7 +142,6 @@ public class CampanaDao implements MonitorDao {
 			if (((FiltrosCampana) filtrosCampana).getStatus()!= null && (((FiltrosCampana) filtrosCampana).getStatus() > 0 && ((FiltrosCampana) filtrosCampana).getStatus() < 3)) {
 				q.setParameter("status", Arrays.asList(((FiltrosCampana) filtrosCampana).getStatus()));
 			}
-			
 			q.setParameter("cve_campana", Arrays.asList(((FiltrosCampana) filtrosCampana).getCveCampana()));
 			
 			q.executeUpdate();

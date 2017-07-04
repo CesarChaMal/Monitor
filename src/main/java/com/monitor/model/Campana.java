@@ -66,16 +66,6 @@ public class Campana  implements Serializable{
 		this.id = id;
 	}
 
-//	@Id
-//	@Column(name = "CVE_CAMPANA", unique = true, nullable = false, length = 12)
-//	public String getCveCampana() {
-//		return cveCampana;
-//	}
-//
-//	public void setCveCampana(String cveCampana) {
-//		this.cveCampana = cveCampana;
-//	}
-
 	@Column(name = "NOMBRE", length = 80)
 	public String getNombre() {
 		return this.nombre;

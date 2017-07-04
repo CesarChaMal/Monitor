@@ -33,6 +33,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Sitio implements Serializable {
 
 	private SitioId id;
+	private CliPro cliPro;
 	private Plaza plaza;
 	private Campana campana;
 	private Date inicia;
@@ -157,6 +158,14 @@ public class Sitio implements Serializable {
 		this.fotos = fotos;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CVE_CLIPRO", referencedColumnName = "CVE_CLIPRO", nullable = false, insertable = false, updatable = false)
+	public CliPro getCliPro() {
+		return this.cliPro;
+	}
 
+	public void setCliPro(CliPro cliPro) {
+		this.cliPro = cliPro;
+	}
 
 }
