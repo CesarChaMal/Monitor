@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import com.monitor.filter.Filtros;
 import com.monitor.persistencia.Persistencia;
 import com.monitor.util.Navigation;
 
@@ -122,7 +123,7 @@ public class CatalogoPlaza implements Navigation {
 
 
 	@Override
-	public void update() {
+	public void update(Filtros filtrosPlaza) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -14,7 +14,7 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.monitor.filter.FiltrosCampana;
+import com.monitor.filter.Filtros;
 import com.monitor.filter.FiltrosSitios;
 import com.monitor.filter.Paginacion;
 import com.monitor.model.dto.SitioDTO;
@@ -34,10 +34,8 @@ public class CatalogoSitios implements Navigation {
 	@ManagedProperty("#{currentData}")
 	public CurrentData currentData;
 
-//	@ManagedProperty("#{filtrosSitios}")
-	public FiltrosSitios filtrosSitios;
-
-	public Paginacion paginacion;
+	private FiltrosSitios filtrosSitios;
+	private Paginacion paginacion;
 	private SitioDTO sitio;
 	private List<SitioDTO> sitiosDTOList;
 	private SitioService sitioService;
@@ -49,8 +47,8 @@ public class CatalogoSitios implements Navigation {
     @PostConstruct
 	public void init() {
 		try {
-		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			filtrosSitios = new FiltrosSitios();
+		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			sitioService = new SitioService(persistencia.getEntityManager());
 			sitiosDTOList = sitioService.consultarSitios(filtrosSitios);
 			paginacion = new Paginacion();
@@ -121,11 +119,13 @@ public class CatalogoSitios implements Navigation {
 	}
 
 	public void next() {
+		update(filtrosSitios);
 		paginacion.next();
 		sitio = sitiosDTOList.get(paginacion.getPageIndex());
 	}
 	
 	public void prev() {
+		update(filtrosSitios);
 		paginacion.prev();
 		sitio = sitiosDTOList.get(paginacion.getPageIndex());
 	}
@@ -136,7 +136,7 @@ public class CatalogoSitios implements Navigation {
 	  String irA = request.getParameter("formCatalogo:irA");
 	  if (Util.isParsable(irA)) {
 		  paginacion.setPageIndex(Integer.parseInt(irA)-1);
-		  update();
+		  update(filtrosSitios);
 	  }
 	}
 
@@ -146,7 +146,7 @@ public class CatalogoSitios implements Navigation {
         String txtCliente = request.getParameter("formCatalogo:txtCliente");
         LOGGER.debug("txtCliente: " + txtCliente);
         filtrosSitios.setCveClipro(txtCliente);
-		update();
+		update(filtrosSitios);
 	}
 	
 	public void busquedaTree() {
@@ -159,15 +159,13 @@ public class CatalogoSitios implements Navigation {
 		filtrosSitios.setCveClipro(txtCliente);
 		filtrosSitios.setOrden(Integer.parseInt(rbnOrdenar));
 		orden = filtrosSitios.getOrden(); 
-		updateTree();
+		updateTree(filtrosSitios);
 	}
 	
-	public void update() {
+	public void update(Filtros filtrosSitios) {
 		try {
-			filtrosSitios = new FiltrosSitios();
 			sitio = null;
-			filtrosSitios = new FiltrosSitios();
-			sitiosDTOList = sitioService.consultarSitios(filtrosSitios);
+			sitiosDTOList = sitioService.consultarSitios((FiltrosSitios) filtrosSitios);
 			paginacion.setModel(sitiosDTOList);
 			if (sitiosDTOList.size() > 0)
 				sitio = sitiosDTOList.get(paginacion.getPageIndex());
@@ -176,10 +174,9 @@ public class CatalogoSitios implements Navigation {
 		}
 	}
 	
-	public void updateTree() {
+	public void updateTree(Filtros filtrosSitios) {
 		try {
-			filtrosSitios = new FiltrosSitios();
-			sitiosDTOList = sitioService.consultarTreeSitios(filtrosSitios);
+			sitiosDTOList = sitioService.consultarTreeSitios((FiltrosSitios) filtrosSitios);
 //			root = 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -196,7 +193,7 @@ public class CatalogoSitios implements Navigation {
 			
 			filtrosSitios.setCveSitio(txtCveSitio);
 			sitioService.eliminaSitio(filtrosSitios);
-			update();
+			update(filtrosSitios);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -229,7 +226,7 @@ public class CatalogoSitios implements Navigation {
 	        }
 			
 			sitioService.actualizaSitio(filtrosSitios);
-			update();
+			update(filtrosSitios);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

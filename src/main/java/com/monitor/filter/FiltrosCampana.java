@@ -7,9 +7,6 @@ import javax.faces.bean.SessionScoped;
 
 import com.monitor.util.Util;
 
-
-@ManagedBean(name="filtrosCampana")
-@SessionScoped
 public class FiltrosCampana extends Filtros {
 
 	private String cveCampana;

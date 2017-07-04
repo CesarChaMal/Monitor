@@ -5,8 +5,6 @@ import javax.faces.bean.SessionScoped;
 
 import com.monitor.util.Util;
 
-@ManagedBean(name="filtrosSitios")
-@SessionScoped
 public class FiltrosSitios extends Filtros {
 
 	private String cveSitio;

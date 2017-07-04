@@ -7,8 +7,6 @@ import javax.faces.bean.SessionScoped;
 
 import com.monitor.util.Util;
 
-@ManagedBean(name="filtrosUsuario")
-@SessionScoped
 public class FiltrosUsuario extends Filtros {
 
 	private String cveClipro;
