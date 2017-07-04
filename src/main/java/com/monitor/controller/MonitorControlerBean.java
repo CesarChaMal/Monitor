@@ -9,6 +9,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.monitor.filter.FiltrosMonitor;
 import com.monitor.filter.PaginacionMonitor;
 import com.monitor.model.Foto;
@@ -29,9 +33,10 @@ public class MonitorControlerBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = LoggerFactory.getLogger(MonitorControlerBean.class);
 	@ManagedProperty("#{persistencia}")
 	public Persistencia persistencia;
-	@ManagedProperty("#{userManager.currentUser}")
+	@ManagedProperty("#{currentData}")
 	public Usuario currentUser;
 	@ManagedProperty("#{paginacionSessionBean.filtrosMonitor}")
 	private FiltrosMonitor filtrosMonitor;
@@ -48,21 +53,21 @@ public class MonitorControlerBean implements Serializable {
 	private CampanaService campanaService;
 	private PlazaService plazaService;
 	private SitioService sitioService;
-	
 	private ArrayList<Foto> fotolistMostrar;
+	private String iluminacionStr;
+	
 
 	@PostConstruct
 	public void init() {
-		
+
 		fotoService = new FotoService(persistencia.getEntityManager());
 		campanaService = new CampanaService(persistencia.getEntityManager());
 		plazaService = new PlazaService(persistencia.getEntityManager());
 		sitioService = new SitioService(persistencia.getEntityManager());
-		filtrosMonitor.setEmailUser(currentUser.getEmail());
+		filtrosMonitor.setCveClipro(currentUser.getCliPro().getCveClipro());
 
 		plazaDTOList = plazaService.consultaPlazasActivas(currentUser.getCliPro().getCveClipro());
-		campanaDTOList = campanaService
-				.consultaCampanasActivas(currentUser.getCliPro().getCveClipro());
+		campanaDTOList = campanaService.consultaCampanasActivas(currentUser.getCliPro().getCveClipro());
 		sitioDTOList = sitioService.consultaSitiosActivos(currentUser.getCliPro().getCveClipro());
 		getFotosToShow();
 
@@ -103,7 +108,7 @@ public class MonitorControlerBean implements Serializable {
 			fotolistMostrar = (ArrayList<Foto>) fotoService.obtenerFotosPorUsuario(filtrosMonitor);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("Error: " , e);
 		}
 		paginacionMonitor = new PaginacionMonitor();
 		paginacionMonitor.setModel(fotolistMostrar);
@@ -177,5 +182,24 @@ public class MonitorControlerBean implements Serializable {
 	public void setFotolistMostrar(ArrayList<Foto> fotolistMostrar) {
 		this.fotolistMostrar = fotolistMostrar;
 	}
+
+	public String getIluminacionStr(int iluminacion) {
+		String descripcion="";
+		switch (iluminacion) {
+		case 1:
+			descripcion ="Si";
+			break;
+		case 2:
+			descripcion ="No";
+			break;
+
+		}
+		return descripcion;
+
+	}
+
+
+
+
 
 }

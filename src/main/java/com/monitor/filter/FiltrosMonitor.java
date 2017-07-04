@@ -49,13 +49,7 @@ public class FiltrosMonitor {
 		this.filterSitio = filterSitio;
 	}
 
-	public String getEmailUser() {
-		return emailUser;
-	}
 
-	public void setEmailUser(String emailUser) {
-		this.emailUser = emailUser;
-	}
 
 	public Date getFechaInicio() throws Exception {
 		return util.formatDate(fechaInicio);

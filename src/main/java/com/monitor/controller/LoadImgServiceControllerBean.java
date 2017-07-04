@@ -13,37 +13,61 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileAttribute;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.Charsets;
+import org.apache.commons.io.FileSystemUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.monitor.dao.CampanaDao;
 import com.monitor.model.Foto;
+import com.monitor.service.LoadImgService;
+
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @ManagedBean
 @RequestScoped
 public class LoadImgServiceControllerBean {
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoadImgServiceControllerBean.class);
 	private Foto foto;
-
 	private StreamedContent fotoMainPage;
 	private StreamedContent fotoOriginal;
 	private String pathFoto;
+	private LoadImgService loadImgService;
+
+	@PostConstruct
+	public void init() {
+		loadImgService = new LoadImgService();
+	}
 
 	public StreamedContent getFotoMainPage() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -72,6 +96,7 @@ public class LoadImgServiceControllerBean {
 
 			}
 		} catch (Exception e) {
+			LOGGER.error("Error : ",e);
 			e.printStackTrace();
 		}
 
@@ -91,13 +116,10 @@ public class LoadImgServiceControllerBean {
 
 			} else {
 
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				System.out.println("path" + path);
+				ByteArrayOutputStream bos = new ByteArrayOutputStream();			
 				if (path != null && !path.isEmpty()) {
 
-					BufferedImage img = ImageIO.read(new FileInputStream(path));
-					System.out.println("img.getWidth()" + img.getWidth());
-					System.out.println(img.getHeight());
+					BufferedImage img = ImageIO.read(new FileInputStream(path));				
 					ImageIO.write(img, "png", bos);
 					fotoOriginal = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");
 					return fotoOriginal;
@@ -105,6 +127,7 @@ public class LoadImgServiceControllerBean {
 
 			}
 		} catch (Exception e) {
+			LOGGER.error("Error : ",e);
 			e.printStackTrace();
 		}
 
@@ -142,34 +165,10 @@ public class LoadImgServiceControllerBean {
 
 	public void dowload(ArrayList<Foto> fotolistMostrar) throws IOException {
 
-		HashMap<String, Foto> mapFotos = new HashMap<>();
-		ArrayList<Foto> listFotoDescarga = fotolistMostrar;
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
 				.getResponse();
-		// se quitan fotos duplicadas
-		for (int i = 0; i < listFotoDescarga.size(); i++) {
-			mapFotos.put(listFotoDescarga.get(i).getFotoPath(), listFotoDescarga.get(i));
-		}
-		System.out.println("mapFotos" + mapFotos.entrySet().size());
 
-		Iterator<Map.Entry<String, Foto>> it = mapFotos.entrySet().iterator();
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		ZipOutputStream out = new ZipOutputStream(os);
-		int j=0;
-		while (it.hasNext()) {
-			Map.Entry<String, Foto> pair = it.next();
-			Foto foto = (Foto) pair.getValue();
-			System.out.println("path" + foto.getFotoPath());
-			BufferedImage img = ImageIO.read(new FileInputStream(foto.getFotoPath()));
-			System.out.println("img" + img.getHeight());
-			ZipEntry entry = new ZipEntry(foto.getSitio().getId().getCveSitio()+j+".jpg");
-			out.putNextEntry(entry);					
-			ImageIO.write(img, "jpg", out);			
-			out.closeEntry();
-			j++;
-
-		}
-		out.close();
+		ByteArrayOutputStream os = loadImgService.dowload(fotolistMostrar);
 
 		response.setContentType("application/zip");
 		response.setHeader("Content-Disposition", "attachment;filename=fotos.zip");
@@ -178,6 +177,46 @@ public class LoadImgServiceControllerBean {
 		response.getOutputStream().close();
 		response.setStatus(0);
 		FacesContext.getCurrentInstance().responseComplete();
+	}
+
+	public void dowloadPorUsuario(String cveCliPro) throws Exception {
+
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
+				.getResponse();
+		ByteArrayOutputStream os = loadImgService.dowloadPorUsuario(cveCliPro);
+		response.setContentType("application/zip");
+		response.setHeader("Content-Disposition", "attachment;filename=fotos.zip");
+		response.getOutputStream().write(os.toByteArray());
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+		response.setStatus(0);
+		FacesContext.getCurrentInstance().responseComplete();
+	}
+
+	public void downloadPDF(ArrayList<Foto> fotolistMostrar) throws IOException {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
+		JRBeanCollectionDataSource collectionBean = new JRBeanCollectionDataSource(fotolistMostrar);
+		try {
+			InputStream reportStream = facesContext.getExternalContext()
+					.getResourceAsStream("/reportes/Monitor.jasper");
+			ServletOutputStream servletOutputStream = response.getOutputStream();
+
+			JasperPrint jasperPrint = JasperFillManager.fillReport(reportStream, new HashMap(), collectionBean);
+			response.addHeader("Content-disposition", "attachment; filename=Monitor.pdf");
+
+			JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+			servletOutputStream.flush();
+			servletOutputStream.close();
+		} catch (Exception e) {
+			LOGGER.error("Error : ",e);
+			e.printStackTrace();
+		} finally {
+			response.getOutputStream().close();
+		}
+		facesContext.responseComplete();
+
 	}
 
 }

@@ -25,8 +25,8 @@ import com.monitor.util.Util;
 
 @ManagedBean
 //@RequestScoped
-@ViewScoped
 //@SessionScoped
+@ViewScoped
 public class CatalogoUsuarios implements Navigation {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoUsuarios.class);
 	

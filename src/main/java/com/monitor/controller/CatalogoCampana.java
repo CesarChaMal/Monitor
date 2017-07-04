@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,8 +24,8 @@ import com.monitor.util.Util;
 
 
 @ManagedBean
-//@ViewScoped
-@SessionScoped
+@ViewScoped
+//@SessionScoped
 public class CatalogoCampana implements Navigation {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoCampana.class);
 	
