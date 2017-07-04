@@ -2,9 +2,7 @@ package com.monitor.dao;
 
 import java.util.Arrays;
 import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.monitor.filter.FiltrosMonitor;

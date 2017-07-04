@@ -1,7 +1,6 @@
 package com.monitor.controller;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
 import com.monitor.model.Foto;

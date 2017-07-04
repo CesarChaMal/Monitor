@@ -1,11 +1,14 @@
 package com.monitor.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.monitor.dao.UsuarioDao;
 import com.monitor.filter.FiltrosUsuario;
+import com.monitor.model.Usuario;
 import com.monitor.model.dto.UsuarioDTO;
 import com.monitor.util.Util;
 
@@ -33,4 +36,10 @@ public class UsuarioService {
 	public void actualizaUsuario(FiltrosUsuario filtrosUsuario) throws Exception {
 		usuarioDao.actualizar(filtrosUsuario);
 	}
+	
+	public ArrayList<Usuario> consultaLoginPorEmail(String email) {
+		ArrayList<Usuario> usuariosList = (ArrayList<Usuario>)usuarioDao.consultaLoginPorEmail(email);
+		return usuariosList;
+	}
+	
 }

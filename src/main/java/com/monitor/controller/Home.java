@@ -1,7 +1,6 @@
 package com.monitor.controller;
 
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -17,12 +16,11 @@ public class Home {
 	
 	private String mensaje; 
 	
-	@PostConstruct
 	public void init()
 	{
 		
-//		mensaje = currentData.getUsuario().getEmail();
-		mensaje = currentData.getUsuario().getNombre();
+		mensaje= currentData.getUsuario().getEmail();
+		
 	}
 
 	public String getMensaje() {

@@ -11,9 +11,7 @@ import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.monitor.filter.FiltrosUsuario;
 import com.monitor.model.Usuario;
-import com.monitor.model.dto.UsuarioDTO;
 import com.monitor.persistencia.Persistencia;
 import com.monitor.service.UsuarioService;
 
@@ -32,7 +30,7 @@ public class UserManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserManager.class);
 
 
-    public static final String HOME_PAGE_REDIRECT = "/secured/home.xhtml";
+    public static final String HOME_PAGE_REDIRECT = "/secured/home.xhtml?faces-redirect=true";
     public static final String LOGOUT_PAGE_REDIRECT = "/logout.xhtml?faces-redirect=true";
     
     private String email;
@@ -69,7 +67,8 @@ public class UserManager {
 
         // invalidate the session
         LOGGER.debug("invalidating session for '{}'", identifier);
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext.getCurrentInstance().getExternalContext()
+                .invalidateSession();
 
         LOGGER.info("logout successful for '{}'", identifier);
         return LOGOUT_PAGE_REDIRECT;
@@ -87,51 +86,27 @@ public class UserManager {
         return null;
     }
 
-//    private Usuario busca(String email, String password) {
-//    	FiltrosUsuario filtrosUsuario = new FiltrosUsuario();
-//    	filtrosUsuario.setEmail(email);
-//    	
-//    	UsuarioService usuarioService = new UsuarioService(persistencia.getEntityManager());
-//    	
-//    	ArrayList<UsuarioDTO> arrayListUsuario;
-//		try {
-//			arrayListUsuario = usuarioService.consultarUsuarios(filtrosUsuario);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//    	
-//    	if(arrayListUsuario!=null && arrayListUsuario.size()==1) 
-//    	{
-//    		UsuarioDTO usuarioDTO = arrayListUsuario.get(0);
-//			Usuario usuario = new Usuario();
-//    		if (usuario != null && usuario.getEmail().equalsIgnoreCase(email) && usuario.getContrasena().equals(password))
-//    		{
-//    			currentData.setUsuario(usuario);
-//    			return usuario;
-//    		}
-//    	}
-//        return null;
-//    }
-    
     private Usuario busca(String email, String password) {
+    	UsuarioService usuarioService = new UsuarioService(persistencia.getEntityManager());
     	
-    	Usuario usuario = new Usuario();
-    	
-    	usuario.consultaLoginPorEmail(email);
-    	
-    	usuario = (Usuario) persistencia.busquedaUnitaria(usuario);
+    	ArrayList<Usuario> arrayListUsuario= usuarioService.consultaLoginPorEmail(email);
     	
     	
-    	if (usuario != null && usuario.getEmail().equalsIgnoreCase(email) && usuario.getContrasena().equals(password))
-    	{
-    		currentData.setUsuario(usuario);
-    		
-    		return usuario;
+    	
+    	if(arrayListUsuario!=null && arrayListUsuario.size()==1){
+    		Usuario usuario = arrayListUsuario.get(0);
+    		   if (usuario != null && usuario.getEmail().equalsIgnoreCase(email) && usuario.getContrasena().equals(password))
+    	        {
+    	        	currentData.setUsuario(usuario);
+    	        	
+    	        	return usuario;
+    	        }
     	}
-    	
-    	return null;
+        
+     
+
+        return null;
     }
-    
     
     public String getEmail() {
 		return email;

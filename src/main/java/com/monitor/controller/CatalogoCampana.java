@@ -6,26 +6,31 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.flow.FlowScoped;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.monitor.filter.Filtros;
 import com.monitor.filter.FiltrosCampana;
+import com.monitor.filter.FiltrosUsuario;
 import com.monitor.filter.Paginacion;
 import com.monitor.model.dto.CampanaDTO;
+import com.monitor.model.dto.UsuarioDTO;
 import com.monitor.persistencia.Persistencia;
 import com.monitor.service.CampanaService;
+import com.monitor.service.UsuarioService;
 import com.monitor.util.Navigation;
 import com.monitor.util.Util;
 
 
 @ManagedBean
-@ViewScoped
-//@SessionScoped
+//@ViewScoped
+@SessionScoped
 public class CatalogoCampana implements Navigation {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoCampana.class);
 	
@@ -35,8 +40,10 @@ public class CatalogoCampana implements Navigation {
 	@ManagedProperty("#{currentData}")
 	public CurrentData currentData;
 
-	private Paginacion paginacion;
-	private FiltrosCampana filtrosCampana;
+	@ManagedProperty("#{filtrosCampana}")
+	public FiltrosCampana filtrosCampana;
+
+	public Paginacion paginacion;
 	private CampanaDTO campana;
 	private List<CampanaDTO> campanasDTOList;
 	private CampanaService campanaService;
@@ -45,7 +52,6 @@ public class CatalogoCampana implements Navigation {
     @PostConstruct
 	public void init() {
 		try {
-			filtrosCampana = new FiltrosCampana();
 		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			campanaService = new CampanaService(persistencia.getEntityManager());
 			campanasDTOList = campanaService.consultarCampanas(filtrosCampana);
@@ -100,13 +106,11 @@ public class CatalogoCampana implements Navigation {
 	}
 
 	public void next() {
-		update(filtrosCampana);
 		paginacion.next();
 		campana = campanasDTOList.get(paginacion.getPageIndex());
 	}
 	
 	public void prev() {
-		update(filtrosCampana);
 		paginacion.prev();
 		campana = campanasDTOList.get(paginacion.getPageIndex());
 	}
@@ -116,8 +120,10 @@ public class CatalogoCampana implements Navigation {
         String irA = request.getParameter("formCatalogo:irA");
         if (Util.isParsable(irA)) {
         	paginacion.setPageIndex(Integer.parseInt(irA)-1);
-    		update(filtrosCampana);
+        	update();
         }
+//    	paginacion.setPageIndex(paginacion.getIrA()-1);
+//    	update();
 	}
 	
 	public void busqueda() {
@@ -129,14 +135,16 @@ public class CatalogoCampana implements Navigation {
 		LOGGER.debug("txtCveCampana: " + txtCveCampana);
 		filtrosCampana.setCveClipro(txtCliente);
 		filtrosCampana.setCveCampana(txtCveCampana);
-		update(filtrosCampana);
+//		filtrosCampana.setCveClipro(campana.getClipro().getCveClipro());
+		update();
 	}
 	
-	public void update(Filtros filtrosCampana) {
+	public void update() {
 		try {
+			filtrosCampana = new FiltrosCampana();
 			campana = null;
 //			campana = new CampanaDTO();
-			campanasDTOList = campanaService.consultarCampanas((FiltrosCampana) filtrosCampana);
+			campanasDTOList = campanaService.consultarCampanas(filtrosCampana);
 			paginacion.setModel(campanasDTOList);
 			if (campanasDTOList.size() > 0)
 				campana = campanasDTOList.get(paginacion.getPageIndex());
@@ -153,8 +161,7 @@ public class CatalogoCampana implements Navigation {
 			LOGGER.debug("txtCveCampana: " + txtCveCampana);
 			filtrosCampana.setCveCampana(txtCveCampana);
 			campanaService.eliminaCampana(filtrosCampana);
-			filtrosCampana.setCveCampana(null);
-			update(filtrosCampana);
+			update();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -181,9 +188,13 @@ public class CatalogoCampana implements Navigation {
 				filtrosCampana.setStatus(Integer.parseInt(statusCampana));
 	        }
 			
+//			filtrosCampana.setCve_campana(campana.getCveCampana());
+//			filtrosCampana.setNombre(campana.getNombre());
+//			filtrosCampana.setFechaAlta(campana.getFechaalta());
+//			filtrosCampana.setStatus(campana.getStatus());
+			
 			campanaService.actualizaCampana(filtrosCampana);
-			filtrosCampana.setCveCampana(null);
-			update(filtrosCampana);
+			update();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

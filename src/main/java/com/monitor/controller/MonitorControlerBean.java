@@ -32,18 +32,17 @@ public class MonitorControlerBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(MonitorControlerBean.class);
+	private static final long serialVersionUID = 1L;
 	@ManagedProperty("#{persistencia}")
 	public Persistencia persistencia;
-	@ManagedProperty("#{currentData}")
+	@ManagedProperty("#{userManager.currentUser}")
 	public Usuario currentUser;
 	@ManagedProperty("#{paginacionSessionBean.filtrosMonitor}")
 	private FiltrosMonitor filtrosMonitor;
 	@ManagedProperty("#{paginacionSessionBean.view}")
 	private String view;
 
-	
 	private PaginacionMonitor paginacionMonitor;
 	private ArrayList<PlazaDTO> plazaDTOList;
 	private ArrayList<CampanaDTO> campanaDTOList;
@@ -163,8 +162,8 @@ public class MonitorControlerBean implements Serializable {
 	public void setCurrentUser(Usuario currentUser) {
 		this.currentUser = currentUser;
 	}
-	
-	public void removeFilter(){
+
+	public void removeFilter() {
 		filtrosMonitor.setFechaFin(null);
 		filtrosMonitor.setFechaInicio(null);
 		filtrosMonitor.setFilterCampana(null);
@@ -172,7 +171,7 @@ public class MonitorControlerBean implements Serializable {
 		filtrosMonitor.setFilterSitio(null);
 		filtrosMonitor.setOrdenarPor("");
 		getFotosToShow();
-		
+
 	}
 
 	public ArrayList<Foto> getFotolistMostrar() {

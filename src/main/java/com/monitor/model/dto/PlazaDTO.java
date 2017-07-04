@@ -6,11 +6,31 @@ public class PlazaDTO  {
 
 	private String cvePlaza;
 	private String nombre;
+	private Long  numFotos;
 	private Integer status;
 	private String padre;
 	private Integer tipo;
 	private String cveClipro;
 	
+	
+	public String getCvePlaza() {
+		return cvePlaza;
+	}
+	public void setCvePlaza(String cvePlaza) {
+		this.cvePlaza = cvePlaza;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Long getNumFotos() {
+		return numFotos;
+	}
+	public void setNumFotos(Long numFotos) {
+		this.numFotos = numFotos;
+	}
 	public Integer getStatus() {
 		return status;
 	}
@@ -35,16 +55,8 @@ public class PlazaDTO  {
 	public void setCveClipro(String cveClipro) {
 		this.cveClipro = cveClipro;
 	}
-	public String getCvePlaza() {
-		return cvePlaza;
-	}
-	public void setCvePlaza(String cvePlaza) {
-		this.cvePlaza = cvePlaza;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+
+
+
+
 }

@@ -13,9 +13,8 @@ import com.monitor.filter.Filtros;
 import com.monitor.filter.FiltrosSitios;
 import com.monitor.model.CliPro;
 
-public class SitioDao implements MonitorDao {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioDao.class);
+public class SitioDao implements MonitorDao{
+	private static final Logger LOGGER = LoggerFactory.getLogger(SitioDao.class);
 	private EntityManager entityManager;
 
 	public SitioDao(EntityManager entityManager) {
@@ -28,7 +27,7 @@ public class SitioDao implements MonitorDao {
 		q.setParameter("cveClipro", cveClipro);
 		return q.getResultList();
 	}
-	
+
 	@Override
 	public List consultar(Filtros filtrosSitios) throws Exception {
 		entityManager.clear();
@@ -37,7 +36,7 @@ public class SitioDao implements MonitorDao {
 		StringBuffer queryString = new StringBuffer("select cl, s, c, p");
 		queryString.append(" from CliPro cl ");
 		queryString.append(" inner join Campana as c on cl.cveClipro = c.id.cveClipro");
-		queryString.append(" inner join Sitio as s on s.id.cveClipro = c.id.cveClipro and s.id.cveCampana = c.id.cveCampana");
+		queryString.append(" inner join Sitio as s on s.id.cveClipro = c.cliPro.cveClipro AND s.id.cveCampana = c.id.cveCampana");
 		queryString.append(" inner join Plaza as p on p.cvePlaza= s.id.cvePlaza");
 
 		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
@@ -57,41 +56,45 @@ public class SitioDao implements MonitorDao {
 		
 		return q.getResultList();
 	}
+	
 
 	public List consultarTree(Filtros filtrosSitios) throws Exception {
 		entityManager.clear();
 		
 		Query q = null;
-		StringBuffer queryString = new StringBuffer("select max(c.id.cveClipro) cveClipro, mas(c.nombre) clipro, max(p.cvePlaza) cvePlaza, max(p.nombre) plaza, ");
-		queryString.append(" max(c.id.cveCampana) cveCampana, max(c.nombre) campana, max(s.id.cveSitio) cveSitio, COUNT(*) AS num_rows");
-		queryString.append(" from CliPro cl ");
-		queryString.append(" inner join Campana as c on cl.cveClipro = c.id.cveClipro");
-		queryString.append(" inner join Sitio as s on s.id.cveClipro = c.id.cveClipro and s.id.cveCampana = c.id.cveCampana");
-		queryString.append(" inner join Plaza as p on p.cvePlaza=s.id.cvePlaza");
-		
+		StringBuffer queryString = new StringBuffer("SELECT  MAX(c.CVE_CLIPRO) CVE_CLIPRO, MAX(c.NOMBRE) CLIPRO, MAX(p.CVE_PLAZA) CVE_PLAZA, MAX(p.NOMBRE) PLAZA, MAX(c.CVE_CAMPANA) CVE_CAMPANA, MAX(c.NOMBRE) CAMPANA, MAX(s.CVE_SITIO) CVE_SITIO, COUNT(*) AS num_rows");
+		queryString.append(" FROM (SELECT ccl.CVE_CLIPRO, ccl.NOMBRE FROM monitor.CLI_PRO ccl");
+
 		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
-			queryString.append(" where ");
-			queryString.append(" lower(c.id.cveClipro) like lower(:cliente) ");
+			queryString.append(" WHERE ");
+			queryString.append(" LOWER(ccl.CVE_CLIPRO) LIKE LOWER(:cliente)");
 		}
-		queryString.append(" group by");
+		
+		queryString.append(") cl");
+		queryString.append(") cl");
+
+		queryString.append(" INNER JOIN monitor.CAMPANA c ON  cl.CVE_CLIPRO = c.CVE_CLIPRO");
+		queryString.append(" INNER JOIN monitor.SITIO s ON s.CVE_CLIPRO = c.CVE_CLIPRO AND s.CVE_CAMPANA = c.CVE_CAMPANA"); 
+		queryString.append(" INNER JOIN monitor.PLAZA p ON p.CVE_PLAZA = s.CVE_PLAZA");
+		queryString.append(" GROUP BY");
 
 		if ( ((FiltrosSitios) filtrosSitios).getOrden() != null && ( ((FiltrosSitios) filtrosSitios).getOrden() >= 0) && ((FiltrosSitios) filtrosSitios).getOrden() <= 2 )  {
 			Integer order = ((FiltrosSitios) filtrosSitios).getOrden();
 			
 			switch (order) {
 			case 1:
-				queryString.append(" p.cvePlaza,");
+				queryString.append(" p.CVE_PLAZA,");
 				break;
 			case 2:
-				queryString.append(" c.id.cveCampana,");
+				queryString.append(" c.CVE_CAMPANA,");
 				break;
 			default:
-				queryString.append(" p.cvePlaza,");
+				queryString.append(" p.CVE_PLAZA,");
 				break;
 			}
 		}
-		queryString.append(" s.id.cveSitio");
-		queryString.append(" order by max(s.id.cveSitio)");
+		queryString.append(" s.CVE_SITIO");
+		queryString.append(" ORDER BY MAX(s.CVE_SITIO)");
 		
 		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
 		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
@@ -103,6 +106,7 @@ public class SitioDao implements MonitorDao {
 		return q.getResultList();
 	}
 	
+
 	@Override
 	public void eliminar(Filtros filtrosSitios) throws Exception {
 		entityManager.clear();
@@ -167,5 +171,4 @@ public class SitioDao implements MonitorDao {
 			entityManager.getTransaction().rollback();
 		}
 	}
-	
 }

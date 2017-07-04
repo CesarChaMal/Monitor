@@ -5,16 +5,10 @@ import java.util.Date;
 public class CampanaDTO {
 	private String cveCampana;
 	private String nombre;
-	private Date fechaalta;
+	private Long  numFotos;
 	private Integer status;
 	private CliProDTO clipro;
-	
-	public CliProDTO getClipro() {
-		return clipro;
-	}
-	public void setClipro(CliProDTO clipro) {
-		this.clipro = clipro;
-	}
+	private Date fechaalta;
 	public String getCveCampana() {
 		return cveCampana;
 	}
@@ -27,11 +21,11 @@ public class CampanaDTO {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Date getFechaalta() {
-		return fechaalta;
+	public Long getNumFotos() {
+		return numFotos;
 	}
-	public void setFechaalta(Date fechaalta) {
-		this.fechaalta = fechaalta;
+	public void setNumFotos(Long numFotos) {
+		this.numFotos = numFotos;
 	}
 	public Integer getStatus() {
 		return status;
@@ -39,4 +33,18 @@ public class CampanaDTO {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public CliProDTO getClipro() {
+		return clipro;
+	}
+	public void setClipro(CliProDTO clipro) {
+		this.clipro = clipro;
+	}
+	public Date getFechaalta() {
+		return fechaalta;
+	}
+	public void setFechaalta(Date fechaalta) {
+		this.fechaalta = fechaalta;
+	}
+	
+
 }

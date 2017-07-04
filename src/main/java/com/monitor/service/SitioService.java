@@ -13,7 +13,6 @@ public class SitioService {
 	private EntityManager entityManager;
 	private SitioDao sitioDao;
 	private Util util;
-	
 	public SitioService(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		sitioDao = new SitioDao(entityManager);
@@ -22,7 +21,7 @@ public class SitioService {
 
 	public ArrayList<SitioDTO> consultaSitiosActivos(String cveClipro) {
 		ArrayList<Object[]> sitioList = (ArrayList<Object[]>)sitioDao.consultaSitiosActivos(cveClipro);
-		ArrayList<SitioDTO> sitioDTOList = util.getSitiosDTO(sitioList);		
+		ArrayList<SitioDTO> sitioDTOList = util.getSitioDTO(sitioList);		
 		return sitioDTOList;
 	}
 	

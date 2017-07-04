@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +14,7 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.monitor.filter.Filtros;
+import com.monitor.filter.FiltrosCampana;
 import com.monitor.filter.FiltrosSitios;
 import com.monitor.filter.Paginacion;
 import com.monitor.model.dto.SitioDTO;
@@ -25,8 +24,7 @@ import com.monitor.util.Navigation;
 import com.monitor.util.Util;
 
 @ManagedBean
-//@SessionScoped
-@ViewScoped
+@SessionScoped
 public class CatalogoSitios implements Navigation {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoSitios.class);
 	
@@ -36,8 +34,10 @@ public class CatalogoSitios implements Navigation {
 	@ManagedProperty("#{currentData}")
 	public CurrentData currentData;
 
-	private FiltrosSitios filtrosSitios;
-	private Paginacion paginacion;
+//	@ManagedProperty("#{filtrosSitios}")
+	public FiltrosSitios filtrosSitios;
+
+	public Paginacion paginacion;
 	private SitioDTO sitio;
 	private List<SitioDTO> sitiosDTOList;
 	private SitioService sitioService;
@@ -49,8 +49,8 @@ public class CatalogoSitios implements Navigation {
     @PostConstruct
 	public void init() {
 		try {
-			filtrosSitios = new FiltrosSitios();
 		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+			filtrosSitios = new FiltrosSitios();
 			sitioService = new SitioService(persistencia.getEntityManager());
 			sitiosDTOList = sitioService.consultarSitios(filtrosSitios);
 			paginacion = new Paginacion();
@@ -121,13 +121,11 @@ public class CatalogoSitios implements Navigation {
 	}
 
 	public void next() {
-		update(filtrosSitios);
 		paginacion.next();
 		sitio = sitiosDTOList.get(paginacion.getPageIndex());
 	}
 	
 	public void prev() {
-		update(filtrosSitios);
 		paginacion.prev();
 		sitio = sitiosDTOList.get(paginacion.getPageIndex());
 	}
@@ -138,7 +136,7 @@ public class CatalogoSitios implements Navigation {
 	  String irA = request.getParameter("formCatalogo:irA");
 	  if (Util.isParsable(irA)) {
 		  paginacion.setPageIndex(Integer.parseInt(irA)-1);
-		  update(filtrosSitios);
+		  update();
 	  }
 	}
 
@@ -148,7 +146,7 @@ public class CatalogoSitios implements Navigation {
         String txtCliente = request.getParameter("formCatalogo:txtCliente");
         LOGGER.debug("txtCliente: " + txtCliente);
         filtrosSitios.setCveClipro(txtCliente);
-		update(filtrosSitios);
+		update();
 	}
 	
 	public void busquedaTree() {
@@ -161,13 +159,15 @@ public class CatalogoSitios implements Navigation {
 		filtrosSitios.setCveClipro(txtCliente);
 		filtrosSitios.setOrden(Integer.parseInt(rbnOrdenar));
 		orden = filtrosSitios.getOrden(); 
-		updateTree(filtrosSitios);
+		updateTree();
 	}
 	
-	public void update(Filtros filtrosSitios) {
+	public void update() {
 		try {
+			filtrosSitios = new FiltrosSitios();
 			sitio = null;
-			sitiosDTOList = sitioService.consultarSitios((FiltrosSitios) filtrosSitios);
+			filtrosSitios = new FiltrosSitios();
+			sitiosDTOList = sitioService.consultarSitios(filtrosSitios);
 			paginacion.setModel(sitiosDTOList);
 			if (sitiosDTOList.size() > 0)
 				sitio = sitiosDTOList.get(paginacion.getPageIndex());
@@ -176,9 +176,10 @@ public class CatalogoSitios implements Navigation {
 		}
 	}
 	
-	public void updateTree(Filtros filtrosSitios) {
+	public void updateTree() {
 		try {
-			sitiosDTOList = sitioService.consultarTreeSitios((FiltrosSitios) filtrosSitios);
+			filtrosSitios = new FiltrosSitios();
+			sitiosDTOList = sitioService.consultarTreeSitios(filtrosSitios);
 //			root = 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,7 +196,7 @@ public class CatalogoSitios implements Navigation {
 			
 			filtrosSitios.setCveSitio(txtCveSitio);
 			sitioService.eliminaSitio(filtrosSitios);
-			update(filtrosSitios);
+			update();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -228,7 +229,7 @@ public class CatalogoSitios implements Navigation {
 	        }
 			
 			sitioService.actualizaSitio(filtrosSitios);
-			update(filtrosSitios);
+			update();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
