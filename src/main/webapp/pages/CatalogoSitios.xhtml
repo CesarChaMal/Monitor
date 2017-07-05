@@ -23,9 +23,8 @@
 		
 				<p:panel header="Sitios" style="width:100%">
 		
-					<h:panelGrid id="grid" columns="1">
-		
-						<h:panelGrid id="pnlBotones" columns="10">
+					<h:panelGrid id="gridBotones" columns="1">
+						<h:panelGrid id="pnlBotones" columns="10" styleClass="botones">
 							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.busqueda()}"></p:commandButton>
 							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.actualizar()}"></p:commandButton>
 							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.eliminar()}">
@@ -39,7 +38,9 @@
 							<p:inputText id="irA" value="#{catalogoSitios.paginacion.irA}" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.irA}"></p:commandButton>
 						</h:panelGrid>
+					</h:panelGrid>
 		
+					<h:panelGrid id="grid" columns="1">
 						<h:panelGrid id="pnlCliente" columns="3">
 							<p:outputLabel>Cliente:</p:outputLabel>
 							<p:inputText id="txtCliente" value="#{catalogoSitios.sitio.clipro.cveClipro}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
@@ -55,48 +56,53 @@
 									</p:treeNode>
 								</p:tree>
 							
-								<p:outputLabel for="rbnOrdenar" value="Ordenar Por" />
-								<p:selectOneRadio id="rbnOrdenar" value="#{catalogoSitios.orden}">
-									<f:selectItem itemLabel="Plaza" itemValue="1" />
-									<f:selectItem itemLabel="Campaña" itemValue="2" />
-								</p:selectOneRadio>
+		 						<p:panel header="Ordenar Por" styleClass="tipos">
+									<h:panelGroup id="pnlRbnOrdenar" columns="2">
+										<p:selectOneRadio id="rbnOrdenar" value="#{catalogoSitios.orden}">
+											<f:selectItem itemLabel="Plaza" itemValue="1" />
+											<f:selectItem itemLabel="Campaña" itemValue="2" />
+										</p:selectOneRadio>
+									</h:panelGroup>
+								</p:panel>
 							</h:panelGrid>
 
 							<h:panelGrid id="pnlDerecho" columns="2">
-								<p:outputLabel>Codigo Sitio</p:outputLabel>
-								<p:inputText id="txtCveSitio" value="#{catalogoSitios.sitio.cveSitio}"></p:inputText>
+								<p:outputLabel style="float: right; position:relative; right: 100px;">Codigo Sitio</p:outputLabel>
+								<p:inputText styleClass="tree-inputs" id="txtCveSitio" value="#{catalogoSitios.sitio.cveSitio}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 
-								<p:outputLabel>Campaña</p:outputLabel>
-								<p:selectOneMenu id="cboCampana" value="#{catalogoSitios.sitio.cveCampana}" style="width:125px">
-									<f:selectItem itemLabel="Seleccione una" itemValue="" />
-									<f:selectItem itemLabel="Black" itemValue="Black" />
-									<f:selectItem itemLabel="Platino" itemValue="Platino" />
-									<f:selectItem itemLabel="Especial" itemValue="Especial" />
+								<p:outputLabel styleClass="tree-labels">Campaña</p:outputLabel>
+								<p:selectOneMenu styleClass="tree-inputs" id="cboCampana" value="#{catalogoSitios.sitio.cveCampana}" style="width:125px;">
+									<f:selectItem itemLabel="Seleccione una" noSelectionOption="true" />
+									<f:selectItems value="#{catalogoSitios.campanaDTOList}" var="entity" itemLabel="#{entity.nombre}"/>
 								</p:selectOneMenu>
 		
-								<p:outputLabel>Plaza</p:outputLabel>
-								<p:selectOneMenu id="cboPlaza" value="#{catalogoSitios.sitio.cvePlaza}" style="width:125px">
-									<f:selectItem itemLabel="Seleccione una" itemValue="" />
-									<f:selectItem itemLabel="Aguascalientes" itemValue="Aguascalientes" />
-									<f:selectItem itemLabel="Sonora" itemValue="Sonora" />
-									<f:selectItem itemLabel="Guerrero" itemValue="Guerrero" />
+								<p:outputLabel styleClass="tree-labels">Plaza</p:outputLabel>
+								<p:selectOneMenu styleClass="tree-inputs" id="cboPlaza" value="#{catalogoSitios.sitio.cvePlaza}" style="width:125px">
+									<f:selectItem itemLabel="Seleccione una" noSelectionOption="true" />
+									<f:selectItems value="#{catalogoSitios.plazaDTOList}" var="entity" itemLabel="#{entity.nombre}"/>
 								</p:selectOneMenu>
 								
-								<h:outputLabel for="txtUbicacion" value="Ubicacion"/>
-							    <p:inputTextarea id="txtUbicacion" value="#{catalogoSitios.sitio.ubicacion}" rows="2" cols="20" label="Ubicacion">
+								<h:outputLabel styleClass="tree-labels" for="txtUbicacion" value="Ubicacion" style="float: right;"/>
+							    <p:inputTextarea styleClass="tree-inputs" id="txtUbicacion" value="#{catalogoSitios.sitio.ubicacion}" rows="3" cols="40" label="Ubicacion" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);">
 							    </p:inputTextarea>
 
-								<p:outputLabel for="rbnIluminacion" value="Cuenta con iluminación" />
-								<p:selectOneRadio id="rbnIluminacion" value="#{catalogoSitios.sitio.iluminacion}">
-									<f:selectItem itemLabel="Si" itemValue="1" />
-									<f:selectItem itemLabel="No" itemValue="2" />
-								</p:selectOneRadio>
+		 						<p:panel header="Cuenta con iluminación" styleClass="tipos">
+									<h:panelGroup id="pnlRbnIluminacion" columns="1">
+										<p:selectOneRadio id="rbnIluminacion" value="#{catalogoSitios.sitio.iluminacion}">
+											<f:selectItem itemLabel="Si" itemValue="1" />
+											<f:selectItem itemLabel="No" itemValue="2" />
+										</p:selectOneRadio>
+									</h:panelGroup>
+								</p:panel>
 								
-								<p:outputLabel for="rbnEstatus" value="Estatus Sitio" />
-								<p:selectOneRadio id="rbnEstatus" value="#{catalogoSitios.sitio.status}">
-									<f:selectItem itemLabel="Activo" itemValue="1" />
-									<f:selectItem itemLabel="Inactivo" itemValue="2" />
-								</p:selectOneRadio>
+		 						<p:panel header="Estatus Sitio" styleClass="tipos">
+									<h:panelGroup id="pnlRbnEstatu" columns="1">
+										<p:selectOneRadio id="rbnEstatus" value="#{catalogoSitios.sitio.status}">
+											<f:selectItem itemLabel="Activo" itemValue="1" />
+											<f:selectItem itemLabel="Inactivo" itemValue="2" />
+										</p:selectOneRadio>
+									</h:panelGroup>
+								</p:panel>
 								
 							</h:panelGrid>
 		
