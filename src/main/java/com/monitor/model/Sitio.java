@@ -10,13 +10,11 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,9 +31,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Sitio implements Serializable {
 
 	private SitioId id;
-	private CliPro cliPro;
 	private Plaza plaza;
 	private Campana campana;
+	private Date inicia;
+	private Date termina;
 	private Integer status;
 	private String ubicacion;
 	private Integer iluminacion;
@@ -50,11 +49,13 @@ public class Sitio implements Serializable {
 		this.campana = campana;
 	}
 
-	public Sitio(SitioId id, Plaza plaza, Campana campana, Integer status, String ubicacion,
+	public Sitio(SitioId id, Plaza plaza, Campana campana, Date inicia, Date termina, Integer status, String ubicacion,
 			Integer iluminacion, Set<Foto> fotos) {
 		this.id = id;
 		this.plaza = plaza;
 		this.campana = campana;
+		this.inicia = inicia;
+		this.termina = termina;
 		this.status = status;
 		this.ubicacion = ubicacion;
 		this.iluminacion = iluminacion;
@@ -98,6 +99,26 @@ public class Sitio implements Serializable {
 		this.campana = campana;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "INICIA", length = 7)
+	public Date getInicia() {
+		return this.inicia;
+	}
+
+	public void setInicia(Date inicia) {
+		this.inicia = inicia;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "TERMINA", length = 7)
+	public Date getTermina() {
+		return this.termina;
+	}
+
+	public void setTermina(Date termina) {
+		this.termina = termina;
+	}
+
 	@Column(name = "STATUS", precision = 6, scale = 0)
 	public Integer getStatus() {
 		return this.status;
@@ -134,14 +155,6 @@ public class Sitio implements Serializable {
 		this.fotos = fotos;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CVE_CLIPRO", referencedColumnName = "CVE_CLIPRO", nullable = false, insertable = false, updatable = false)
-	public CliPro getCliPro() {
-		return this.cliPro;
-	}
 
-	public void setCliPro(CliPro cliPro) {
-		this.cliPro = cliPro;
-	}
 
 }

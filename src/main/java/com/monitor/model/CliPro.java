@@ -44,6 +44,7 @@ public class CliPro implements java.io.Serializable {
 	}
 
 	@Id
+
 	@Column(name = "CVE_CLIPRO", unique = true, nullable = false, length = 10)
 	public String getCveClipro() {
 		return this.cveClipro;

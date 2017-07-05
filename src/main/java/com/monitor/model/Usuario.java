@@ -1,18 +1,17 @@
 package com.monitor.model;
 // Generated 23/06/2017 12:40:03 PM by Hibernate Tools 5.2.3.Final
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,7 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "USUARIO", schema = "MONITOR")
-public class Usuario extends Entidad {
+public class Usuario  implements Serializable {
 	private String email;
 	private CliPro cliPro;
 	private String nombre;
@@ -59,6 +58,7 @@ public class Usuario extends Entidad {
 	}
 
 	@Id
+
 	@Column(name = "EMAIL", unique = true, nullable = false, length = 20)
 	public String getEmail() {
 		return this.email;
@@ -142,72 +142,4 @@ public class Usuario extends Entidad {
 		this.fotos = fotos;
 	}
 
-	@Override
-	public Query traerQuery(EntityManager entityManager) {
-		// TODO Auto-generated method stub
-
-		Query q = null;
-
-		switch (consulta) {
-
-		case "consultaLoginPorEmail":
-
-			q = consultaLoginPorEmail(entityManager);
-
-			break;
-
-		case "consultaTodos":
-
-			q = consultaTodos(entityManager);
-
-			break;
-
-		case "consultaPorId":
-
-			q = consultaPorId(entityManager);
-
-			break;
-
-		default:
-			break;
-		}
-
-		return q;
-	}
-
-	@Override
-	public void copiaDatos(Entidad entidad) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected Query consultaPorId(EntityManager entityManager) {
-		// TODO Auto-generated method stub
-		Query q = entityManager.createQuery("SELECT m from Usuario as m where id=:id ");
-
-		return q.setParameter("email", email);
-	}
-
-	public void consultaLoginPorEmail(String email) {
-		consulta = "consultaLoginPorEmail";
-		parametros.put("email", email);
-	}
-
-	private Query consultaLoginPorEmail(EntityManager entityManager) {
-		Query q = entityManager.createQuery("SELECT m from Usuario  m where m.email=:email");
-
-		q.setParameter("email", parametros.get("email"));
-		return q;
-	}
-
-	public void consultaTodos() {
-		consulta = "consultaTodos";
-	}
-
-	private Query consultaTodos(EntityManager entityManager) {
-		Query q = entityManager.createQuery("SELECT m from Usuario as m ");
-
-		return q;
-	}
 }
