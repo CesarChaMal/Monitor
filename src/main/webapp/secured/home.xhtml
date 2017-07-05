@@ -224,6 +224,8 @@ p:hover i {
 			class="logotipo"> <img
 			src="#{resource['img/logo-monitor.png']}" width="150" height="90"
 			alt="logo" /> </figure>
+			<h:outputLink id="logout" styleClass="blue" style="float:right;color:black;margin-top:75px;margin-right:15px;text-decoration:underline;font-size: 26px;color: #00a0e7;"
+							value="javascript:void(0)" onclick="PF('dlgVersion').show();">Salir</h:outputLink>
 		<div class="name">
 			Bienvenido:
 			<p:outputLabel
@@ -235,16 +237,17 @@ p:hover i {
 
 				<ul>
 					<li id="licampana"><a
-						href="#{request.contextPath}/pages/CatalogoCampana.xhtml">CAMPAÑAS</a></li>
+						href="#{request.contextPath}/pages/CatalogoCampana.xhtml">Campañas</a></li>
 					<!--      <li id="liplazas"><a href="#">PLAZAS</a></li> -->
 					<li id="lisitio"><a
-						href="#{request.contextPath}/pages/CatalogoSitios.xhtml">SITIOS</a></li>
+						href="#{request.contextPath}/pages/CatalogoSitios.xhtml">Sitios</a></li>
 					<li id="liusuario"><a
-						href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml">USUARIOS</a></li>
+						href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml">Usuarios</a></li>
 					<li id="limonitorizacion"><a
-						href="#{request.contextPath}/pages/monitorizacion.xhtml">MONITORIZACION</a></li>
-					<li id="lisoporte"><a href="#">SOPORTE</a></li>
-					<li id="liacerca">Acerca de</li>
+						href="#{request.contextPath}/pages/monitorizacion.xhtml">Monitorización</a></li>
+					<li id="lisoporte"><a href="#">Soporte</a></li>
+					<li id="liacerca"><h:outputLink id="openDialogLink"
+							value="javascript:void(0)" onclick="PF('dlgVersion').show();">Acerca de</h:outputLink></li>
 				</ul>
 			</div>
 			<div id="divcampana" class="camp">
@@ -283,6 +286,13 @@ p:hover i {
 				<p>Este es un mensaje de acerca de</p>
 			</div>
 		</div>
+		<p:dialog id="version" widgetVar="dlgVersion" header="Versión"
+				resizable="false" showEffect="clip" hideEffect="clip">
+				<img src="#{resource['images/logo-monitor.png']}" alt="logo" />
+				<br/>
+				<h:outputLabel styleClass="orange" value="Versión "></h:outputLabel>
+				<h:outputLabel styleClass="blue" value="1.0"></h:outputLabel>
+			</p:dialog>
 		</header> </section>
 		<section class="contain">
 		<div class="descripciondiv">
