@@ -7,19 +7,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.attribute.FileAttribute;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -27,27 +19,19 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.io.FileSystemUtils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.monitor.dao.CampanaDao;
 import com.monitor.model.Foto;
 import com.monitor.service.LoadImgService;
-
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @ManagedBean
@@ -91,12 +75,59 @@ public class LoadImgServiceControllerBean {
 				}
 
 			}
-		} catch (Exception e) {
-			LOGGER.error("Error : ",e);
+		} catch (FileNotFoundException e) {
+
+			LOGGER.error("Error : ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			LOGGER.error("Error : ", e);
+			e.printStackTrace();
+		} finally {
+			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+			ctx.getRealPath(File.separator);
+			System.out.println();
+			path = ctx.getRealPath(File.separator)+File.separator +"resources" + File.separator + "img" + File.separator + "noDisponible.jpg";
+			fotoMainPage = getFotoMainPage(path);
+		}
+
+		return fotoMainPage;
+	}
+
+	public StreamedContent getFotoMainPage(String path) {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		try {
+			if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+				return new DefaultStreamedContent();
+
+			} else {
+				ByteArrayOutputStream bos = new ByteArrayOutputStream();
+				System.out.println("path" + path);
+				if (path != null && !path.isEmpty()) {
+					BufferedImage img = ImageIO.read(new FileInputStream(path));
+					// image is scaled two times at run time
+
+					int w = 300;
+					int h = 200;
+					BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+					Graphics g = bi.getGraphics();
+					g.drawImage(img, 0, 0, w, h, null);
+					ImageIO.write(bi, "png", bos);
+
+					fotoMainPage = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");
+					return fotoMainPage;
+				}
+
+			}
+		} catch (FileNotFoundException e) {
+			LOGGER.error("Error : ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			LOGGER.error("Error : ", e);
 			e.printStackTrace();
 		}
 
-		return null;
+		return fotoMainPage;
 	}
 
 	public void setFotoMainPage(StreamedContent foto) {
@@ -112,10 +143,10 @@ public class LoadImgServiceControllerBean {
 
 			} else {
 
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();			
+				ByteArrayOutputStream bos = new ByteArrayOutputStream();
 				if (path != null && !path.isEmpty()) {
 
-					BufferedImage img = ImageIO.read(new FileInputStream(path));				
+					BufferedImage img = ImageIO.read(new FileInputStream(path));
 					ImageIO.write(img, "png", bos);
 					fotoOriginal = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");
 					return fotoOriginal;
@@ -123,7 +154,7 @@ public class LoadImgServiceControllerBean {
 
 			}
 		} catch (Exception e) {
-			LOGGER.error("Error : ",e);
+			LOGGER.error("Error : ", e);
 			e.printStackTrace();
 		}
 
@@ -196,7 +227,7 @@ public class LoadImgServiceControllerBean {
 		JRBeanCollectionDataSource collectionBean = new JRBeanCollectionDataSource(fotolistMostrar);
 		try {
 			InputStream reportStream = facesContext.getExternalContext()
-					.getResourceAsStream("/reportes/Monitor.jasper");
+					.getResourceAsStream(File.separator + "reportes" + File.separator + "Monitor.jasper");
 			ServletOutputStream servletOutputStream = response.getOutputStream();
 
 			JasperPrint jasperPrint = JasperFillManager.fillReport(reportStream, new HashMap(), collectionBean);
@@ -206,7 +237,7 @@ public class LoadImgServiceControllerBean {
 			servletOutputStream.flush();
 			servletOutputStream.close();
 		} catch (Exception e) {
-			LOGGER.error("Error : ",e);
+			LOGGER.error("Error : ", e);
 			e.printStackTrace();
 		} finally {
 			response.getOutputStream().close();

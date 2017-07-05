@@ -9,64 +9,62 @@
 <h:head>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-		function mostrarImagen() {
-			$(document).ready(function() {
-				$("#licampana").hover(function() {
-					$("#divcampana").css("display", "block");
-				}, function() {
-					$("#divcampana").css("display", "none");
-				});
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#licampana").hover(function() {
+				$("#divcampana").css("display", "block");
+			}, function() {
+				$("#divcampana").css("display", "none");
 			});
+		});
 
-			$(document).ready(function() {
-				$("#liplazas").hover(function() {
-					$("#divplazas").css("display", "block");
-				}, function() {
-					$("#divplazas").css("display", "none");
-				});
+		$(document).ready(function() {
+			$("#liplazas").hover(function() {
+				$("#divplazas").css("display", "block");
+			}, function() {
+				$("#divplazas").css("display", "none");
 			});
+		});
 
-			$(document).ready(function() {
-				$("#lisitio").hover(function() {
-					$("#divsitio").css("display", "block");
-				}, function() {
-					$("#divsitio").css("display", "none");
-				});
+		$(document).ready(function() {
+			$("#lisitio").hover(function() {
+				$("#divsitio").css("display", "block");
+			}, function() {
+				$("#divsitio").css("display", "none");
 			});
+		});
 
-			$(document).ready(function() {
-				$("#liusuario").hover(function() {
-					$("#divusuario").css("display", "block");
-				}, function() {
-					$("#divusuario").css("display", "none");
-				});
+		$(document).ready(function() {
+			$("#liusuario").hover(function() {
+				$("#divusuario").css("display", "block");
+			}, function() {
+				$("#divusuario").css("display", "none");
 			});
+		});
 
-			$(document).ready(function() {
-				$("#limonitorizacion").hover(function() {
-					$("#divmonitorizacion").css("display", "block");
-				}, function() {
-					$("#divmonitorizacion").css("display", "none");
-				});
+		$(document).ready(function() {
+			$("#limonitorizacion").hover(function() {
+				$("#divmonitorizacion").css("display", "block");
+			}, function() {
+				$("#divmonitorizacion").css("display", "none");
 			});
+		});
 
-			$(document).ready(function() {
-				$("#lisoporte").hover(function() {
-					$("#divsoporte").css("display", "block");
-				}, function() {
-					$("#divsoporte").css("display", "none");
-				});
+		$(document).ready(function() {
+			$("#lisoporte").hover(function() {
+				$("#divsoporte").css("display", "block");
+			}, function() {
+				$("#divsoporte").css("display", "none");
 			});
+		});
 
-			$(document).ready(function() {
-				$("#liacerca").hover(function() {
-					$("#divacerca").css("display", "block");
-				}, function() {
-					$("#divacerca").css("display", "none");
-				});
+		$(document).ready(function() {
+			$("#liacerca").hover(function() {
+				$("#divacerca").css("display", "block");
+			}, function() {
+				$("#divacerca").css("display", "none");
 			});
-		}
+		});
 	</script>
 
 	<style>
@@ -221,23 +219,32 @@ p:hover i {
 
 	<h:form>
 
+		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 		<section class="header"> <header> <figure
 			class="logotipo"> <img
-			src="#{resource['img/monitorexacto.png']}" width="150" height="90"
+			src="#{resource['img/logo-monitor.png']}" width="150" height="90"
 			alt="logo" /> </figure>
-		<div class="name">Bienvenido:<p:outputLabel value="#{userManager.currentUser.nombre}  #{userManager.currentUser.apellidos}"/></div>
+		<div class="name">
+			Bienvenido:
+			<p:outputLabel
+				value="#{userManager.currentUser.nombre}  #{userManager.currentUser.apellidos}" />
+		</div>
 		<div class="dropdown">
 			<i class="fa fa-align-justify fa-2x"></i><span class="menu">MENU</span>
 			<div class="dropdown-content">
 
 				<ul>
-					<li id="licampana"><a href="#">CAMPAÑAS</a></li>
-					<li id="liplazas"><a href="#">PLAZAS</a></li>
-					<li id="lisitio"><a href="#">SITIOS</a></li>
-					<li id="liusuario"><a href="#">USUARIOS</a></li>
-					<li id="limonitorizacion"><a href="#">MONITORIZACION</a></li>
+					<li id="licampana"><a
+						href="#{request.contextPath}/pages/CatalogoCampana.xhtml">CAMPAÑAS</a></li>
+					<!--      <li id="liplazas"><a href="#">PLAZAS</a></li> -->
+					<li id="lisitio"><a
+						href="#{request.contextPath}/pages/CatalogoSitios.xhtml">SITIOS</a></li>
+					<li id="liusuario"><a
+						href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml">USUARIOS</a></li>
+					<li id="limonitorizacion"><a
+						href="#{request.contextPath}/pages/monitorizacion.xhtml">MONITORIZACION</a></li>
 					<li id="lisoporte"><a href="#">SOPORTE</a></li>
-					<li id="liacerca"><a href="#">ACERCA DE</a></li>
+					<li id="liacerca">Acerca de</li>
 				</ul>
 			</div>
 			<div id="divcampana" class="camp">
@@ -276,12 +283,12 @@ p:hover i {
 				<p>Este es un mensaje de acerca de</p>
 			</div>
 		</div>
-		</header> 
-		</section>
+		</header> </section>
 		<section class="contain">
 		<div class="descripciondiv">
 			<div class="descripcion">
-			<span class="orange">Solución Integral</span><span class="blue"> para monitoreo de exteriores</span>
+				<span class="orange">Solucion Integral</span><span class="blue">
+					para monitoreo de exteriores</span>
 			</div>
 		</div>
 		<div class="izq">
