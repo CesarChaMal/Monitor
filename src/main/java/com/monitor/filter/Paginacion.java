@@ -25,49 +25,15 @@ public class Paginacion {
 
 	public void setModel(List<?> model) {
 		this.origModel = model;
-//		this.records = defaultRegistros;
 		this.records = model.size();
 		this.recordsTotal = model.size();
-
-//		updateModel();
-	}
-
-	public void updateModel() {
-		if (records > 0) {
-			pages = records <= 0 ? 1 : recordsTotal / records;
-
-			if (recordsTotal % records > 0) {
-				pages++;
-			}
-
-			if (pages == 0) {
-				pages = 1;
-			}
-		} else {
-			records = 1;
-			pages = 1;
-		}
-		int fromIndex = getFirst();
-		int toIndex = getFirst() + records;
-
-		if (toIndex > this.recordsTotal) {
-			toIndex = this.recordsTotal;
-		}
-
-		this.model = origModel.subList(fromIndex, toIndex);
 	}
 
 	public void next() {
 		LOGGER.debug("Entra a next");
-//		if (this.pageIndex <= pages) {
-//			this.pageIndex++;
-//		}
-
 		if (this.pageIndex < recordsTotal-1) {
 			this.pageIndex++;
 		}
-		
-//		updateModel();
 	}
 
 	public void prev() {
@@ -75,8 +41,6 @@ public class Paginacion {
 		if (this.pageIndex > 0) {
 			this.pageIndex--;
 		}
-
-//		updateModel();
 	}
 
 	public int getRecords() {
@@ -117,7 +81,6 @@ public class Paginacion {
 		LOGGER.debug("setDefaultRegistros " + defaultRegistros);
 		this.defaultRegistros = defaultRegistros;
 		records = defaultRegistros;
-		updateModel();
 	}
 
 	public int getIrA() {

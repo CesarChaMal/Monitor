@@ -33,6 +33,43 @@ public class Util {
 
 	}
 
+	public <T> ArrayList<PlazaDTO> getPlazaDTO(ArrayList<T> plazasList) {
+		ArrayList<PlazaDTO> plazaDTOList = new ArrayList<PlazaDTO>();
+		for (T result : plazasList) {
+			Plaza plaza = (Plaza) result; 
+			PlazaDTO plazaDTO = new PlazaDTO();
+			plazaDTO.setCvePlaza(plaza.getCvePlaza());
+			plazaDTO.setNombre(plaza.getNombre());
+			plazaDTOList.add(plazaDTO);
+		}
+		return plazaDTOList;
+	}
+
+	public ArrayList<CampanaDTO> getCampanasDTO(ArrayList<Object[]> campanasList) {
+		ArrayList<CampanaDTO> campanaDTOList = new ArrayList<CampanaDTO>();
+		for (Object[] result : campanasList) {
+			Campana campana = (Campana) result[0];
+			CampanaId id = (CampanaId) campana.getId();
+			CliPro clipro = (CliPro) result[1];
+			
+			CampanaDTO campanaDTO = new CampanaDTO();
+			campanaDTO.setCveCampana(id.getCveCampana());
+			campanaDTO.setNombre(campana.getNombre());
+			campanaDTO.setFechaalta(campana.getFechaalta());
+			campanaDTO.setStatus(campana.getStatus());
+			
+			CliProDTO cliproDTO = new CliProDTO();
+			cliproDTO.setCveClipro(clipro.getCveClipro());
+			cliproDTO.setNombre(clipro.getNombre());
+			cliproDTO.setTipo(clipro.getTipo());
+			cliproDTO.setPadre(clipro.getPadre());
+			
+			campanaDTO.setClipro(cliproDTO);
+			campanaDTOList.add(campanaDTO);
+		}
+		return campanaDTOList;
+	}
+
 	public ArrayList<CampanaDTO> getCampanaDTO(ArrayList<Object[]> campanaList) {
 		ArrayList<CampanaDTO> campanaDTOList = new ArrayList<CampanaDTO>();
 		for (Object[] result : campanaList) {
@@ -46,6 +83,19 @@ public class Util {
 
 	}
 
+	public <T> ArrayList<CampanaDTO> getCampana2DTO(ArrayList<T> campanaList) {
+		ArrayList<CampanaDTO> campanaDTOList = new ArrayList<CampanaDTO>();
+		for (T result : campanaList) {
+			Campana campana = (Campana) result;
+			CampanaDTO campanaDTO = new CampanaDTO();
+			campanaDTO.setCveCampana(campana.getId().getCveCampana());
+			campanaDTO.setNombre(campana.getNombre());
+			campanaDTOList.add(campanaDTO);
+		}
+		return campanaDTOList;
+		
+	}
+	
 	public ArrayList<SitioDTO> getSitioDTO(ArrayList<Object[]> sitioList) {
 		ArrayList<SitioDTO> sitioDTOList = new ArrayList<SitioDTO>();
 		for (Object[] result : sitioList) {
@@ -61,11 +111,11 @@ public class Util {
 
 	public <T> ArrayList<SitioDTO> getSitiosDTO(ArrayList<T[]> sitiosList) {
 		ArrayList<SitioDTO> sitioDTOList = new ArrayList<SitioDTO>();
-		for (Object[] result : sitiosList) {
-			Sitio sitio = (Sitio) result[0];
-			Campana campana = (Campana) result[1];
-			Plaza plaza = (Plaza) result[2];
-			CliPro clipro = (CliPro) result[3];
+		for (T[] result : sitiosList) {
+			CliPro clipro = (CliPro) result[0];
+			Sitio sitio = (Sitio) result[1];
+			Campana campana = (Campana) result[2];
+			Plaza plaza = (Plaza) result[3];
 
 			SitioDTO sitioDTO = new SitioDTO();
 			sitioDTO.setCveSitio(sitio.getId().getCveSitio());
@@ -81,6 +131,7 @@ public class Util {
 			cliproDTO.setNombre(clipro.getNombre());
 
 			CampanaDTO campanaDTO = new CampanaDTO();
+			campanaDTO.setCveCampana(campana.getId().getCveCampana());
 			campanaDTO.setClipro(cliproDTO);
 			campanaDTO.setNombre(campana.getNombre());
 
@@ -98,40 +149,39 @@ public class Util {
 
 	}
 
-	public ArrayList<CampanaDTO> getCampanasDTO(ArrayList<Object[]> campanasList) {
-		ArrayList<CampanaDTO> campanaDTOList = new ArrayList<CampanaDTO>();
-		for (Object[] result : campanasList) {
-			Campana campana = (Campana) result[0];
-			CampanaId id = (CampanaId) campana.getId();
-			CliPro clipro = (CliPro) result[1];
+	public <T> ArrayList<SitioDTO> getSitiosTreeDTO(ArrayList<T[]> sitiosList) {
+		ArrayList<SitioDTO> sitioDTOList = new ArrayList<SitioDTO>();
+		for (T[] result : sitiosList) {
 
-			CampanaDTO campanaDTO = new CampanaDTO();
-			campanaDTO.setCveCampana(id.getCveCampana());
-			campanaDTO.setNombre(campana.getNombre());
-			campanaDTO.setFechaalta(campana.getFechaalta());
-			campanaDTO.setStatus(campana.getStatus());
-
+			SitioDTO sitioDTO = new SitioDTO();
+			sitioDTO.setCveSitio(result[6].toString());
+			sitioDTO.setCveCampana(result[4].toString());
+			sitioDTO.setCvePlaza(result[2].toString());
+			sitioDTO.setCveClipro(result[0].toString());
+			
 			CliProDTO cliproDTO = new CliProDTO();
-			cliproDTO.setCveClipro(clipro.getCveClipro());
-			cliproDTO.setNombre(clipro.getNombre());
-			cliproDTO.setTipo(clipro.getTipo());
-			cliproDTO.setPadre(clipro.getPadre());
-
+			cliproDTO.setCveClipro(sitioDTO.getCveClipro());
+			cliproDTO.setNombre(result[1].toString());
+			
+			CampanaDTO campanaDTO = new CampanaDTO();
 			campanaDTO.setClipro(cliproDTO);
-			campanaDTOList.add(campanaDTO);
+			campanaDTO.setCveCampana(sitioDTO.getCveCampana());
+			campanaDTO.setNombre(result[5].toString());
+			
+			PlazaDTO plazaDTO = new PlazaDTO();
+			plazaDTO.setCveClipro(cliproDTO.getCveClipro());
+			plazaDTO.setCvePlaza(sitioDTO.getCvePlaza());
+			plazaDTO.setNombre(result[3].toString());
+			
+			sitioDTO.setClipro(cliproDTO);
+			sitioDTO.setCampana(campanaDTO);
+			sitioDTO.setPlaza(plazaDTO);
+			sitioDTOList.add(sitioDTO);
 		}
-		return campanaDTOList;
+		return sitioDTOList;
+		
 	}
-
-	public Date formatDate(Date date) throws Exception {
-		if (date != null) {
-			SimpleDateFormat dt = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-			String dateString = dt.format(date);
-		}
-
-		return date;
-	}
-
+	
 	public <T> ArrayList<UsuarioDTO> getUsuariosDTO(ArrayList<T[]> usuariosList) {
 		ArrayList<UsuarioDTO> usuarioDTOList = new ArrayList<UsuarioDTO>();
 		// for (Object[] result : usuariosList) {
@@ -160,13 +210,22 @@ public class Util {
 		return usuarioDTOList;
 	}
 
-	public static boolean isParsable(String input) {
-		boolean parsable = true;
-		try {
-			Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			parsable = false;
+	public Date formatDate(Date date) throws Exception {
+		if(date!=null){
+			SimpleDateFormat dt = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.ENGLISH);			
+			String dateString =dt.format(date);
+			System.out.println("dateString " +dateString);
 		}
-		return parsable;
+		return date;
 	}
+	
+	public static boolean isParsable(String input){
+	    boolean parsable = true;
+	    try{
+	        Integer.parseInt(input);
+	    }catch(NumberFormatException e){
+	        parsable = false;
+	    }
+	    return parsable;
+	}	
 }

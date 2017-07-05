@@ -15,14 +15,14 @@
 
         <ui:define name="header">
         </ui:define>
-	    
+	
         <ui:define name="content">
 			<p:growl id="mensajes" showDetail="true" life="2000" />
 		
 		
 			<h:form id="formCatalogo" style="height:100%;">
 		
-				<p:panel header="Campañas" style="width:60%">
+				<p:panel header="Campañas" style="width:100%">
 		
 					<h:panelGrid id="gridBotones" columns="1">
 		
@@ -55,7 +55,7 @@
 							<p:inputText id="txtCveCampana" value="#{catalogoCampana.campana.cveCampana}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 			
 							<p:outputLabel>Nombre:</p:outputLabel>
-							<p:inputText id="txtNombre" value ="#{catalogoCampana.campana.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+							<p:inputText id="txtNombre" value ="#{catalogoCampana.campana.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);" styleClass="nombre"></p:inputText>
 			
 							<p:outputLabel>Fecha Alta</p:outputLabel>
 							<p:calendar id="txtFechaAlta" value="#{catalogoCampana.campana.fechaalta}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:calendar>

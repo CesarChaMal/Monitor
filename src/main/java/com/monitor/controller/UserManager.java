@@ -11,7 +11,9 @@ import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.monitor.filter.FiltrosUsuario;
 import com.monitor.model.Usuario;
+import com.monitor.model.dto.UsuarioDTO;
 import com.monitor.persistencia.Persistencia;
 import com.monitor.service.UsuarioService;
 
@@ -67,8 +69,7 @@ public class UserManager {
 
         // invalidate the session
         LOGGER.debug("invalidating session for '{}'", identifier);
-        FacesContext.getCurrentInstance().getExternalContext()
-                .invalidateSession();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
         LOGGER.info("logout successful for '{}'", identifier);
         return LOGOUT_PAGE_REDIRECT;

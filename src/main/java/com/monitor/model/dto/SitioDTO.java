@@ -12,7 +12,6 @@ public class SitioDTO {
 	private CampanaDTO campana;
 	private PlazaDTO plaza;
 	private CliProDTO clipro;
-
 	
 	public String getCveSitio() {
 		return cveSitio;

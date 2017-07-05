@@ -13,6 +13,7 @@ public class SitioService {
 	private EntityManager entityManager;
 	private SitioDao sitioDao;
 	private Util util;
+	
 	public SitioService(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		sitioDao = new SitioDao(entityManager);
@@ -33,7 +34,7 @@ public class SitioService {
 	
 	public <T> ArrayList<SitioDTO> consultarTreeSitios(FiltrosSitios filtrosSitios) throws Exception {
 		ArrayList<T[]> sitiosList = (ArrayList<T[]>)sitioDao.consultarTree(filtrosSitios);
-		ArrayList<SitioDTO> sitioDTOList = util.getSitiosDTO(sitiosList);		
+		ArrayList<SitioDTO> sitioDTOList = util.getSitiosTreeDTO(sitiosList);		
 		return sitioDTOList;
 	}
 	

@@ -5,10 +5,11 @@ import java.util.Date;
 public class CampanaDTO {
 	private String cveCampana;
 	private String nombre;
-	private Long  numFotos;
+	private Date fechaalta;
 	private Integer status;
 	private CliProDTO clipro;
-	private Date fechaalta;
+	private Long  numFotos;
+	
 	public String getCveCampana() {
 		return cveCampana;
 	}
@@ -45,6 +46,4 @@ public class CampanaDTO {
 	public void setFechaalta(Date fechaalta) {
 		this.fechaalta = fechaalta;
 	}
-	
-
 }

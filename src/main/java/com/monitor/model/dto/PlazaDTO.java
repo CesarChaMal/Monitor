@@ -1,17 +1,15 @@
 package com.monitor.model.dto;
 // Generated 23/06/2017 12:40:03 PM by Hibernate Tools 5.2.3.Final
 
-
-public class PlazaDTO  {
+public class PlazaDTO {
 
 	private String cvePlaza;
 	private String nombre;
-	private Long  numFotos;
 	private Integer status;
 	private String padre;
 	private Integer tipo;
 	private String cveClipro;
-	
+	private Long  numFotos;
 	
 	public String getCvePlaza() {
 		return cvePlaza;

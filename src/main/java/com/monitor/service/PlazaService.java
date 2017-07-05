@@ -25,4 +25,10 @@ public class PlazaService {
 		ArrayList<PlazaDTO> plazaDTOList = util.getPlazasDTO(plazaList);
 		return plazaDTOList;
 	}
+	
+	public ArrayList<PlazaDTO> consultaPlazas() {
+		ArrayList<Object[]> plazaList =(ArrayList<Object[]>)plazaDao.consultaPlazas();
+		ArrayList<PlazaDTO> plazaDTOList = util.getPlazaDTO(plazaList);
+		return plazaDTOList;
+	}
 }

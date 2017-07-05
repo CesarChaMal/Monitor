@@ -1,7 +1,5 @@
 package com.monitor.dao;
 
-import java.util.List;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +14,7 @@ import com.monitor.filter.FiltrosCampana;
 import com.monitor.filter.FiltrosUsuario;
 import com.monitor.model.CliPro;
 
-public class CampanaDao  implements MonitorDao {
+public class CampanaDao implements MonitorDao {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CampanaDao.class);
 	private EntityManager entityManager;
 	public CampanaDao(EntityManager entityManager) {
@@ -38,7 +36,11 @@ public class CampanaDao  implements MonitorDao {
 		q.setParameter("cveClipro", cveClipro);
 		return q.getResultList();
 	}
-//	
+
+	public List consultaCampanas() {
+		Query q = entityManager.createQuery("select c from Campana as c where c.status=1 order by c.nombre desc");
+		return q.getResultList();
+	}
 
 	@Override
 	public void actualizar(Filtros filtrosCampana) throws Exception {
@@ -81,6 +83,7 @@ public class CampanaDao  implements MonitorDao {
 			entityManager.getTransaction().rollback();
 		}
 	}
+	
 
 	@Override
 	public List consultar(Filtros filtrosCampana) throws Exception {

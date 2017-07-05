@@ -10,29 +10,66 @@
     <body>
 	    <ui:composition>
 
-<!-- 
-			<h1>This is the header</h1>
--->
-
-			<h:form>
-				<b:navBar brand="Monitoreo Exacto" brandHref="#" styleClass="blueGradient">
-					<p><h:outputText value="Bienvenido, #{home.mensaje}!" /></p>
-	    			<b:navbarLinks>
-	        			<b:navLink value="" href="#"><h:graphicImage value="../resources/img/logo.png" width="100px" height="100px"/></b:navLink>
-	        			<b:dropMenu value="Menu" iconAwesome="align-justify">
-				            <b:navLink value="Home" href="#{request.contextPath}/secured/home.xhtml"></b:navLink>
-				            <b:navLink value="Catalogo Usuarios" href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml"></b:navLink>
-				            <b:navLink value="Catalogo Campañas" href="#{request.contextPath}/pages/CatalogoCampana.xhtml"></b:navLink>
-				            <b:navLink value="Catalogo Sitios" href="#{request.contextPath}/pages/CatalogoSitios.xhtml"></b:navLink>
-				            <b:navLink value="Monitorización" href="#{request.contextPath}/pages/monitorizacion.xhtml"></b:navLink>
-				            <b:navLink></b:navLink>
-<ui:remove>
-				            <b:navLink value="Logout" href="#{userManager.logout()}"></b:navLink>
-</ui:remove>
-	        			</b:dropMenu>
-	    			</b:navbarLinks>
-	    		</b:navBar>
-			</h:form>
+			<section class="header"> 
+				<header> 
+					<figure class="logotipo"> 
+						<img src="#{resource['img/monitorexacto.png']}" width="150" height="90" alt="logo" /> 
+					</figure>
+					<div class="name">Bienvenido:<p:outputLabel value="#{userManager.currentUser.nombre}  #{userManager.currentUser.apellidos}"/></div>
+					
+					<div class="dropdown">
+						<i class="fa fa-align-justify fa-2x"></i><span class="menu">MENU</span>
+						<div class="dropdown-content">
+							<ul>
+								<li id="lihome"><a href="#{request.contextPath}/secured/home.xhtml">HOME</a></li>
+								<li id="licampana"><a href="#{request.contextPath}/pages/CatalogoCampana.xhtml">CAMPAÑAS</a></li>
+								<li id="lisitio"><a href="#{request.contextPath}/pages/CatalogoSitios.xhtml">SITIOS</a></li>
+								<li id="liusuario"><a href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml">USUARIOS</a></li>
+								<li id="limonitorizacion"><a href="#{request.contextPath}/pages/monitorizacion.xhtml">MONITORIZACION</a></li>
+								<li id="lisoporte"><a href="#">SOPORTE</a></li>
+								<li id="liacerca"><a href="#">ACERCA DE</a></li>
+							</ul>
+						</div>
+	<!-- 
+						<div id="divcampana" class="camp">
+							<img src="#{resource['img/ico-cam.png']}" width="150" height="90"
+								alt="logo" />
+							<p>Este es un mensaje de campañas</p>
+						</div>
+						<div id="divhome" class="camp">
+							<img src="#{resource['img/ico-pla.png']}" width="150" height="90"
+								alt="logo" />
+							<p>Este es un mensaje de home</p>
+						</div>
+						<div id="divsitio" class="camp">
+							<img src="#{resource['img/ico-sit.png']}" width="150" height="90"
+								alt="logo" />
+							<p>Este es un mensaje de sitios</p>
+						</div>
+						<div id="divusuario" class="camp">
+							<img src="#{resource['img/ico-usr.png']}" width="150" height="90"
+								alt="logo" />
+							<p>Este es un mensaje de usuarios</p>
+						</div>
+						<div id="divmonitorizacion" class="camp">
+							<img src="#{resource['img/ico-mon.png']}" width="150" height="90"
+								alt="logo" />
+							<p>Este es un mensaje de monitorizacion</p>
+						</div>
+						<div id="divsoporte" class="camp">
+							<img src="#{resource['img/ico-sop.png']}" width="150" height="90"
+								alt="logo" />
+							<p>Este es un mensaje de soporte</p>
+						</div>
+						<div id="divacerca" class="camp">
+							<img src="#{resource['img/ico-ace.png']}" width="150" height="90"
+								alt="logo" />
+							<p>Este es un mensaje de acerca de</p>
+						</div>
+		 -->			
+					</div>
+				</header> 
+			</section>
 	        
 	    </ui:composition>
     </body>

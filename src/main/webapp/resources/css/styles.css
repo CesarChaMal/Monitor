@@ -1,16 +1,13 @@
-html, body {
-	height: 100%;
-}
-
-body {
-	background-color: #E5EAF8;
-	margin: 0;
-	font-family: Helvetica, sans-serif;;
-	overflow: hidden;
-}
-
-a {
-	color: #ffffff;
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    /*
+    padding-left: 150px;
+    padding-right: 150px;
+    */
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 1%;
 }
 
 .ui-message-info,.ui-message-error,.ui-message-warn,.ui-message-fatal {
@@ -26,9 +23,10 @@ a {
 
 .ui-widget-content {
 	/* 
-	border: 1px solid black;	
-	*/
 	border: none!important;	
+	*/
+	border: 1px solid #CEDCE7;	
+	background: #E8F0F4;
 }
 
 .ui-layout-unit-content {
@@ -52,10 +50,6 @@ a {
     color: #333;
     font-weight: bold;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-.login {
-	margin: 20%;
 }
 
 .monitor-background {
@@ -100,7 +94,8 @@ button:active {
 }
 */
 
-#formCatalogo\3A pnlCliente, #formCatalogo\3A pnlCliente2, #formCatalogo\3A pnlRbnTipo, #formCatalogo\3A pnlRbnStatus {
+#formCatalogo\3A pnlCliente, #formCatalogo\3A pnlCliente2, #formCatalogo\3A pnlRbnTipo, #formCatalogo\3A pnlRbnStatus, #formCatalogo\3A pnlSubPanel,
+ #formCatalogo\3A pnlCliente, #formCatalogo\3A pnlCliente {
 	padding: 5px;
 	border-spacing: 5px;
     border-collapse: separate;
@@ -143,6 +138,10 @@ div > #formCatalogo\3A gridBotones {
 	width:100%;
 }
 
+#formCatalogo\3A gridBotones {
+    border: 1px solid #AAADAF;
+}
+
 #paginacion-info {
 	float: right;
 }
@@ -151,3 +150,24 @@ div > #formCatalogo\3A gridBotones {
 	width:40px;
 }
 
+.nombre {
+	width:250px;
+}
+
+.ui-tree-container {
+	background: white;
+    border: 1px solid #AAADAF;
+	width: auto;
+	height: 300px;
+}
+
+.tree-labels {
+	float: right; 
+	position:relative; 
+	right: 100px;
+}
+
+.tree-inputs {
+	position:relative; 
+	right: 90px;
+}

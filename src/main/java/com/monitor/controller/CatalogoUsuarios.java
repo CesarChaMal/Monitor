@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.monitor.filter.Filtros;
 import com.monitor.filter.FiltrosUsuario;
 import com.monitor.filter.Paginacion;
 import com.monitor.model.dto.UsuarioDTO;
@@ -25,9 +26,7 @@ import com.monitor.util.Util;
 
 
 @ManagedBean
-//@RequestScoped
-//@ViewScoped
-@SessionScoped
+@ViewScoped
 public class CatalogoUsuarios implements Navigation {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogoUsuarios.class);
 	
@@ -37,10 +36,8 @@ public class CatalogoUsuarios implements Navigation {
 	@ManagedProperty("#{currentData}")
 	public CurrentData currentData;
 
-	@ManagedProperty("#{filtrosUsuario}")
-	public FiltrosUsuario filtrosUsuario;
-
-	public Paginacion paginacion;
+	private FiltrosUsuario filtrosUsuario;
+	private Paginacion paginacion;
 	private UsuarioDTO usuario;
 	private List<UsuarioDTO> usuariosDTOList;
 	private UsuarioService usuarioService;
@@ -49,6 +46,7 @@ public class CatalogoUsuarios implements Navigation {
     @PostConstruct
 	public void init() {
 		try {
+			filtrosUsuario = new FiltrosUsuario();
 		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			usuarioService = new UsuarioService(persistencia.getEntityManager());
 			usuariosDTOList = usuarioService.consultarUsuarios(filtrosUsuario);
@@ -114,11 +112,13 @@ public class CatalogoUsuarios implements Navigation {
 	}
 
 	public void next() {
+		update(filtrosUsuario);
 		paginacion.next();
 		usuario = usuariosDTOList.get(paginacion.getPageIndex());
 	}
 	
 	public void prev() {
+		update(filtrosUsuario);
 		paginacion.prev();
 		usuario = usuariosDTOList.get(paginacion.getPageIndex());
 	}
@@ -128,10 +128,8 @@ public class CatalogoUsuarios implements Navigation {
         String irA = request.getParameter("formCatalogo:irA");
         if (Util.isParsable(irA)) {
         	paginacion.setPageIndex(Integer.parseInt(irA)-1);
-        	update();
+        	update(filtrosUsuario);
         }
-//    	paginacion.setPageIndex(paginacion.getIrA()-1);
-//    	update();
 	}
 	
 	public void busqueda() {
@@ -143,17 +141,14 @@ public class CatalogoUsuarios implements Navigation {
 		LOGGER.debug("txtEmail: " + txtEmail);
 		filtrosUsuario.setCveClipro(txtCliente);
 		filtrosUsuario.setEmail(txtEmail);
-
-//		filtrosUsuario.setCveClipro(usuario.getClipro().getCveClipro());
-		update();
+		update(filtrosUsuario);
 	}
 	
-	public void update() {
+	public void update(Filtros filtrosUsuario) {
 		try {
-			filtrosUsuario = new FiltrosUsuario();
 			usuario = null;
 //			usuario = new UsuarioDTO();
-			usuariosDTOList = usuarioService.consultarUsuarios(filtrosUsuario);
+			usuariosDTOList = usuarioService.consultarUsuarios((FiltrosUsuario) filtrosUsuario);
 			paginacion.setModel(usuariosDTOList);
 			if (usuariosDTOList.size() > 0)
 				usuario = usuariosDTOList.get(paginacion.getPageIndex());
@@ -169,11 +164,10 @@ public class CatalogoUsuarios implements Navigation {
 			String txtEmail = request.getParameter("formCatalogo:txtEmail");
 			LOGGER.debug("txtEmail: " + txtEmail);
 			filtrosUsuario.setEmail(txtEmail);
-			
-//			filtrosUsuario.setEmail(usuario.getEmail());
 			usuarioService.eliminaUsuario(filtrosUsuario);
 			paginacion.setPageIndex(paginacion.getPageIndex()-1);
-			update();
+			filtrosUsuario.setEmail(null);
+			update(filtrosUsuario);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -197,7 +191,7 @@ public class CatalogoUsuarios implements Navigation {
 
 //			filtrosUsuario.setCveClipro(txtCliente);
 //			filtrosUsuario.setCveCliproNombre(txtClienteNombre);
-//			filtrosUsuario.setEmail(txtEmail);
+			filtrosUsuario.setEmail(txtEmail);
 			filtrosUsuario.setContrasena(txtContrasena);
 			filtrosUsuario.setNombre(txtNombre);
 			filtrosUsuario.setApellidos(txtApellidos);
@@ -221,7 +215,8 @@ public class CatalogoUsuarios implements Navigation {
 //			filtrosUsuario.setTipo(usuario.getTipo());
 //			filtrosUsuario.setStatus(usuario.getStatus());
 			usuarioService.actualizaUsuario(filtrosUsuario);
-			update();
+			filtrosUsuario.setEmail(null);
+			update(filtrosUsuario);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
