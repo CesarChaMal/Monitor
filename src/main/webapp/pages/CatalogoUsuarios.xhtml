@@ -29,19 +29,28 @@
 				<p:panel header="Usuarios" style="width:100%">
 			
 					<h:panelGrid id="gridBotones" columns="1">
-						<h:panelGrid id="pnlBotones" columns="10" styleClass="botones">
-							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoUsuarios.busqueda()}"></p:commandButton>
-							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoUsuarios.actualizar()}"></p:commandButton>
-							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoUsuarios.eliminar()}">
-								<p:confirm header="Confirmation" message="Estas seguro?" icon="ui-icon-alert"/>
-							</p:commandButton>
-							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.prev}"></p:commandButton>
-							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid2])" actionListener="#{catalogoUsuarios.next}"></p:commandButton>
+						<h:panelGrid id="pnlBotones" columns="13" styleClass="botones">
+<ui:remove>
+<!-- 
+							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid1])" actionListener="#{catalogoUsuarios.busqueda()}"></p:commandButton>
+-->
+</ui:remove>
+							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid1]" actionListener="#{catalogoUsuarios.actualizar()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid1])" actionListener="#{catalogoUsuarios.eliminar()}"><p:confirm header="Confirmation" message="Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<ui:remove>
+<!-- 
+							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid1])" actionListener="#{catalogoUsuarios.prev}"></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid] @([id$=grid1])" actionListener="#{catalogoUsuarios.next}"></p:commandButton>
+-->
+</ui:remove>
+							<p:commandButton icon="ui-icon-seek-first" title="Anterior"><f:ajax listener="#{catalogoUsuarios.prev}" execute="formCatalogo" render="paginacion-info grid grid1" /></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end" title="Siguiente"><f:ajax listener="#{catalogoUsuarios.next}" execute="formCatalogo" render="paginacion-info grid grid1" /></p:commandButton>
 							<p:commandButton icon="ui-icon-power" title="Logout" action="#{userManager.logout()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-home" title="Home" action="/secured/home.xhtml?faces-redirect=true"><f:ajax /></p:commandButton>
 							<p:outputLabel style="position:relative; left: 10px;" id="paginacion-info">#{catalogoUsuarios.paginacion.pageIndex+1} of #{catalogoUsuarios.paginacion.recordsTotal} records</p:outputLabel>
 							<p:outputLabel style="position:relative; left: 30px;"> ir a: </p:outputLabel>
 							<p:inputText id="irA" value="#{catalogoUsuarios.paginacion.irA}" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
-							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid2])" actionListener="#{catalogoUsuarios.irA()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-arrowreturn-1-e" style="position:relative; left: 37px;" title="Ir a registro" process="@this" update="@([id$=paginacion-info]) @([id$=grid]) @([id$=grid1]" actionListener="#{catalogoUsuarios.irA()}"></p:commandButton>
 						</h:panelGrid>
 					</h:panelGrid>
 
@@ -49,29 +58,34 @@
 			
 						<h:panelGrid id="pnlCliente" columns="3">
 							<p:outputLabel>Cliente:</p:outputLabel>
-							<p:inputText id="txtCliente" value="#{catalogoUsuarios.usuario.clipro.cveClipro}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
-							<p:inputText id="txtClienteNombre" value="#{catalogoUsuarios.usuario.clipro.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+							<p:inputText id="txtCliente" value="#{catalogoUsuarios.usuario.clipro.cveClipro}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);" disabled="true"></p:inputText>
+							<p:inputText id="txtClienteNombre" value="#{catalogoUsuarios.usuario.clipro.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);" disabled="true"></p:inputText>
 						</h:panelGrid>
 			
 						<h:panelGrid id="pnlCliente2" columns="4">
 							<p:outputLabel>Email:</p:outputLabel>
-							<p:inputText id="txtEmail" value="#{catalogoUsuarios.usuario.email}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+							<p:inputText id="txtEmail" value="#{catalogoUsuarios.usuario.email}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);" disabled="true"></p:inputText>
 			
 							<p:outputLabel>Contraseña</p:outputLabel>
 							<p:inputText id="txtContrasena" value="#{catalogoUsuarios.usuario.contrasena}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 			
 							<p:outputLabel>Nombre:</p:outputLabel>
-							<p:inputText id="txtNombre" value ="#{catalogoUsuarios.usuario.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+							<p:inputText id="txtNombre" value="#{catalogoUsuarios.usuario.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 			
 							<p:outputLabel>Fecha Alta</p:outputLabel>
+<ui:remove>
+<!-- 
 							<p:calendar id="txtFechaAlta" value="#{catalogoUsuarios.usuario.fechaalta}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:calendar>
+-->
+</ui:remove>                                        
+							<p:inputText id="txtFechaAlta" value="#{catalogoUsuarios.usuario.fechaalta}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);" disabled="true"><f:convertDateTime pattern="M/d/y"/></p:inputText>							
 			
 							<p:outputLabel>Apellidos</p:outputLabel>
 							<p:inputText id="txtApellidos" value="#{catalogoUsuarios.usuario.apellidos}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
 						</h:panelGrid>
 					</h:panelGrid>
 			
-					<h:panelGrid id="grid2" columns="2">
+					<h:panelGrid id="grid1" columns="2">
 						<p:panel header="Tipo Usuario" styleClass="tipos">
 							<h:panelGroup id="pnlRbnTipo" columns="2">
 								<p:selectOneRadio id="tipoUsuario" value="#{catalogoUsuarios.usuario.tipo}">
@@ -89,8 +103,14 @@
 								</p:selectOneRadio>
 							</h:panelGroup>
 						</p:panel>
+						<h:inputHidden id="txtClienteHidden" value="#{catalogoUsuarios.usuario.clipro.cveClipro}" />
+						<h:inputHidden id="txtClienteNombreHidden" value="#{catalogoUsuarios.usuario.clipro.nombre}" />
+						<h:inputHidden id="txtEmailHidden" value="#{catalogoUsuarios.usuario.email}" />
+<ui:remove>
+<!-- 
+-->
+</ui:remove>                                        
 					</h:panelGrid>
-			
 				</p:panel>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 					<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>

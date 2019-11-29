@@ -24,15 +24,20 @@
 				<p:panel header="Sitios" style="width:100%">
 		
 					<h:panelGrid id="gridBotones" columns="1">
-						<h:panelGrid id="pnlBotones" columns="10" styleClass="botones">
+						<h:panelGrid id="pnlBotones" columns="13" styleClass="botones">
 							<p:commandButton icon="ui-icon-search" title="Busqueda" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.busqueda()}"></p:commandButton>
 							<p:commandButton icon="ui-icon-disk" title="Actualizar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.actualizar()}"></p:commandButton>
-							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.eliminar()}">
-								<p:confirm header="Confirmation" message="Estas seguro?" icon="ui-icon-alert"/>
-							</p:commandButton>
+							<p:commandButton icon="ui-icon-trash" title="Eliminar" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.eliminar()}"><p:confirm header="Confirmation" message="Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<ui:remove>
+<!-- 
 							<p:commandButton icon="ui-icon-seek-first" title="Anterior" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.prev}"></p:commandButton>
 							<p:commandButton icon="ui-icon-seek-end" title="Siguiente" process="@this" update="@([id$=paginacion-info]) @([id$=grid])" actionListener="#{catalogoSitios.next}"></p:commandButton>
+-->
+</ui:remove>
+							<p:commandButton icon="ui-icon-seek-first" title="Anterior"><f:ajax listener="#{catalogoSitios.prev}" execute="formCatalogo" render="paginacion-info grid" /></p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end" title="Siguiente"><f:ajax listener="#{catalogoSitios.next}" execute="formCatalogo" render="paginacion-info grid" /></p:commandButton>
 							<p:commandButton icon="ui-icon-power" title="Logout" action="#{userManager.logout()}"></p:commandButton>
+							<p:commandButton icon="ui-icon-home" title="Home" action="/secured/home.xhtml?faces-redirect=true"><f:ajax /></p:commandButton>
 							<p:outputLabel style="position:relative; left: 10px;" id="paginacion-info">#{catalogoSitios.paginacion.pageIndex+1} of #{catalogoSitios.paginacion.recordsTotal} records</p:outputLabel>
 							<p:outputLabel style="position:relative; left: 30px;"> ir a: </p:outputLabel>
 							<p:inputText id="irA" value="#{catalogoSitios.paginacion.irA}" style="position:relative; left: 35px;" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
@@ -43,8 +48,8 @@
 					<h:panelGrid id="grid" columns="1">
 						<h:panelGrid id="pnlCliente" columns="3">
 							<p:outputLabel>Cliente:</p:outputLabel>
-							<p:inputText id="txtCliente" value="#{catalogoSitios.sitio.clipro.cveClipro}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
-							<p:inputText id="txtClienteNombre" value="#{catalogoSitios.sitio.clipro.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+							<p:inputText id="txtCliente" value="#{catalogoSitios.sitio.clipro.cveClipro}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);" disabled="true"></p:inputText>
+							<p:inputText id="txtClienteNombre" value="#{catalogoSitios.sitio.clipro.nombre}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);" disabled="true"></p:inputText>
 						</h:panelGrid>
 		
 						<h:panelGrid id="pnlSubPanel" columns="2">
@@ -58,9 +63,10 @@
 							
 		 						<p:panel header="Ordenar Por" styleClass="tipos">
 									<h:panelGroup id="pnlRbnOrdenar" columns="2">
-										<p:selectOneRadio id="rbnOrdenar" value="#{catalogoSitios.orden}">
+										<p:selectOneRadio id="rbnOrdenar" value="#{catalogoSitios.orden}" >
 											<f:selectItem itemLabel="Plaza" itemValue="1" />
 											<f:selectItem itemLabel="Campaña" itemValue="2" />
+											<p:ajax process="@this" update="@([id$=grid])" listener="#{catalogoSitios.busquedaTree()}" />
 										</p:selectOneRadio>
 									</h:panelGroup>
 								</p:panel>
@@ -68,22 +74,22 @@
 
 							<h:panelGrid id="pnlDerecho" columns="2">
 								<p:outputLabel style="float: right; position:relative; right: 100px;">Codigo Sitio</p:outputLabel>
-								<p:inputText styleClass="tree-inputs" id="txtCveSitio" value="#{catalogoSitios.sitio.cveSitio}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);"></p:inputText>
+								<p:inputText styleClass="sitios-inputs" id="txtCveSitio" value="#{catalogoSitios.sitio.cveSitio}" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);" disabled="true"></p:inputText>
 
-								<p:outputLabel styleClass="tree-labels">Campaña</p:outputLabel>
-								<p:selectOneMenu styleClass="tree-inputs" id="cboCampana" value="#{catalogoSitios.sitio.cveCampana}" style="width:125px;">
+								<p:outputLabel styleClass="sitios-labels">Campaña</p:outputLabel>
+								<p:selectOneMenu styleClass="sitios-inputs" id="cboCampana" value="#{catalogoSitios.sitio.cveCampana}" style="width:160px;" onchange="">
 									<f:selectItem itemLabel="Seleccione una" noSelectionOption="true" />
-									<f:selectItems value="#{catalogoSitios.campanaDTOList}" var="entity" itemLabel="#{entity.nombre}"/>
+									<f:selectItems value="#{catalogoSitios.campanaDTOList}" var="entity" itemLabel="#{entity.nombre}" itemValue="#{entity.cveCampana}"/>
 								</p:selectOneMenu>
 		
-								<p:outputLabel styleClass="tree-labels">Plaza</p:outputLabel>
-								<p:selectOneMenu styleClass="tree-inputs" id="cboPlaza" value="#{catalogoSitios.sitio.cvePlaza}" style="width:125px">
+								<p:outputLabel styleClass="sitios-labels">Plaza</p:outputLabel>
+								<p:selectOneMenu styleClass="sitios-inputs" id="cboPlaza" value="#{catalogoSitios.sitio.cvePlaza}" style="width:160px" onchange="">
 									<f:selectItem itemLabel="Seleccione una" noSelectionOption="true" />
-									<f:selectItems value="#{catalogoSitios.plazaDTOList}" var="entity" itemLabel="#{entity.nombre}"/>
+									<f:selectItems value="#{catalogoSitios.plazaDTOList}" var="entity" itemLabel="#{entity.nombre}" itemValue="#{entity.cvePlaza}"/>
 								</p:selectOneMenu>
-								
-								<h:outputLabel styleClass="tree-labels" for="txtUbicacion" value="Ubicacion" style="float: right;"/>
-							    <p:inputTextarea styleClass="tree-inputs" id="txtUbicacion" value="#{catalogoSitios.sitio.ubicacion}" rows="3" cols="40" label="Ubicacion" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);">
+
+								<h:outputLabel styleClass="sitios-labels" for="txtUbicacion" value="Ubicacion" style="float: right;"/>
+							    <p:inputTextarea styleClass="sitios-inputs" id="txtUbicacion" value="#{catalogoSitios.sitio.ubicacion}" rows="3" cols="40" label="Ubicacion" onfocus="mainHelper.changeBackgroundColor(this.id);" onblur="mainHelper.changeBackgroundTransparent(this.id);">
 							    </p:inputTextarea>
 
 		 						<p:panel header="Cuenta con iluminación" styleClass="tipos">
@@ -96,7 +102,7 @@
 								</p:panel>
 								
 		 						<p:panel header="Estatus Sitio" styleClass="tipos">
-									<h:panelGroup id="pnlRbnEstatu" columns="1">
+									<h:panelGroup id="pnlRbnEstatus" columns="1">
 										<p:selectOneRadio id="rbnEstatus" value="#{catalogoSitios.sitio.status}">
 											<f:selectItem itemLabel="Activo" itemValue="1" />
 											<f:selectItem itemLabel="Inactivo" itemValue="2" />
@@ -108,10 +114,17 @@
 		
 						</h:panelGrid>
 		
+						<h:inputHidden id="txtClienteHidden" value="#{catalogoUsuarios.usuario.clipro.cveClipro}" />
+						<h:inputHidden id="txtClienteNombreHidden" value="#{catalogoSitios.sitio.clipro.nombre}" />
+						<h:inputHidden id="txtCveSitioHidden" value="#{catalogoSitios.sitio.cveSitio}" />
 					</h:panelGrid>
 
 				</p:panel>
 
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+				</p:confirmDialog>
 			</h:form>
         </ui:define>
         

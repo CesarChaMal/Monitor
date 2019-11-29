@@ -1,0 +1,251 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5B067B4B-3EFE-02FD-A911-A25993132FFF" schemaObject="9D67FF59-4F89-3614-5482-D9AD8461CBF1" name="FOTO">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>FOTO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="FECHA_HORA" id="BE49B2D7-A6C1-EE85-23D4-0014A5B508A1">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>FECHA_HORA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FOTO_PATH" id="E3DFF488-701F-8F6D-34C0-F572C22C072C">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>FOTO_PATH</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="COMENTARIO" id="E8A1EF5A-01B9-6EBD-52F2-E537A1C63137">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>COMENTARIO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LATITUD_GPS" id="70584F94-0DC5-50F2-3943-3A6171BEEDD6">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>LATITUD_GPS</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>126</dataTypePrecision>
+<ownDataTypeParameters>,126,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LONGITUD_GPS" id="54FB8154-AE5E-BC5C-7FF6-4D0E00C3D584">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>LONGITUD_GPS</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>126</dataTypePrecision>
+<ownDataTypeParameters>,126,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CALIFICACION" id="3E845474-D734-A525-1F2C-F0A7811FD7F0">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>CALIFICACION</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,6,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CVE_CAMPANA" id="37A14B93-15BA-A82B-1076-840508DBE16C">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>CVE_CAMPANA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 BYTE</dataTypeSize>
+<ownDataTypeParameters>12 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="69CFBADF-2E06-0913-63EC-83944034A10F" referredColumn="4BC84B66-F27A-633C-2D31-024A9F96DE5A"/>
+</associations>
+</Column>
+<Column name="CVE_CLIPRO" id="A51C49D4-689F-88AC-0F0C-2340D5C0EFA5">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>CVE_CLIPRO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="69CFBADF-2E06-0913-63EC-83944034A10F" referredColumn="BC7CF5C0-DF8F-8E1D-A11B-ED3E14A52BED"/>
+</associations>
+</Column>
+<Column name="EMAIL" id="1ADEC2B8-D718-4529-E71E-EA8E637FDC39">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>EMAIL</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D6D3FDEF-760D-568F-4E64-8624A9A3FC2E" referredColumn="1B939875-E2C2-442B-F74D-EFF83F17C1E8"/>
+</associations>
+</Column>
+<Column name="CVE_PLAZA" id="B295C126-A4AD-ED7C-C924-8722D55BB756">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>CVE_PLAZA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="69CFBADF-2E06-0913-63EC-83944034A10F" referredColumn="B8A3FD19-CBE6-193E-D647-7E78E6351E34"/>
+</associations>
+</Column>
+<Column name="CVE_SITIO" id="94202078-959A-4930-ED43-6F792E3CB0F8">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>FOTO</sourceObjSchema>
+<sourceObjName>CVE_SITIO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="69CFBADF-2E06-0913-63EC-83944034A10F" referredColumn="1C9C5037-1669-B631-194A-6938DE572196"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0041C3E3-1008-1D20-0106-00336C5FCC7E" name="XPKFOTO">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>XPKFOTO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BE49B2D7-A6C1-EE85-23D4-0014A5B508A1"/>
+<colUsage columnID="37A14B93-15BA-A82B-1076-840508DBE16C"/>
+<colUsage columnID="A51C49D4-689F-88AC-0F0C-2340D5C0EFA5"/>
+<colUsage columnID="1ADEC2B8-D718-4529-E71E-EA8E637FDC39"/>
+<colUsage columnID="B295C126-A4AD-ED7C-C924-8722D55BB756"/>
+<colUsage columnID="94202078-959A-4930-ED43-6F792E3CB0F8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EFAD8E33-2B92-659A-48B6-08B6EAEF5C91" schemaObject="9D67FF59-4F89-3614-5482-D9AD8461CBF1" name="XPKFOTO">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>XPKFOTO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BE49B2D7-A6C1-EE85-23D4-0014A5B508A1"/>
+<colUsage columnID="37A14B93-15BA-A82B-1076-840508DBE16C"/>
+<colUsage columnID="A51C49D4-689F-88AC-0F0C-2340D5C0EFA5"/>
+<colUsage columnID="1ADEC2B8-D718-4529-E71E-EA8E637FDC39"/>
+<colUsage columnID="B295C126-A4AD-ED7C-C924-8722D55BB756"/>
+<colUsage columnID="94202078-959A-4930-ED43-6F792E3CB0F8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E4F134F1-00F3-74EB-0317-9F14A60EB075" name="R_13">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="37A14B93-15BA-A82B-1076-840508DBE16C"/>
+<colUsage columnID="A51C49D4-689F-88AC-0F0C-2340D5C0EFA5"/>
+<colUsage columnID="B295C126-A4AD-ED7C-C924-8722D55BB756"/>
+<colUsage columnID="94202078-959A-4930-ED43-6F792E3CB0F8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AC048AEE-F548-BEBC-6E8B-A41BB00C6C69" name="R_14">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1ADEC2B8-D718-4529-E71E-EA8E637FDC39"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

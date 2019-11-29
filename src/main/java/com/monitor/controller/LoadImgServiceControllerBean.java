@@ -1,7 +1,5 @@
 package com.monitor.controller;
 
-import java.awt.Graphics;
-
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,6 +26,7 @@ import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.monitor.model.Foto;
+import com.monitor.model.dto.FotoDTO;
 import com.monitor.service.LoadImgService;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -43,6 +42,7 @@ public class LoadImgServiceControllerBean {
 	private StreamedContent fotoOriginal;
 	private String pathFoto;
 	private LoadImgService loadImgService;
+	private BufferedImage defaultImg;
 
 	@PostConstruct
 	public void init() {
@@ -52,81 +52,7 @@ public class LoadImgServiceControllerBean {
 	public StreamedContent getFotoMainPage() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		String path = context.getExternalContext().getRequestParameterMap().get("pathFoto");
-		try {
-			if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-				return new DefaultStreamedContent();
-
-			} else {
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				System.out.println("path" + path);
-				if (path != null && !path.isEmpty()) {
-					BufferedImage img = ImageIO.read(new FileInputStream(path));
-					// image is scaled two times at run time
-
-					int w = 300;
-					int h = 200;
-					BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-					Graphics g = bi.getGraphics();
-					g.drawImage(img, 0, 0, w, h, null);
-					ImageIO.write(bi, "png", bos);
-
-					fotoMainPage = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");
-					return fotoMainPage;
-				}
-
-			}
-		} catch (FileNotFoundException e) {
-
-			LOGGER.error("Error : ", e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			LOGGER.error("Error : ", e);
-			e.printStackTrace();
-		} finally {
-			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-			ctx.getRealPath(File.separator);
-			System.out.println();
-			path = ctx.getRealPath(File.separator)+File.separator +"resources" + File.separator + "img" + File.separator + "noDisponible.jpg";
-			fotoMainPage = getFotoMainPage(path);
-		}
-
-		return fotoMainPage;
-	}
-
-	public StreamedContent getFotoMainPage(String path) {
-		FacesContext context = FacesContext.getCurrentInstance();
-
-		try {
-			if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-				return new DefaultStreamedContent();
-
-			} else {
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				System.out.println("path" + path);
-				if (path != null && !path.isEmpty()) {
-					BufferedImage img = ImageIO.read(new FileInputStream(path));
-					// image is scaled two times at run time
-
-					int w = 300;
-					int h = 200;
-					BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-					Graphics g = bi.getGraphics();
-					g.drawImage(img, 0, 0, w, h, null);
-					ImageIO.write(bi, "png", bos);
-
-					fotoMainPage = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");
-					return fotoMainPage;
-				}
-
-			}
-		} catch (FileNotFoundException e) {
-			LOGGER.error("Error : ", e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			LOGGER.error("Error : ", e);
-			e.printStackTrace();
-		}
-
+		fotoMainPage = loadImgService.getFotoMainPage(path, context);
 		return fotoMainPage;
 	}
 
@@ -136,29 +62,26 @@ public class LoadImgServiceControllerBean {
 
 	public StreamedContent getFotoOriginal() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		String path = context.getExternalContext().getRequestParameterMap().get("pathFoto");
-		try {
-			if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-				return new DefaultStreamedContent();
+		boolean error = false;
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+			return new DefaultStreamedContent();
 
-			} else {
+		} else {
 
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				if (path != null && !path.isEmpty()) {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			BufferedImage img = defaultImg;
 
-					BufferedImage img = ImageIO.read(new FileInputStream(path));
-					ImageIO.write(img, "png", bos);
-					fotoOriginal = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");
-					return fotoOriginal;
-				}
-
+			try {
+				ImageIO.write(img, "png", bos);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			LOGGER.error("Error : ", e);
-			e.printStackTrace();
+			fotoOriginal = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");			
+
 		}
 
-		return null;
+		return fotoOriginal;
 	}
 
 	public void setFotoOriginal(StreamedContent fotoOriginal) {
@@ -190,7 +113,7 @@ public class LoadImgServiceControllerBean {
 		return foto;
 	}
 
-	public void dowload(ArrayList<Foto> fotolistMostrar) throws IOException {
+	public void dowload(ArrayList<FotoDTO> fotolistMostrar) throws IOException {
 
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
 				.getResponse();
@@ -229,7 +152,8 @@ public class LoadImgServiceControllerBean {
 			InputStream reportStream = facesContext.getExternalContext()
 					.getResourceAsStream(File.separator + "reportes" + File.separator + "Monitor.jasper");
 			ServletOutputStream servletOutputStream = response.getOutputStream();
-
+			HashMap<String, String> mapParams = new HashMap();
+			mapParams.put("defaultImage", loadImgService.defaultImgPath);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(reportStream, new HashMap(), collectionBean);
 			response.addHeader("Content-disposition", "attachment; filename=Monitor.pdf");
 
@@ -244,6 +168,14 @@ public class LoadImgServiceControllerBean {
 		}
 		facesContext.responseComplete();
 
+	}
+
+	public BufferedImage getDefaultImg() {
+		return defaultImg;
+	}
+
+	public void setDefaultImg(BufferedImage defaultImg) {
+		this.defaultImg = defaultImg;
 	}
 
 }

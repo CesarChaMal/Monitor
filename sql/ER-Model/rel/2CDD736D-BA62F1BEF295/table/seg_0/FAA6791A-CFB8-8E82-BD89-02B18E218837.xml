@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FAA6791A-CFB8-8E82-BD89-02B18E218837" schemaObject="9D67FF59-4F89-3614-5482-D9AD8461CBF1" name="SOPORTE">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>SOPORTE</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_SOPORTE" id="1DBD7A53-9A24-98E1-B75C-5D70A95DA581">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SOPORTE</sourceObjSchema>
+<sourceObjName>ID_SOPORTE</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,6,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DOCTO" id="096AB256-7983-5C06-E30D-885DB7FBD857">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SOPORTE</sourceObjSchema>
+<sourceObjName>DOCTO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<dataTypeSize>4000</dataTypeSize>
+<ownDataTypeParameters>4000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9160497A-F9CF-3E94-B98C-F4682BD8904E" name="XPKSOPORTE">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>XPKSOPORTE</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1DBD7A53-9A24-98E1-B75C-5D70A95DA581"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F7A436C1-355E-8137-7B66-60D4882C47F9" schemaObject="9D67FF59-4F89-3614-5482-D9AD8461CBF1" name="XPKSOPORTE">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>XPKSOPORTE</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1DBD7A53-9A24-98E1-B75C-5D70A95DA581"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -22,22 +22,26 @@
 				</p:graphicImage>
 			</div>
 		</p:dialog>
+
 		<br />
-		<p:panelGrid columns="2">
+		<p:panelGrid columns="2" style="font-size: small;">
 			<f:facet name="header">
-				<br />
-				<p:commandLink oncomplete="PF('viewImg').show()"
-					action="#{loadImgServiceControllerBean.setFoto(foto)}"
-					update="viewImgOriginal">
+				<br />				
 					<p:graphicImage
 						value="#{loadImgServiceControllerBean.fotoMainPage}">
 						<f:param name="pathFoto" value="#{foto.fotoPath}"></f:param>
-					</p:graphicImage>
-				</p:commandLink>
+					</p:graphicImage>			
 				<br />
 				<h:outputText value="Cve Sitio:" />
 				<p:spacer width="10" height="10" />
-				<h:outputText  value="#{foto.sitio.id.cveSitio}" />
+				<h:outputText value="#{foto.sitio.id.cveSitio}" />
+				<p:spacer width="10" height="10" />
+				<p:commandButton icon="fa  fa-search-plus" style="vertical-align: top;"
+									actionListener="#{monitorControlerBean.setView('cuadriculaView')}"
+									ajax="false">
+									<f:ajax onevent="blockDivViewScript" />
+				</p:commandButton>
+				
 			</f:facet>
 			<h:outputText value="Campaña:" />
 			<h:outputText value="#{foto.sitio.campana.nombre}" />
@@ -48,9 +52,9 @@
 			<h:outputText value="Dirección:" />
 			<h:outputText value="#{foto.sitio.ubicacion}" />
 
-			<h:outputText value="Fecha de creación:" />
+			<h:outputText value="Fecha captura:" />
 			<h:outputText value="#{foto.id.fechaHora}">
-				<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+				<f:convertDateTime type="date" pattern="dd/MMM/yyyy HH:mm" />
 			</h:outputText>
 
 			<h:outputText value="Ver en mapa:" />

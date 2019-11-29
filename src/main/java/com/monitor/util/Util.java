@@ -1,24 +1,52 @@
 package com.monitor.util;
 
-import java.text.ParseException;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.monitor.model.Campana;
 import com.monitor.model.CampanaId;
 import com.monitor.model.CliPro;
+import com.monitor.model.Foto;
 import com.monitor.model.Plaza;
 import com.monitor.model.Sitio;
 import com.monitor.model.Usuario;
 import com.monitor.model.dto.CampanaDTO;
 import com.monitor.model.dto.CliProDTO;
+import com.monitor.model.dto.FotoDTO;
 import com.monitor.model.dto.PlazaDTO;
 import com.monitor.model.dto.SitioDTO;
 import com.monitor.model.dto.UsuarioDTO;
 
 public class Util {
+	static public BufferedImage defaultImg;
+	static public String defaultImgPath = "";
+	static File defaultFile = null;
+	private static final Logger LOGGER = LoggerFactory.getLogger(Util.class);
+	static {
+		ImageIO.scanForPlugins();
+		defaultImgPath = defaultImgPath();
+		defaultImg = getDefaultImage();
+	}
 
 	public ArrayList<PlazaDTO> getPlazasDTO(ArrayList<Object[]> plazasList) {
 		ArrayList<PlazaDTO> plazaDTOList = new ArrayList<PlazaDTO>();
@@ -45,6 +73,23 @@ public class Util {
 		return plazaDTOList;
 	}
 
+	public ArrayList<FotoDTO> getFotoDTO(ArrayList<Foto> fotoList) {
+		ArrayList<FotoDTO> fotoDTOList = new ArrayList<FotoDTO>();
+		for (Foto foto : fotoList) {
+			FotoDTO fotoDTO = new FotoDTO();
+			fotoDTO.setCalificacion(foto.getCalificacion());
+			fotoDTO.setComentario(foto.getComentario());
+			fotoDTO.setFotoPath(foto.getFotoPath());
+			fotoDTO.setId(foto.getId());
+			fotoDTO.setLatitudGps(foto.getLatitudGps());
+			fotoDTO.setLongitudGps(foto.getLongitudGps());
+			fotoDTO.setSitio(foto.getSitio());
+			fotoDTO.setUsuario(foto.getUsuario());
+			fotoDTOList.add(fotoDTO);
+		}
+		return fotoDTOList;
+	}
+
 	public ArrayList<CampanaDTO> getCampanasDTO(ArrayList<Object[]> campanasList) {
 		ArrayList<CampanaDTO> campanaDTOList = new ArrayList<CampanaDTO>();
 		for (Object[] result : campanasList) {
@@ -56,6 +101,8 @@ public class Util {
 			campanaDTO.setCveCampana(id.getCveCampana());
 			campanaDTO.setNombre(campana.getNombre());
 			campanaDTO.setFechaalta(campana.getFechaalta());
+			campanaDTO.setInicia(campana.getInicia());
+			campanaDTO.setTermina(campana.getTermina());
 			campanaDTO.setStatus(campana.getStatus());
 			
 			CliProDTO cliproDTO = new CliProDTO();
@@ -218,14 +265,136 @@ public class Util {
 		}
 		return date;
 	}
+
+	public static boolean isParsable(String input) {
+		boolean parsable = true;
+		try {
+			Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			parsable = false;
+		}
+		return parsable;
+	}
+
+	static private BufferedImage getDefaultImage() {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		BufferedImage img = null;
+
+		try {
+			defaultFile = new File(defaultImgPath);
+			img = ImageIO.read(new FileInputStream(defaultFile));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LOGGER.error("Error : ", e);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LOGGER.error("Error : ", e);
+		}
+
+		// image is scaled two times at run time
+
+		int w = 300;
+		int h = 200;
+		BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = bi.getGraphics();
+		g.drawImage(img, 0, 0, w, h, null);
+		return bi;
+
+	}
+
+	static private String defaultImgPath() {
+		String path = "";
+		ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+//		String currentPath = ctx.getRealPath(File.separator);
+		String currentPath = ctx.getRealPath("");
+		if (currentPath.endsWith(File.separator)) {
+//			path = ctx.getRealPath(File.separator) + "resources" + File.separator + "img" + File.separator
+			path = ctx.getRealPath("") + "resources" + File.separator + "img" + File.separator
+					+ "noDisponible.jpg";
+		} else {
+//			path = ctx.getRealPath(File.separator) + File.separator + "resources" + File.separator + "img"
+			path = ctx.getRealPath("") + File.separator + "resources" + File.separator + "img"
+					+ File.separator + "noDisponible.jpg";
+		}
+		System.out.println("path " + path);
+		return path;
+	}
+
+	public BufferedImage getBufferedImage(String path) {
+		BufferedImage img = null;
+		boolean error = false;
+		System.out.println("Entra a getBufferedImage" + path);
+		
+
+		try {
+			img = ImageIO.read(new FileInputStream(path));
+			System.out.println("Entra a getBufferedImage" + img);
+		} catch (FileNotFoundException e) {
+			error = true;
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (error) {
+			img = defaultImg;
+			System.out.println("Entra a error getBufferedImage" + img);
+		}
+
+		return img;
+
+	}
+
+	public StreamedContent getFotoOriginal(BufferedImage img) {
+		System.out.println("Entra a getFotoOriginal");
+		FacesContext context = FacesContext.getCurrentInstance();
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		StreamedContent fotoOriginal = null;
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+			return new DefaultStreamedContent();
+
+		} else{		
+		try {
+			ImageIO.write(img, "png", bos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		fotoOriginal = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");
+		return fotoOriginal;
+
+	}
+
+	public StreamedContent getFotoMainPage(BufferedImage img) {
+		System.out.println("Entra a getFotoMainPage");
+		FacesContext context = FacesContext.getCurrentInstance();
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		StreamedContent fotoMainPage = null;
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+			System.out.println("PhaseId.RENDER_RESPONSE");
+			return new DefaultStreamedContent();
+			
+		} else{
+			System.out.println("entra else");
+			int w = 300;
+			int h = 200;
+			BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			Graphics g = bi.getGraphics();
+			g.drawImage(img, 0, 0, w, h, null);
+			try {
+				ImageIO.write(bi, "png", bos);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			fotoMainPage = new DefaultStreamedContent(new ByteArrayInputStream(bos.toByteArray()), "image/png");
+		}
+		System.out.println("fotoMainPage" +fotoMainPage);
 	
-	public static boolean isParsable(String input){
-	    boolean parsable = true;
-	    try{
-	        Integer.parseInt(input);
-	    }catch(NumberFormatException e){
-	        parsable = false;
-	    }
-	    return parsable;
-	}	
+		return fotoMainPage;
+	}
 }

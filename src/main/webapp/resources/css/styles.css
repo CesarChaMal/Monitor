@@ -94,14 +94,15 @@ button:active {
 }
 */
 
-#formCatalogo\3A pnlCliente, #formCatalogo\3A pnlCliente2, #formCatalogo\3A pnlRbnTipo, #formCatalogo\3A pnlRbnStatus, #formCatalogo\3A pnlSubPanel,
- #formCatalogo\3A pnlCliente, #formCatalogo\3A pnlCliente {
+#formCatalogo\3A pnlCliente, #formCatalogo\3A pnlCliente2, #formCatalogo\3A pnlCliente3, #formCatalogo\3A pnlRbnTipo, #formCatalogo\3A pnlRbnStatus, #formCatalogo\3A pnlSubPanel
+{
 	padding: 5px;
 	border-spacing: 5px;
     border-collapse: separate;
 }
 
-#formCatalogo\3A pnlCliente input, #formCatalogo\3A pnlCliente2 input, #formCatalogo\3A pnlRbnTipo input, #formCatalogo\3A pnlRbnStatus input {
+
+#formCatalogo\3A pnlCliente input, #formCatalogo\3A pnlCliente2 input, #formCatalogo\3A pnlCliente3 input, #formCatalogo\3A pnlRbnTipo input, #formCatalogo\3A pnlRbnStatus input, #formCatalogo\3A pnlSubPanel input {
 	position: relative;
 	bottom: 7px;
 }
@@ -110,7 +111,7 @@ button:active {
     /* border-bottom: 1px solid #C4CCD0; */
 }
 
-#formCatalogo\3A grid label { 
+#formCatalogo\3A grid label, #formCatalogo\3A grid1 label { 
     border-bottom: 1px solid #C4CCD0;
 }
 
@@ -120,6 +121,7 @@ button:active {
 
 .tipos {
 	background: #DDEBF4; 
+    border: 1px solid #AAADAF;
 	width:90%
 }
 
@@ -128,7 +130,8 @@ button:active {
 	padding: 10px;
 }
 
-div > #formCatalogo\3A grid, div > #formCatalogo\3A grid2 {
+div > #formCatalogo\3A grid, div > #formCatalogo\3A grid1, div > #formCatalogo\3A grid2, div > #formCatalogo\3A grid3 
+div > #formCatalogo\3A grid, div > #formCatalogo\3A grid1, div > #formCatalogo\3A grid2, div > #formCatalogo\3A grid3 {
 	background: #E8F0F4;
 	width:100%
 }
@@ -158,16 +161,31 @@ div > #formCatalogo\3A gridBotones {
 	background: white;
     border: 1px solid #AAADAF;
 	width: auto;
-	height: 300px;
+	height: 220px;
 }
 
-.tree-labels {
+.sitios-labels {
 	float: right; 
 	position:relative; 
 	right: 100px;
 }
 
-.tree-inputs {
+.sitios-inputs {
 	position:relative; 
 	right: 90px;
+}
+
+.fechaalta-label {
+	float: left; 
+	position:relative; 
+	right: 150px;
+	bottom: 20px;
+}
+
+#formCatalogo\3A rbnOrdenar label, #formCatalogo\3A rbnIluminacion label, #formCatalogo\3A rbnEstatus label  {
+	border-style: none!important;
+}
+
+#formCatalogo\3A tipoUsuario label, #formCatalogo\3A statusUsuario label {
+	border-style: none!important;
 }

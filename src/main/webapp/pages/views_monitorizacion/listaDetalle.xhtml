@@ -15,29 +15,25 @@
 			height="550px" maximizable="false" resizable="false"
 			position="center top">
 			<div align="center">
-				<p:graphicImage value="#{loadImgServiceControllerBean.fotoOriginal}"
-					id="imgView">
-					<f:param name="pathFoto" value="#{foto.fotoPath}"></f:param>
-				</p:graphicImage>
+				<p:graphicImage
+						value="#{loadImgServiceControllerBean.fotoMainPage}">
+						<f:param name="pathFoto" value="#{foto.fotoPath}"></f:param>
+				</p:graphicImage>	
 			</div>
 		</p:dialog>
 		<div class="ui-g">
 			<div class="ui-g-12 ui-md-6 ui-lg-4">
-				<p:commandLink oncomplete="PF('viewImg').show()"
-					action="#{loadImgServiceControllerBean.setFoto(foto)}"
-					update="viewImgOriginal">
-					<p:graphicImage
+			<p:graphicImage
 						value="#{loadImgServiceControllerBean.fotoMainPage}">
 						<f:param name="pathFoto" value="#{foto.fotoPath}"></f:param>
-					</p:graphicImage>
-				</p:commandLink>
-					<p:outputLabel>Fecha de creación:</p:outputLabel>
-					<p:spacer width="10" height="10" />
-					<h:outputText value="#{foto.id.fechaHora}">
-						<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
-					</h:outputText>
+				</p:graphicImage>	
+				<p:outputLabel>Fecha captura:</p:outputLabel>
+				<p:spacer width="10" height="10" />
+				<h:outputText value="#{foto.id.fechaHora}">
+					<f:convertDateTime type="date" pattern="dd/MMM/yyyy HH:mm" />
+				</h:outputText>
 			</div>
-			<div class="ui-g-12 ui-md-6 ui-lg-4">			
+			<div class="ui-g-12 ui-md-6 ui-lg-4">
 				<div>
 					<p:outputLabel>Cve Sitio:</p:outputLabel>
 					<p:spacer width="10" height="10" />
@@ -60,21 +56,22 @@
 					<br />
 					<p:separator style="border: none;"></p:separator>
 					<p:outputLabel>Iluminación:</p:outputLabel>
-					<p:spacer width="10" height="10" />		
-					<c:set var="iluminacionStr" value="#{monitorControlerBean.getIluminacionStr(foto.sitio.iluminacion)}"></c:set>			
-					<h:outputText value="#{iluminacionStr}" />	
+					<p:spacer width="10" height="10" />
+					<c:set var="iluminacionStr"
+						value="#{monitorControlerBean.getIluminacionStr(foto.sitio.iluminacion)}"></c:set>
+					<h:outputText value="#{iluminacionStr}" />
 					<p:separator style="border: none;"></p:separator>
 					<p:outputLabel>Comentario:</p:outputLabel>
-					<p:spacer width="10" height="10" />					
-					<h:outputText value="#{foto.comentario}" />			
-				
+					<p:spacer width="10" height="10" />
+					<h:outputText value="#{foto.comentario}" />
+
 				</div>
-				
+
 			</div>
 			<div class="ui-g-12 ui-md-6 ui-lg-4">
 				<p:panel style="background: #c6d7d7;">
 					<div align="center">
-					<p:outputLabel>Vigencia Campaña</p:outputLabel>
+						<p:outputLabel>Vigencia Campaña</p:outputLabel>
 					</div>
 					<hr />
 					<p:outputLabel>INICIA:</p:outputLabel>

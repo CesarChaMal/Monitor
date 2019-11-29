@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="CAMPANA" directorySegmentName="seg_0" id="C2F0C5EF-999F-BC34-B0D2-0ACB153A6C70">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:10 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<schemaObject>9D67FF59-4F89-3614-5482-D9AD8461CBF1</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>121D06DD-3C21-743D-483E-E5BA3000579A</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="TERMINA" id="10DE5910-52A3-E3B0-0CDF-B0A7662FD106">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CVE_CAMPANA" id="71A46490-6A65-14C1-0E2C-F67F08BA5F0E">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NOMBRE" id="90A0C426-95F7-623E-7954-3742C7C6003C">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INICIA" id="D38ACADC-82F5-EB6D-47F7-ED60CB2E4A70">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="FECHAALTA" id="E8EAFB0D-AB52-9A5F-AE68-902D5C1864BC">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="STATUS" id="EA82A122-6EAF-BA6E-91BA-C02270E65B07">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CVE_CLIPRO" id="F0A7584D-F606-6825-7C56-3479A1D4350B">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="XPKCAMPANA" id="E9121036-0FBA-3410-BD8A-362AE0540921">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<schemaObject>9D67FF59-4F89-3614-5482-D9AD8461CBF1</schemaObject>
+<segment>6BF27473-5606-A187-2BCA-FB05C5732865</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="XPKCAMPANA" id="32CB3894-7CE8-0EB3-A746-AFD70B49F5DE">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<segment>6BF27473-5606-A187-2BCA-FB05C5732865</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+<existingIndex>E9121036-0FBA-3410-BD8A-362AE0540921</existingIndex>
+<indexSegment>6BF27473-5606-A187-2BCA-FB05C5732865</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

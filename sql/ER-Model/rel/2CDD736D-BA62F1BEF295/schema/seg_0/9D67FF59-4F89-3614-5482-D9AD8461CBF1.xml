@@ -1,0 +1,6 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SchemaObject class="oracle.dbtools.crest.model.design.relational.SchemaObject" name="MONITOR" directorySegmentName="seg_0" id="9D67FF59-4F89-3614-5482-D9AD8461CBF1">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</SchemaObject>

@@ -27,28 +27,43 @@ public class UsuarioDao implements MonitorDao {
 		Query q = null;
 		StringBuffer queryString = new StringBuffer("select u,cl from Usuario as u inner join CliPro as cl on (u.id.cliPro=cl.cveClipro)");
 
-		if (((FiltrosUsuario) filtrosUsuario).getCveClipro() != null && ((FiltrosUsuario) filtrosUsuario).getCveClipro().length() > 0) {
+//		if (((FiltrosUsuario) filtrosUsuario).getCveClipro() != null && ((FiltrosUsuario) filtrosUsuario).getCveClipro().length() > 0) {
+//			queryString.append(" and ");
+//			queryString.append(" lower(u.cliPro.cveClipro) like lower(:cve_cliente)");
+//		}
+//		if (((FiltrosUsuario) filtrosUsuario).getClipro() != null && ((FiltrosUsuario) filtrosUsuario).getClipro().length() > 0) {
+//			queryString.append(" and ");
+//			queryString.append(" lower(u.cliPro.nombre) like lower(:cliente)");
+//		}
+//		if (((FiltrosUsuario) filtrosUsuario).getEmail() != null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
+//			queryString.append(" and ");
+//			queryString.append(" lower(u.email) like lower(:email)");
+//		}
+		if (((FiltrosUsuario) filtrosUsuario).getNombre() != null && ((FiltrosUsuario) filtrosUsuario).getNombre().length() > 0) {
 			queryString.append(" and ");
-			queryString.append(" lower(u.id.cliPro) like lower(:cliente)");
-		}
-		if (((FiltrosUsuario) filtrosUsuario).getEmail() != null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
-			queryString.append(" and ");
-			queryString.append(" lower(u.email) like lower(:email)");
+			queryString.append(" lower(u.nombre) like lower(:nombre)");
 		}
 		queryString.append(" order by fechaalta DESC");
 		
 		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
-		if (((FiltrosUsuario) filtrosUsuario).getCveClipro() != null && ((FiltrosUsuario) filtrosUsuario).getCveClipro().length() > 0) {
-			CliPro clipro = new CliPro();
-			clipro.setCveClipro(((FiltrosUsuario) filtrosUsuario).getCveClipro()+"%");
-			
-			q.setParameter("cliente", Arrays.asList(clipro));
+//		if (((FiltrosUsuario) filtrosUsuario).getCveClipro() != null && ((FiltrosUsuario) filtrosUsuario).getCveClipro().length() > 0) {
+//			CliPro clipro = new CliPro();
+//			clipro.setCveClipro(((FiltrosUsuario) filtrosUsuario).getCveClipro()+"%");
+//			q.setParameter("cve_cliente", Arrays.asList(clipro));
+//		}
+//		if (((FiltrosUsuario) filtrosUsuario).getClipro() != null && ((FiltrosUsuario) filtrosUsuario).getClipro().length() > 0) {
+//			CliPro clipro = new CliPro();
+//			clipro.setNombre(((FiltrosUsuario) filtrosUsuario).getClipro()+"%");
+//			q.setParameter("cliente", Arrays.asList(clipro));
+//		}
+//		if (((FiltrosUsuario) filtrosUsuario).getEmail() != null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
+//			String email = "%"+((FiltrosUsuario) filtrosUsuario).getEmail()+"%";
+//			q.setParameter("email", Arrays.asList(email));
+//		}
+		if (((FiltrosUsuario) filtrosUsuario).getNombre() != null && ((FiltrosUsuario) filtrosUsuario).getNombre().length() > 0) {
+			String nombre = "%"+((FiltrosUsuario) filtrosUsuario).getNombre()+"%";
+			q.setParameter("nombre", Arrays.asList(nombre));
 		}
-		if (((FiltrosUsuario) filtrosUsuario).getEmail() != null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
-			String email = "%"+((FiltrosUsuario) filtrosUsuario).getEmail()+"%";
-			q.setParameter("email", Arrays.asList(email));
-		}
-		
 		return q.getResultList();
 	}
 
@@ -58,7 +73,8 @@ public class UsuarioDao implements MonitorDao {
 		entityManager.getTransaction().begin();
 		
 		Query q = null;
-		StringBuffer queryString = new StringBuffer("delete from Usuario where email = :email");
+//		StringBuffer queryString = new StringBuffer("delete from Usuario where email = :email");
+		StringBuffer queryString = new StringBuffer("update Usuario set status=2 where email = :email");
 		
 		try {
 			q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
@@ -81,6 +97,9 @@ public class UsuarioDao implements MonitorDao {
 		Query q = null;
 		StringBuffer queryString = new StringBuffer("update Usuario set");
 		
+//		if (((FiltrosUsuario) filtrosUsuario).getEmail()!= null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
+//			queryString.append(" email = :email,");
+//		}
 		if (((FiltrosUsuario) filtrosUsuario).getNombre()!= null && ((FiltrosUsuario) filtrosUsuario).getNombre().length() > 0) {
 			queryString.append(" nombre = :nombre,");
 		}
@@ -99,10 +118,13 @@ public class UsuarioDao implements MonitorDao {
 		if (((FiltrosUsuario) filtrosUsuario).getStatus()!= null && (((FiltrosUsuario) filtrosUsuario).getStatus() > 0 && ((FiltrosUsuario) filtrosUsuario).getStatus() < 3)) {
 			queryString.append(" status = :status ");
 		}
-		queryString.append(" where email = :email");
+		queryString.append(" where email = :user_email");
 		
 		try {
 			q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
+//			if (((FiltrosUsuario) filtrosUsuario).getEmail() != null && ((FiltrosUsuario) filtrosUsuario).getEmail().length() > 0) {
+//				q.setParameter("email", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getEmail()));
+//			}
 			if (((FiltrosUsuario) filtrosUsuario).getNombre() != null && ((FiltrosUsuario) filtrosUsuario).getNombre().length() > 0) {
 				q.setParameter("nombre", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getNombre()));
 			}
@@ -121,7 +143,7 @@ public class UsuarioDao implements MonitorDao {
 			if (((FiltrosUsuario) filtrosUsuario).getStatus()!= null && (((FiltrosUsuario) filtrosUsuario).getStatus() > 0 && ((FiltrosUsuario) filtrosUsuario).getStatus() < 3)) {
 				q.setParameter("status", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getStatus()));
 			}
-			q.setParameter("email", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getEmail()));
+			q.setParameter("user_email", Arrays.asList(((FiltrosUsuario) filtrosUsuario).getEmail()));
 			
 			q.executeUpdate();
 			entityManager.getTransaction().commit();

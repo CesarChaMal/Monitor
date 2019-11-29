@@ -1,14 +1,12 @@
 package com.monitor.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import com.monitor.dao.FotoDao;
 import com.monitor.filter.FiltrosMonitor;
 import com.monitor.model.Foto;
+import com.monitor.model.dto.FotoDTO;
+
 
 public class FotoService {
 	private EntityManager entityManager;
@@ -27,8 +25,9 @@ public class FotoService {
 		this.entityManager = entityManager;
 	}
 
-	public ArrayList<Foto> obtenerFotosPorUsuario(FiltrosMonitor filtrosMonitor) throws Exception {
-		return (ArrayList<Foto>)fotoDao.obtenerFotosPorUsuario(filtrosMonitor);
+	public ArrayList<FotoDTO> obtenerFotosPorUsuario(FiltrosMonitor filtrosMonitor) throws Exception {
+		com.monitor.util.Util util = new com.monitor.util.Util();
+		return (ArrayList<FotoDTO>)util.getFotoDTO((ArrayList<Foto>)fotoDao.obtenerFotosPorUsuario(filtrosMonitor));
 	}
 
 }

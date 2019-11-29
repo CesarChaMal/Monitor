@@ -2,15 +2,12 @@ package com.monitor.filter;
 
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import com.monitor.util.Util;
 
 public class FiltrosUsuario extends Filtros {
 
 	private String cveClipro;
-	private String cveCliproNombre;
+	private String clipro;
 	private String email;
 	private String nombre;
 	private String apellidos;
@@ -27,11 +24,11 @@ public class FiltrosUsuario extends Filtros {
 	public void setCveClipro(String cveClipro) {
 		this.cveClipro = cveClipro;
 	}
-	public String getCveCliproNombre() {
-		return cveCliproNombre;
+	public String getClipro() {
+		return clipro;
 	}
-	public void setCveCliproNombre(String cveCliproNombre) {
-		this.cveCliproNombre = cveCliproNombre;
+	public void setClipro(String clipro) {
+		this.clipro = clipro;
 	}
 	public String getEmail() {
 		return email;

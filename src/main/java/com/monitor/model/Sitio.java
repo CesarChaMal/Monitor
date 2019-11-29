@@ -33,6 +33,7 @@ public class Sitio implements Serializable {
 	private SitioId id;
 	private Plaza plaza;
 	private Campana campana;
+	private CliPro cliPro;
 	private Date inicia;
 	private Date termina;
 	private Integer status;
@@ -155,6 +156,14 @@ public class Sitio implements Serializable {
 		this.fotos = fotos;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CVE_CLIPRO", nullable = false, insertable = false, updatable = false)
+	public CliPro getCliPro() {
+		return cliPro;
+	}
 
+	public void setCliPro(CliPro cliPro) {
+		this.cliPro = cliPro;
+	}
 
 }

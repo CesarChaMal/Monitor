@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="B0477D42-8C44-D892-292E-D23FAFC72591" containerWithKeyObject="FFB96F7F-E548-47DF-5A8C-6D0B68B29DFE" localFKIndex="304BA940-A99C-10AB-4F85-99136637D18B" name="R_17">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>R_17</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<referredTableLongName>MONITOR.PLAZA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>7D68A1CB-6548-A2B4-E8F4-40ED028A8E57</referredTableID>
+<keyObject>740D8AD5-F128-AAF3-3FCC-2B182F5F50D8</keyObject>
+<referredKeyID>740D8AD5-F128-AAF3-3FCC-2B182F5F50D8</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>CVE_PLAZA</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

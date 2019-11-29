@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="249F7C95-7DA8-48F4-5183-454E3B565654" containerWithKeyObject="ACAB403D-3B84-E6C3-020B-06B9EAF2F7F9" localFKIndex="ABC51AC0-9E87-B74D-EFE2-5164BA744082" name="R_16">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>R_16</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<referredTableLongName>MONITOR.CLI_PRO</referredTableLongName>
+<deleteRule>SET NULL</deleteRule>
+<referredTableID>33BA6E16-365F-440F-6338-C79F7B6B0025</referredTableID>
+<keyObject>673FCBA4-4B77-2769-742C-2A067F42E7B6</keyObject>
+<referredKeyID>673FCBA4-4B77-2769-742C-2A067F42E7B6</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>CVE_CLIPRO</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

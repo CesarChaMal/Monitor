@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="FOTO" directorySegmentName="seg_0" id="5B067B4B-3EFE-02FD-A911-A25993132FFF">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<schemaObject>9D67FF59-4F89-3614-5482-D9AD8461CBF1</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>121D06DD-3C21-743D-483E-E5BA3000579A</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="EMAIL" id="1ADEC2B8-D718-4529-E71E-EA8E637FDC39">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CVE_CAMPANA" id="37A14B93-15BA-A82B-1076-840508DBE16C">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CALIFICACION" id="3E845474-D734-A525-1F2C-F0A7811FD7F0">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LONGITUD_GPS" id="54FB8154-AE5E-BC5C-7FF6-4D0E00C3D584">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LATITUD_GPS" id="70584F94-0DC5-50F2-3943-3A6171BEEDD6">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CVE_SITIO" id="94202078-959A-4930-ED43-6F792E3CB0F8">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CVE_CLIPRO" id="A51C49D4-689F-88AC-0F0C-2340D5C0EFA5">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CVE_PLAZA" id="B295C126-A4AD-ED7C-C924-8722D55BB756">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="FECHA_HORA" id="BE49B2D7-A6C1-EE85-23D4-0014A5B508A1">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="FOTO_PATH" id="E3DFF488-701F-8F6D-34C0-F572C22C072C">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COMENTARIO" id="E8A1EF5A-01B9-6EBD-52F2-E537A1C63137">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="XPKFOTO" id="EFAD8E33-2B92-659A-48B6-08B6EAEF5C91">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<schemaObject>9D67FF59-4F89-3614-5482-D9AD8461CBF1</schemaObject>
+<segment>6BF27473-5606-A187-2BCA-FB05C5732865</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="R_14" id="AC048AEE-F548-BEBC-6E8B-A41BB00C6C69">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="R_13" id="E4F134F1-00F3-74EB-0317-9F14A60EB075">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="XPKFOTO" id="0041C3E3-1008-1D20-0106-00336C5FCC7E">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<segment>6BF27473-5606-A187-2BCA-FB05C5732865</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+<existingIndex>EFAD8E33-2B92-659A-48B6-08B6EAEF5C91</existingIndex>
+<indexSegment>6BF27473-5606-A187-2BCA-FB05C5732865</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

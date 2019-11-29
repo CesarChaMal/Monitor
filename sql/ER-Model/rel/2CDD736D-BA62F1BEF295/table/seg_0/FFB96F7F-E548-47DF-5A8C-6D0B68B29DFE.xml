@@ -1,0 +1,212 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FFB96F7F-E548-47DF-5A8C-6D0B68B29DFE" schemaObject="9D67FF59-4F89-3614-5482-D9AD8461CBF1" name="SITIO">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>SITIO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="CVE_CAMPANA" id="4BC84B66-F27A-633C-2D31-024A9F96DE5A">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>CVE_CAMPANA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 BYTE</dataTypeSize>
+<ownDataTypeParameters>12 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4E4A4EF3-95B6-2D7B-219B-6CC7713C7C17" referredColumn="71A46490-6A65-14C1-0E2C-F67F08BA5F0E"/>
+</associations>
+</Column>
+<Column name="INICIA" id="85D108D7-5D3A-A42D-C248-614DEE04C5F0">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>INICIA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TERMINA" id="CFE54104-33C7-B856-EB49-4427AA82F2F1">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>TERMINA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STATUS" id="4C5C6308-1D79-9628-8AEE-D979AEF72327">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>STATUS</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,6,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CVE_CLIPRO" id="BC7CF5C0-DF8F-8E1D-A11B-ED3E14A52BED">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>CVE_CLIPRO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4E4A4EF3-95B6-2D7B-219B-6CC7713C7C17" referredColumn="F0A7584D-F606-6825-7C56-3479A1D4350B"/>
+</associations>
+</Column>
+<Column name="CVE_PLAZA" id="B8A3FD19-CBE6-193E-D647-7E78E6351E34">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>CVE_PLAZA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B0477D42-8C44-D892-292E-D23FAFC72591" referredColumn="F0C47C81-22FD-3DC8-B04B-2C66729A78DE"/>
+</associations>
+</Column>
+<Column name="CVE_SITIO" id="1C9C5037-1669-B631-194A-6938DE572196">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>CVE_SITIO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UBICACION" id="798109EE-8926-8949-1F28-D9E577674177">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>UBICACION</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200 BYTE</dataTypeSize>
+<ownDataTypeParameters>200 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ILUMINACION" id="1949BB48-F68E-F25B-264D-B2378F6FE438">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>SITIO</sourceObjSchema>
+<sourceObjName>ILUMINACION</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,6,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A1BD021C-35AF-F7FA-1F63-0C6AAECD0C32" name="XPKSITIO">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>XPKSITIO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4BC84B66-F27A-633C-2D31-024A9F96DE5A"/>
+<colUsage columnID="BC7CF5C0-DF8F-8E1D-A11B-ED3E14A52BED"/>
+<colUsage columnID="B8A3FD19-CBE6-193E-D647-7E78E6351E34"/>
+<colUsage columnID="1C9C5037-1669-B631-194A-6938DE572196"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0403FB5D-774A-66B5-FF22-799040C69329" schemaObject="9D67FF59-4F89-3614-5482-D9AD8461CBF1" name="XPKSITIO">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>XPKSITIO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4BC84B66-F27A-633C-2D31-024A9F96DE5A"/>
+<colUsage columnID="BC7CF5C0-DF8F-8E1D-A11B-ED3E14A52BED"/>
+<colUsage columnID="B8A3FD19-CBE6-193E-D647-7E78E6351E34"/>
+<colUsage columnID="1C9C5037-1669-B631-194A-6938DE572196"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="304BA940-A99C-10AB-4F85-99136637D18B" name="R_17">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B8A3FD19-CBE6-193E-D647-7E78E6351E34"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="79AEA5F8-D3CC-4CA0-CAB6-75F10A78EDDA" name="R_2">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4BC84B66-F27A-633C-2D31-024A9F96DE5A"/>
+<colUsage columnID="BC7CF5C0-DF8F-8E1D-A11B-ED3E14A52BED"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TI_USUARIO" directorySegmentName="seg_0" id="4DF1F711-6864-C58A-E3B0-11C1BA26746A">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>TI_USUARIO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<actions>INSERT</actions>
+<body>DECLARE NUMROWS INTEGER;&lt;br/&gt;BEGIN&lt;br/&gt;    /* ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m. */&lt;br/&gt;    /* cli_pro R/16 usuario on child insert set null */&lt;br/&gt;    /* ERWIN_RELATION:CHECKSUM=&quot;0000f791&quot;, PARENT_OWNER=&quot;&quot;, PARENT_TABLE=&quot;cli_pro&quot;&lt;br/&gt;    CHILD_OWNER=&quot;&quot;, CHILD_TABLE=&quot;usuario&quot;&lt;br/&gt;    P2C_VERB_PHRASE=&quot;R/16&quot;, C2P_VERB_PHRASE=&quot;R/16&quot;, &lt;br/&gt;    FK_CONSTRAINT=&quot;R_16&quot;, FK_COLUMNS=&quot;cve_clipro&quot; */&lt;br/&gt;    UPDATE usuario&lt;br/&gt;      SET&lt;br/&gt;        /* %SetFK(usuario,NULL) */&lt;br/&gt;        usuario.cve_clipro = NULL&lt;br/&gt;      WHERE&lt;br/&gt;        NOT EXISTS (&lt;br/&gt;          SELECT * FROM cli_pro&lt;br/&gt;            WHERE&lt;br/&gt;              /* %JoinFKPK(:%New,cli_pro,&quot; = &quot;,&quot; AND&quot;) */&lt;br/&gt;              :new.cve_clipro = cli_pro.cve_clipro&lt;br/&gt;        ) &lt;br/&gt;        /* %JoinPKPK(usuario,:%New,&quot; = &quot;,&quot; AND&quot;) */&lt;br/&gt;         and usuario.email = :new.email;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;-- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.&lt;br/&gt;END;&lt;br/&gt;&lt;br/&gt;</body>
+<triggerTime>BEFORE</triggerTime>
+<owner>0864DCF3-C5FD-AD52-641E-B638BC7DC525</owner>
+<table>ACAB403D-3B84-E6C3-020B-06B9EAF2F7F9</table>
+</TriggerOraclev10g>

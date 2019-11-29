@@ -38,7 +38,8 @@ public class CampanaDao implements MonitorDao {
 	}
 
 	public List consultaCampanas() {
-		Query q = entityManager.createQuery("select c from Campana as c where c.status=1 order by c.nombre desc");
+//		Query q = entityManager.createQuery("select c from Campana as c where c.status=1 order by c.nombre desc");
+		Query q = entityManager.createQuery("select c from Campana as c order by c.nombre desc");
 		return q.getResultList();
 	}
 
@@ -56,6 +57,12 @@ public class CampanaDao implements MonitorDao {
 		if (((FiltrosCampana) filtrosCampana).getFechaAlta()!= null) {
 			queryString.append(" fechaalta = :fechaalta,");
 		}
+		if (((FiltrosCampana) filtrosCampana).getInicia()!= null) {
+			queryString.append(" inicia = :inicia,");
+		}
+		if (((FiltrosCampana) filtrosCampana).getTermina()!= null) {
+			queryString.append(" termina = :termina,");
+		}
 		if (((FiltrosCampana) filtrosCampana).getStatus()!= null && (((FiltrosCampana) filtrosCampana).getStatus() > 0 && ((FiltrosCampana) filtrosCampana).getStatus() < 3)) {
 			queryString.append(" status = :status ");
 		}
@@ -69,6 +76,12 @@ public class CampanaDao implements MonitorDao {
 			}
 			if (((FiltrosCampana) filtrosCampana).getFechaAlta() != null) {
 				q.setParameter("fechaalta", Arrays.asList(((FiltrosCampana) filtrosCampana).getFechaAlta()));
+			}
+			if (((FiltrosCampana) filtrosCampana).getInicia() != null) {
+				q.setParameter("inicia", Arrays.asList(((FiltrosCampana) filtrosCampana).getInicia()));
+			}
+			if (((FiltrosCampana) filtrosCampana).getTermina() != null) {
+				q.setParameter("termina", Arrays.asList(((FiltrosCampana) filtrosCampana).getTermina()));
 			}
 			if (((FiltrosCampana) filtrosCampana).getStatus()!= null && (((FiltrosCampana) filtrosCampana).getStatus() > 0 && ((FiltrosCampana) filtrosCampana).getStatus() < 3)) {
 				q.setParameter("status", Arrays.asList(((FiltrosCampana) filtrosCampana).getStatus()));
@@ -92,25 +105,43 @@ public class CampanaDao implements MonitorDao {
 		Query q = null;
 		StringBuffer queryString = new StringBuffer("select c,cl from Campana as c inner join CliPro as cl on (c.cliPro=cl.cveClipro)");
 
-		if (((FiltrosCampana) filtrosCampana).getCveClipro() != null && ((FiltrosCampana) filtrosCampana).getCveClipro().length() > 0) {
+//		if (((FiltrosCampana) filtrosCampana).getCveClipro() != null && ((FiltrosCampana) filtrosCampana).getCveClipro().length() > 0) {
+//			queryString.append(" and ");
+//			queryString.append(" lower(c.id.cveClipro) like lower(:cve_cliente)");
+////			queryString.append(" lower(c.cliPro.cveClipro) like lower(:cve_cliente)");
+//		}
+//		if (((FiltrosCampana) filtrosCampana).getClipro() != null && ((FiltrosCampana) filtrosCampana).getClipro().length() > 0) {
+//			queryString.append(" and ");
+//			queryString.append(" lower(c.cliPro.nombre) like lower(:cliente)");
+//		}
+//		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
+//			queryString.append(" and ");
+//			queryString.append(" lower(c.id.cveCampana) like lower(:cve_campana)");
+//		}
+		if (((FiltrosCampana) filtrosCampana).getNombre() != null && ((FiltrosCampana) filtrosCampana).getNombre().length() > 0) {
 			queryString.append(" and ");
-			queryString.append(" lower(c.cliPro) like lower(:cliente)");
-		}
-		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
-			queryString.append(" and ");
-			queryString.append(" lower(c.id.cveCampana) like lower(:cve_campana)");
+			queryString.append(" lower(c.nombre) like lower(:campana)");
 		}
 		queryString.append(" order by fechaalta DESC");
 		
 		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
-		if (((FiltrosCampana) filtrosCampana).getCveClipro() != null && ((FiltrosCampana) filtrosCampana).getCveClipro().length() > 0) {
-			CliPro clipro = new CliPro();
-			clipro.setCveClipro(((FiltrosCampana) filtrosCampana).getCveClipro()+"%");
-			q.setParameter("cliente", Arrays.asList(clipro));
-		}
-		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
-			String cve_campana = "%"+((FiltrosCampana) filtrosCampana).getCveCampana()+"%";
-			q.setParameter("cve_campana", Arrays.asList(cve_campana));
+//		if (((FiltrosCampana) filtrosCampana).getCveClipro() != null && ((FiltrosCampana) filtrosCampana).getCveClipro().length() > 0) {
+//			CliPro clipro = new CliPro();
+//			clipro.setCveClipro(((FiltrosCampana) filtrosCampana).getCveClipro()+"%");
+//			q.setParameter("cve_cliente", Arrays.asList(clipro));
+//		}
+//		if (((FiltrosCampana) filtrosCampana).getClipro() != null && ((FiltrosCampana) filtrosCampana).getClipro().length() > 0) {
+//			CliPro clipro = new CliPro();
+//			clipro.setNombre(((FiltrosCampana) filtrosCampana).getClipro()+"%");
+//			q.setParameter("cliente", Arrays.asList(clipro));
+//		}
+//		if (((FiltrosCampana) filtrosCampana).getCveCampana() != null && ((FiltrosCampana) filtrosCampana).getCveCampana().length() > 0) {
+//			String cve_campana = "%"+((FiltrosCampana) filtrosCampana).getCveCampana()+"%";
+//			q.setParameter("cve_campana", Arrays.asList(cve_campana));
+//		}
+		if (((FiltrosCampana) filtrosCampana).getNombre() != null && ((FiltrosCampana) filtrosCampana).getNombre().length() > 0) {
+			String campana = "%"+((FiltrosCampana) filtrosCampana).getNombre()+"%";
+			q.setParameter("campana", Arrays.asList(campana));
 		}
 		
 		return q.getResultList();

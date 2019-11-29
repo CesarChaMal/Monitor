@@ -127,27 +127,39 @@ public class CatalogoUsuarios implements Navigation {
 	    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String irA = request.getParameter("formCatalogo:irA");
         if (Util.isParsable(irA)) {
-        	paginacion.setPageIndex(Integer.parseInt(irA)-1);
-        	update(filtrosUsuario);
+        	int index = Integer.parseInt(irA)-1;
+        	if (index >= 0 && index < paginacion.getRecordsTotal()){
+        		paginacion.setPageIndex(index);
+            	update(filtrosUsuario);
+        	} else {
+        		paginacion.setIrA(0);
+        	}
         }
 	}
 	
 	public void busqueda() {
 		filtrosUsuario = new FiltrosUsuario();
 	    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		String txtCliente = request.getParameter("formCatalogo:txtCliente");
-		String txtEmail = request.getParameter("formCatalogo:txtEmail");
+		String txtCliente = request.getParameter("formCatalogo:txtClienteHidden");
+		String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombreHidden");
+		String txtEmail = request.getParameter("formCatalogo:txtEmailHidden");
+		String txtNombre = request.getParameter("formCatalogo:txtNombre");
 		LOGGER.debug("txtCliente: " + txtCliente);
+		LOGGER.debug("txtClienteNombre: " + txtClienteNombre);
 		LOGGER.debug("txtEmail: " + txtEmail);
+		LOGGER.debug("txtNombre: " + txtNombre);
 		filtrosUsuario.setCveClipro(txtCliente);
+		filtrosUsuario.setClipro(txtClienteNombre);
+		filtrosUsuario.setNombre(txtNombre);
 		filtrosUsuario.setEmail(txtEmail);
+//		paginacion.setPageIndex(0);
 		update(filtrosUsuario);
 	}
 	
 	public void update(Filtros filtrosUsuario) {
 		try {
-			usuario = null;
-//			usuario = new UsuarioDTO();
+//			usuario = null;
+			usuario = new UsuarioDTO();
 			usuariosDTOList = usuarioService.consultarUsuarios((FiltrosUsuario) filtrosUsuario);
 			paginacion.setModel(usuariosDTOList);
 			if (usuariosDTOList.size() > 0)
@@ -161,12 +173,12 @@ public class CatalogoUsuarios implements Navigation {
 		try {
 			filtrosUsuario = new FiltrosUsuario();
 		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-			String txtEmail = request.getParameter("formCatalogo:txtEmail");
+			String txtEmail = request.getParameter("formCatalogo:txtEmailHidden");
 			LOGGER.debug("txtEmail: " + txtEmail);
 			filtrosUsuario.setEmail(txtEmail);
 			usuarioService.eliminaUsuario(filtrosUsuario);
-			paginacion.setPageIndex(paginacion.getPageIndex()-1);
-			filtrosUsuario.setEmail(null);
+//			paginacion.setPageIndex(paginacion.getPageIndex()-1);
+			filtrosUsuario = new FiltrosUsuario();
 			update(filtrosUsuario);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -179,9 +191,10 @@ public class CatalogoUsuarios implements Navigation {
 			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 			
 		    request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-	        String txtCliente = request.getParameter("formCatalogo:txtCliente");
-	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombre");
-			String txtEmail = request.getParameter("formCatalogo:txtEmail");
+	        String txtCliente = request.getParameter("formCatalogo:txtClienteHidden");
+	        String txtClienteNombre = request.getParameter("formCatalogo:txtClienteNombreHidden");
+//			String txtEmail = request.getParameter("formCatalogo:txtEmail");
+			String txtEmail = request.getParameter("formCatalogo:txtEmailHidden");
 			String txtContrasena = request.getParameter("formCatalogo:txtContrasena");
 			String txtNombre = request.getParameter("formCatalogo:txtNombre");
 			String txtApellidos = request.getParameter("formCatalogo:txtApellidos");
@@ -215,7 +228,7 @@ public class CatalogoUsuarios implements Navigation {
 //			filtrosUsuario.setTipo(usuario.getTipo());
 //			filtrosUsuario.setStatus(usuario.getStatus());
 			usuarioService.actualizaUsuario(filtrosUsuario);
-			filtrosUsuario.setEmail(null);
+			filtrosUsuario = new FiltrosUsuario();
 			update(filtrosUsuario);
 		} catch (Exception e) {
 			e.printStackTrace();

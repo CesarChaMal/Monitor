@@ -18,6 +18,7 @@ import com.monitor.filter.PaginacionMonitor;
 import com.monitor.model.Foto;
 import com.monitor.model.Usuario;
 import com.monitor.model.dto.CampanaDTO;
+import com.monitor.model.dto.FotoDTO;
 import com.monitor.model.dto.PlazaDTO;
 import com.monitor.model.dto.SitioDTO;
 import com.monitor.persistencia.Persistencia;
@@ -52,8 +53,7 @@ public class MonitorControlerBean implements Serializable {
 	private CampanaService campanaService;
 	private PlazaService plazaService;
 	private SitioService sitioService;
-	private ArrayList<Foto> fotolistMostrar;
-	private String iluminacionStr;
+	private ArrayList<FotoDTO> fotolistMostrar;
 	
 
 	@PostConstruct
@@ -64,7 +64,6 @@ public class MonitorControlerBean implements Serializable {
 		plazaService = new PlazaService(persistencia.getEntityManager());
 		sitioService = new SitioService(persistencia.getEntityManager());
 		filtrosMonitor.setCveClipro(currentUser.getCliPro().getCveClipro());
-
 		plazaDTOList = plazaService.consultaPlazasActivas(currentUser.getCliPro().getCveClipro());
 		campanaDTOList = campanaService.consultaCampanasActivas(currentUser.getCliPro().getCveClipro());
 		sitioDTOList = sitioService.consultaSitiosActivos(currentUser.getCliPro().getCveClipro());
@@ -104,7 +103,7 @@ public class MonitorControlerBean implements Serializable {
 	public void getFotosToShow() {
 		try {
 			System.out.println("se consultan las fotos");
-			fotolistMostrar = (ArrayList<Foto>) fotoService.obtenerFotosPorUsuario(filtrosMonitor);
+			fotolistMostrar = (ArrayList<FotoDTO>) fotoService.obtenerFotosPorUsuario(filtrosMonitor);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			LOGGER.error("Error: " , e);
@@ -174,11 +173,11 @@ public class MonitorControlerBean implements Serializable {
 
 	}
 
-	public ArrayList<Foto> getFotolistMostrar() {
+	public ArrayList<FotoDTO> getFotolistMostrar() {
 		return fotolistMostrar;
 	}
 
-	public void setFotolistMostrar(ArrayList<Foto> fotolistMostrar) {
+	public void setFotolistMostrar(ArrayList<FotoDTO> fotolistMostrar) {
 		this.fotolistMostrar = fotolistMostrar;
 	}
 

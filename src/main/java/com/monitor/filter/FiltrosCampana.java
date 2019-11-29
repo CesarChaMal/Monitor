@@ -2,9 +2,6 @@ package com.monitor.filter;
 
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import com.monitor.util.Util;
 
 public class FiltrosCampana extends Filtros {
@@ -12,9 +9,11 @@ public class FiltrosCampana extends Filtros {
 	private String cveCampana;
 	private String nombre;
 	private Date fechaAlta;
+	private Date inicia;
+	private Date termina;
 	private Integer status;
 	private String cveClipro;
-	private String cveCliproNombre;
+	private String clipro;
 	
 	private Util util= new Util();
 
@@ -48,16 +47,28 @@ public class FiltrosCampana extends Filtros {
 	public void setCveClipro(String cveClipro) {
 		this.cveClipro = cveClipro;
 	}
-	public String getCveCliproNombre() {
-		return cveCliproNombre;
+	public String getClipro() {
+		return clipro;
 	}
-	public void setCveCliproNombre(String cveCliproNombre) {
-		this.cveCliproNombre = cveCliproNombre;
+	public void setClipro(String clipro) {
+		this.clipro = clipro;
 	}
 	public Util getUtil() {
 		return util;
 	}
 	public void setUtil(Util util) {
 		this.util = util;
+	}
+	public Date getInicia() throws Exception {
+		return util.formatDate(inicia);
+	}
+	public void setInicia(Date inicia) {
+		this.inicia = inicia;
+	}
+	public Date getTermina() throws Exception {
+		return util.formatDate(termina);
+	}
+	public void setTermina(Date termina) {
+		this.termina = termina;
 	}
 }

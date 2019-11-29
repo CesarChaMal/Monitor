@@ -1,7 +1,7 @@
-******************************************************************
-CREACION DE USUARIO
-conectarse con system
-******************************************************************
+------------------------------------------------------------------
+-- CREACION DE USUARIO
+-- conectarse con system
+------------------------------------------------------------------
 
 
 
@@ -21,10 +21,10 @@ GRANT CREATE SESSION TO "MONITOR";
 
 
 
-******************************************************************
-CREACION DE ESTRUCTURA
-conectarse con monitor
-******************************************************************
+------------------------------------------------------------------
+-- CREACION DE ESTRUCTURA
+-- conectarse con monitor
+------------------------------------------------------------------
 
 
 
@@ -33,11 +33,14 @@ CREATE TABLE "MONITOR"."CAMPANA"
   "NOMBRE" VARCHAR2(80 BYTE), 
   "STATUS" NUMBER(6,0), 
   "FECHAALTA" DATE, 
+  "INICIA" DATE NOT NULL, 
+  "TERMINA" DATE NOT NULL, 
   "CVE_CLIPRO" VARCHAR2(10 BYTE) NOT NULL ENABLE
    ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS" ;
+  
 CREATE TABLE "MONITOR"."CLI_PRO" 
    (  "CVE_CLIPRO" VARCHAR2(10 BYTE) NOT NULL ENABLE, 
   "NOMBRE" VARCHAR2(80 BYTE), 
@@ -215,7 +218,7 @@ ALTER TABLE "MONITOR"."USUARIO" ADD CONSTRAINT "R_16" FOREIGN KEY ("CVE_CLIPRO")
     REFERENCES "MONITOR"."CLI_PRO" ("CVE_CLIPRO") ON DELETE SET NULL ENABLE;
 -- new object type path: SCHEMA_EXPORT/TABLE/TRIGGER
 
-CREATE TRIGGER "MONITOR"."TU_CAMPANA" AFTER UPDATE ON campana for each row
+CREATE TRIGGER "MONITOR"."TU_CAMPANA" AFTER UPDATE ON "MONITOR"."CAMPANA" for each row
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 -- UPDATE trigger on campana 
 DECLARE NUMROWS INTEGER;
@@ -259,26 +262,7 @@ ALTER TRIGGER "MONITOR"."TU_CAMPANA"
     PLSQL_OPTIMIZE_LEVEL=  2
     PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE';
     
-    
 
-ALTER TRIGGER "MONITOR"."TD_CLI_PRO" 
-  COMPILE 
-    PLSQL_OPTIMIZE_LEVEL=  2
-    PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
-;
-
-ALTER TRIGGER "MONITOR"."TD_CAMPANA" 
-  COMPILE 
-    PLSQL_OPTIMIZE_LEVEL=  2
-    PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
-;
-
-
-ALTER TRIGGER "MONITOR"."TU_CLI_PRO" 
-  COMPILE 
-    PLSQL_OPTIMIZE_LEVEL=  2
-    PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
-;
 CREATE TRIGGER "MONITOR"."TI_FOTO" BEFORE INSERT ON "MONITOR"."FOTO" for each row
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 -- INSERT trigger on foto 
@@ -349,15 +333,6 @@ ALTER TRIGGER "MONITOR"."TI_FOTO"
 
 
 
-
-ALTER TRIGGER "MONITOR"."TD_PLAZA" 
-  COMPILE 
-    PLSQL_OPTIMIZE_LEVEL=  2
-    PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
-;
-
-
-
 CREATE TRIGGER "MONITOR"."TU_PLAZA" AFTER UPDATE ON "MONITOR"."PLAZA" for each row
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 -- UPDATE trigger on plaza 
@@ -400,6 +375,7 @@ ALTER TRIGGER "MONITOR"."TU_PLAZA"
     PLSQL_OPTIMIZE_LEVEL=  2
     PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
 ;
+
 CREATE TRIGGER "MONITOR"."TI_SITIO" BEFORE INSERT ON "MONITOR"."SITIO" for each row
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 -- INSERT trigger on sitio 
@@ -466,13 +442,6 @@ ALTER TRIGGER "MONITOR"."TI_SITIO"
     PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
 ;
 
-
-
-ALTER TRIGGER "MONITOR"."TD_SITIO" 
-  COMPILE 
-    PLSQL_OPTIMIZE_LEVEL=  2
-    PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
-;
 CREATE TRIGGER "MONITOR"."TU_SITIO" AFTER UPDATE ON "MONITOR"."SITIO" for each row
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 -- UPDATE trigger on sitio 
@@ -568,10 +537,14 @@ ALTER TRIGGER "MONITOR"."TU_SITIO"
     PLSQL_OPTIMIZE_LEVEL=  2
     PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
 ;
-CREATE TRIGGER "MONITOR"."TI_USUARIO" BEFORE INSERT ON usuario for each row
+
+
+CREATE TRIGGER "MONITOR"."TI_USUARIO" BEFORE INSERT ON "MONITOR"."USUARIO" for each row
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 -- INSERT trigger on usuario 
-DECLARE NUMROWS INTEGER;
+DECLARE 
+PRAGMA AUTONOMOUS_TRANSACTION;
+NUMROWS INTEGER;
 BEGIN
     /* ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m. */
     /* cli_pro R/16 usuario on child insert set null */
@@ -593,7 +566,7 @@ BEGIN
         /* %JoinPKPK(usuario,:%New," = "," AND") */
          and usuario.email = :new.email;
 
-
+    COMMIT;
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 END;
 
@@ -608,16 +581,17 @@ ALTER TRIGGER "MONITOR"."TI_USUARIO"
 ;
 
 
+-- java.sql.SQLException: ORA-04091: table MONITOR.USUARIO is mutating, trigger/function may not see it
+-- ORA-06512: at "MONITOR.TU_USUARIO", line 34
+-- ORA-04088: error during execution of trigger 'MONITOR.TU_USUARIO'
 
-ALTER TRIGGER "MONITOR"."TD_USUARIO" 
-  COMPILE 
-    PLSQL_OPTIMIZE_LEVEL=  2
-    PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
-;
+-- DROP TRIGGER "MONITOR"."TU_USUARIO";
 CREATE TRIGGER "MONITOR"."TU_USUARIO" AFTER UPDATE ON "MONITOR"."USUARIO" for each row
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 -- UPDATE trigger on usuario 
-DECLARE NUMROWS INTEGER;
+DECLARE 
+PRAGMA AUTONOMOUS_TRANSACTION;
+NUMROWS INTEGER;
 BEGIN
   /* ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m. */
   /* usuario R/14 foto on parent update restrict */
@@ -663,6 +637,7 @@ BEGIN
         /* %JoinPKPK(usuario,:%New," = "," AND") */
          and usuario.email = :new.email;
 
+    COMMIT;
 
 -- ERwin Builtin martes, 20 de junio de 2017 01:04:36 a.m.
 END;
@@ -676,17 +651,3 @@ ALTER TRIGGER "MONITOR"."TU_USUARIO"
     PLSQL_OPTIMIZE_LEVEL=  2
     PLSQL_CODE_TYPE=  INTERPRETED    PLSCOPE_SETTINGS=  'IDENTIFIERS:NONE'
 ;
-
-
-
-
-
-SELECT * FROM monitor.USUARIO;
-SELECT * FROM monitor.CLI_PRO;
-SELECT * FROM monitor.CAMPANA;
-SELECT * FROM monitor.PLAZA;
-SELECT * FROM monitor.SITIO;
-SELECT * FROM monitor.FOTO
-
-SELECT email, nombre, apellidos, contrasena, tipo, fechaalta, status, cve_clipro FROM monitor.usuario
-DELETE FROM "MONITOR"."USUARIO"

@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="SOPORTE" directorySegmentName="seg_0" id="FAA6791A-CFB8-8E82-BD89-02B18E218837">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<schemaObject>9D67FF59-4F89-3614-5482-D9AD8461CBF1</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>121D06DD-3C21-743D-483E-E5BA3000579A</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="DOCTO" id="096AB256-7983-5C06-E30D-885DB7FBD857">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_SOPORTE" id="1DBD7A53-9A24-98E1-B75C-5D70A95DA581">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="XPKSOPORTE" id="F7A436C1-355E-8137-7B66-60D4882C47F9">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<schemaObject>9D67FF59-4F89-3614-5482-D9AD8461CBF1</schemaObject>
+<segment>6BF27473-5606-A187-2BCA-FB05C5732865</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+</IndexProxy>
+</indexProxies>
+<lobStorages>
+<LobStorage class="oracle.dbtools.crest.model.design.storage.oracle.v11g.LobStorageOraclev11g" name="SYS_LOB0000021592C00002$$" id="1FED57C2-0477-2995-B0FA-E10F2B04DD43">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<cache>NOCACHE</cache>
+<chunk>8192</chunk>
+<column>DOCTO</column>
+<logging>YES</logging>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+</LobStorage>
+</lobStorages>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="XPKSOPORTE" id="9160497A-F9CF-3E94-B98C-F4682BD8904E">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<segment>6BF27473-5606-A187-2BCA-FB05C5732865</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+<existingIndex>F7A436C1-355E-8137-7B66-60D4882C47F9</existingIndex>
+<indexSegment>6BF27473-5606-A187-2BCA-FB05C5732865</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

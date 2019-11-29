@@ -21,7 +21,8 @@ public class PlazaDao {
 	}
 	
 	public List consultaPlazas() {
-		Query q = entityManager.createQuery("select p from Plaza as p where p.status=1 order by p.nombre desc");
+//		Query q = entityManager.createQuery("select p from Plaza as p where p.status=1 order by p.nombre desc");
+		Query q = entityManager.createQuery("select p from Plaza as p order by p.nombre desc");
 		return q.getResultList();
 	}
 }

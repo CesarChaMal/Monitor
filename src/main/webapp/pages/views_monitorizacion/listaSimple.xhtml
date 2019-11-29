@@ -48,9 +48,9 @@
 		<p:column headerText="Comentario">
 			<h:outputText value="#{foto.comentario}" />
 		</p:column>
-		<p:column headerText="Fecha de creación">
+		<p:column headerText="Fecha captura">
 			<h:outputText value="#{foto.id.fechaHora}">
-				<f:convertDateTime type="date" pattern="dd/MMM/yyyy" />
+				<f:convertDateTime type="date" pattern="dd/MMM/yyyy HH:mm" />
 			</h:outputText>
 		</p:column>
 

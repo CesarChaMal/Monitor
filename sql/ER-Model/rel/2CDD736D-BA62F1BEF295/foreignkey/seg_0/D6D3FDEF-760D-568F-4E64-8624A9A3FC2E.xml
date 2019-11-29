@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="D6D3FDEF-760D-568F-4E64-8624A9A3FC2E" containerWithKeyObject="5B067B4B-3EFE-02FD-A911-A25993132FFF" localFKIndex="AC048AEE-F548-BEBC-6E8B-A41BB00C6C69" name="R_14">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>R_14</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<referredTableLongName>MONITOR.USUARIO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>ACAB403D-3B84-E6C3-020B-06B9EAF2F7F9</referredTableID>
+<keyObject>D09570A1-E37C-02B4-08C5-72D24E7DED25</keyObject>
+<referredKeyID>D09570A1-E37C-02B4-08C5-72D24E7DED25</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>EMAIL</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -138,6 +138,7 @@ p:hover i {
 	top: 70px;
 	display: inline-block;
 	left: -391px;
+	/* left: -200px; */
 }
 
 .dropdown-content {
@@ -223,8 +224,16 @@ p:hover i {
 			class="logotipo"> <img
 			src="#{resource['img/monitorexacto.png']}" width="150" height="90"
 			alt="logo" /> </figure>
+			<p:commandLink id="logout" styleClass="blue" style="float:right;color:black;margin-top:75px;margin-right:15px;text-decoration:underline;font-size: 26px;color: #00a0e7;"
+							action="#{userManager.logout}">Salir</p:commandLink>
+<ui:remove>
+<!-- 
 			<h:outputLink id="logout" styleClass="blue" style="float:right;color:black;margin-top:75px;margin-right:15px;text-decoration:underline;font-size: 26px;color: #00a0e7;"
 							value="javascript:void(0)" onclick="PF('dlgVersion').show();">Salir</h:outputLink>
+			<h:outputLink id="logout" styleClass="blue" style="float:right;color:black;margin-top:75px;margin-right:15px;text-decoration:underline;font-size: 26px;color: #00a0e7;"
+							onclick="#{userManager.logout()}">Salir</h:outputLink>
+-->
+</ui:remove>                                        
 		<div class="name">
 			<p:outputLabel
 				value="Bienvenido: " />
@@ -292,6 +301,11 @@ p:hover i {
 				<br/>
 				<h:outputLabel styleClass="orange" value="Versión "></h:outputLabel>
 				<h:outputLabel styleClass="blue" value="1.0"></h:outputLabel>
+				<br/>
+				<h:outputLabel styleClass="blue" value="© Derechos Reservados"></h:outputLabel>
+				<br/>
+				<h:outputLabel styleClass="blue" value="Monitoreo Exacto S.A de C.V."></h:outputLabel>
+				
 			</p:dialog>
 		</header> </section>
 		<section class="contain">

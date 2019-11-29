@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="CLI_PRO" directorySegmentName="seg_0" id="33BA6E16-365F-440F-6338-C79F7B6B0025">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<schemaObject>9D67FF59-4F89-3614-5482-D9AD8461CBF1</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>121D06DD-3C21-743D-483E-E5BA3000579A</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="CVE_CLIPRO" id="22797795-8F4E-A115-67F4-C953BE6D76AE">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NOMBRE" id="23B5FEB5-9E3E-FBE1-4278-C42FF076AD45">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PADRE" id="4C574CE3-E4F0-E7B5-B123-4E569FDEEF2E">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TIPO" id="66AB2CE6-1DAE-8736-5B4F-FDF963B97C23">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="XPKCLI_PRO" id="D37727DA-E769-B90C-9BED-3B19F63EB0C1">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<schemaObject>9D67FF59-4F89-3614-5482-D9AD8461CBF1</schemaObject>
+<segment>6BF27473-5606-A187-2BCA-FB05C5732865</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="XPKCLI_PRO" id="673FCBA4-4B77-2769-742C-2A067F42E7B6">
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<segment>6BF27473-5606-A187-2BCA-FB05C5732865</segment>
+<tableSpace>01EE99E0-D980-ECA5-444D-AD9700B02D5F</tableSpace>
+<existingIndex>D37727DA-E769-B90C-9BED-3B19F63EB0C1</existingIndex>
+<indexSegment>6BF27473-5606-A187-2BCA-FB05C5732865</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

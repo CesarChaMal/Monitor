@@ -33,9 +33,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Campana  implements Serializable{
 
 	private CampanaId id;
-//	private String cveCampana;
 	private String nombre;
 	private Date fechaalta;
+	private Date inicia;
+	private Date termina;
 	private Integer status;
 	private CliPro cliPro;
 
@@ -111,6 +112,26 @@ public class Campana  implements Serializable{
 
 	public void setCliPro(CliPro cliPro) {
 		this.cliPro = cliPro;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "INICIA", length = 7)
+	public Date getInicia() {
+		return inicia;
+	}
+
+	public void setInicia(Date inicia) {
+		this.inicia = inicia;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "TERMINA", length = 7)
+	public Date getTermina() {
+		return termina;
+	}
+
+	public void setTermina(Date termina) {
+		this.termina = termina;
 	}
 
 }

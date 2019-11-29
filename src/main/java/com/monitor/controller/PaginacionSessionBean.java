@@ -16,7 +16,7 @@ public class PaginacionSessionBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private FiltrosMonitor filtrosMonitor;
-	private  String view = "cuadriculaView";;
+	private  String view = "listaDetalle";
 	@PostConstruct
 	public void init() {
 		filtrosMonitor = new FiltrosMonitor();

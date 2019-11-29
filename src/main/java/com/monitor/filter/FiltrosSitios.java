@@ -1,8 +1,5 @@
 package com.monitor.filter;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import com.monitor.util.Util;
 
 public class FiltrosSitios extends Filtros {
@@ -12,8 +9,11 @@ public class FiltrosSitios extends Filtros {
 	private Integer iluminacion;
 	private Integer status;
 	private String cveClipro;
+	private String clipro;
 	private String cveCampana;
+	private String campana;
 	private String cvePlaza;
+	private String plaza;
 	private Integer orden; 
 	
 	private Util util= new Util();
@@ -71,5 +71,23 @@ public class FiltrosSitios extends Filtros {
 	}
 	public void setUtil(Util util) {
 		this.util = util;
+	}
+	public String getClipro() {
+		return clipro;
+	}
+	public void setClipro(String clipro) {
+		this.clipro = clipro;
+	}
+	public String getCampana() {
+		return campana;
+	}
+	public void setCampana(String campana) {
+		this.campana = campana;
+	}
+	public String getPlaza() {
+		return plaza;
+	}
+	public void setPlaza(String plaza) {
+		this.plaza = plaza;
 	}
 }

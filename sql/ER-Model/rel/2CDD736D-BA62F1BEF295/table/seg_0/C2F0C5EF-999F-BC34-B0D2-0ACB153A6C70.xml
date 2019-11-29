@@ -1,0 +1,147 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C2F0C5EF-999F-BC34-B0D2-0ACB153A6C70" schemaObject="9D67FF59-4F89-3614-5482-D9AD8461CBF1" name="CAMPANA">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>CAMPANA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:10 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="CVE_CAMPANA" id="71A46490-6A65-14C1-0E2C-F67F08BA5F0E">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>CAMPANA</sourceObjSchema>
+<sourceObjName>CVE_CAMPANA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 BYTE</dataTypeSize>
+<ownDataTypeParameters>12 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NOMBRE" id="90A0C426-95F7-623E-7954-3742C7C6003C">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>CAMPANA</sourceObjSchema>
+<sourceObjName>NOMBRE</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>80 BYTE</dataTypeSize>
+<ownDataTypeParameters>80 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STATUS" id="EA82A122-6EAF-BA6E-91BA-C02270E65B07">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>CAMPANA</sourceObjSchema>
+<sourceObjName>STATUS</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,6,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FECHAALTA" id="E8EAFB0D-AB52-9A5F-AE68-902D5C1864BC">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>CAMPANA</sourceObjSchema>
+<sourceObjName>FECHAALTA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INICIA" id="D38ACADC-82F5-EB6D-47F7-ED60CB2E4A70">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>CAMPANA</sourceObjSchema>
+<sourceObjName>INICIA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TERMINA" id="10DE5910-52A3-E3B0-0CDF-B0A7662FD106">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>CAMPANA</sourceObjSchema>
+<sourceObjName>TERMINA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CVE_CLIPRO" id="F0A7584D-F606-6825-7C56-3479A1D4350B">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>CAMPANA</sourceObjSchema>
+<sourceObjName>CVE_CLIPRO</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="32CB3894-7CE8-0EB3-A746-AFD70B49F5DE" name="XPKCAMPANA">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>XPKCAMPANA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="71A46490-6A65-14C1-0E2C-F67F08BA5F0E"/>
+<colUsage columnID="F0A7584D-F606-6825-7C56-3479A1D4350B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E9121036-0FBA-3410-BD8A-362AE0540921" schemaObject="9D67FF59-4F89-3614-5482-D9AD8461CBF1" name="XPKCAMPANA">
+<sourceConnName>localhost</sourceConnName>
+<sourceObjSchema>MONITOR</sourceObjSchema>
+<sourceObjName>XPKCAMPANA</sourceObjName>
+<createdBy>Cesar Chavez</createdBy>
+<createdTime>2017-07-08 11:20:11 UTC</createdTime>
+<ownerDesignName>ER-Model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="71A46490-6A65-14C1-0E2C-F67F08BA5F0E"/>
+<colUsage columnID="F0A7584D-F606-6825-7C56-3479A1D4350B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

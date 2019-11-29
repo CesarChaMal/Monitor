@@ -10,36 +10,46 @@
     <body>
 	    <ui:composition>
 
+			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 			<section class="header"> 
 				<header> 
-					<figure class="logotipo"> 
-						<img src="#{resource['img/monitorexacto.png']}" width="150" height="90" alt="logo" /> 
-					</figure>
-					<div class="name">Bienvenido:<p:outputLabel value="#{userManager.currentUser.nombre}  #{userManager.currentUser.apellidos}"/></div>
-					
+					<figure class="logotipo"> <img src="#{resource['img/monitorexacto.png']}" width="150" height="90" alt="logo" /> </figure>
+					<h:outputLink id="logout" styleClass="blue" style="float:right;color:black;margin-top:75px;margin-right:15px;text-decoration:underline;font-size: 26px;color: #00a0e7;"
+									value="javascript:void(0)" onclick="PF('dlgVersion').show();">Salir</h:outputLink>
+					<div class="name">
+						<p:outputLabel
+							value="Bienvenido: " />
+						<p:outputLabel
+							value="#{userManager.currentUser.nombre}  #{userManager.currentUser.apellidos}" />
+					</div>
 					<div class="dropdown">
 						<i class="fa fa-align-justify fa-2x"></i><span class="menu">MENU</span>
 						<div class="dropdown-content">
+			
 							<ul>
-								<li id="lihome"><a href="#{request.contextPath}/secured/home.xhtml">HOME</a></li>
-								<li id="licampana"><a href="#{request.contextPath}/pages/CatalogoCampana.xhtml">CAMPAÑAS</a></li>
-								<li id="lisitio"><a href="#{request.contextPath}/pages/CatalogoSitios.xhtml">SITIOS</a></li>
-								<li id="liusuario"><a href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml">USUARIOS</a></li>
-								<li id="limonitorizacion"><a href="#{request.contextPath}/pages/monitorizacion.xhtml">MONITORIZACION</a></li>
-								<li id="lisoporte"><a href="#">SOPORTE</a></li>
-								<li id="liacerca"><a href="#">ACERCA DE</a></li>
+								<li id="licampana"><a
+									href="#{request.contextPath}/pages/CatalogoCampana.xhtml" style="font-size: 25px;">Campañas</a></li>
+								<!--      <li id="liplazas"><a href="#">PLAZAS</a></li> -->
+								<li id="lisitio"><a
+									href="#{request.contextPath}/pages/CatalogoSitios.xhtml" style="font-size: 25px;">Sitios</a></li>
+								<li id="liusuario"><a
+									href="#{request.contextPath}/pages/CatalogoUsuarios.xhtml" style="font-size: 25px;">Usuarios</a></li>
+								<li id="limonitorizacion"><a
+									href="#{request.contextPath}/pages/monitorizacion.xhtml" style="font-size: 25px;">Monitorización</a></li>
+								<li id="lisoporte"><a href="#" style="font-size: 25px;">Soporte</a></li>
+								<li id="liacerca"><h:outputLink id="openDialogLink"
+										value="javascript:void(0)" onclick="PF('dlgVersion').show();" style="font-size: 25px;">Acerca de</h:outputLink></li>
 							</ul>
 						</div>
-	<!-- 
 						<div id="divcampana" class="camp">
 							<img src="#{resource['img/ico-cam.png']}" width="150" height="90"
 								alt="logo" />
 							<p>Este es un mensaje de campañas</p>
 						</div>
-						<div id="divhome" class="camp">
+						<div id="divplazas" class="camp">
 							<img src="#{resource['img/ico-pla.png']}" width="150" height="90"
 								alt="logo" />
-							<p>Este es un mensaje de home</p>
+							<p>Este es un mensaje de plazas</p>
 						</div>
 						<div id="divsitio" class="camp">
 							<img src="#{resource['img/ico-sit.png']}" width="150" height="90"
@@ -66,8 +76,18 @@
 								alt="logo" />
 							<p>Este es un mensaje de acerca de</p>
 						</div>
-		 -->			
 					</div>
+					<p:dialog id="version" widgetVar="dlgVersion" header="Versión"
+							resizable="false" showEffect="clip" hideEffect="clip">
+						<img src="#{resource['img/monitorexacto.png']}" alt="logo" />
+						<br/>
+						<h:outputLabel styleClass="orange" value="Versión "></h:outputLabel>
+						<h:outputLabel styleClass="blue" value="1.0"></h:outputLabel>
+						<br/>
+						<h:outputLabel styleClass="blue" value="© Derechos Reservados"></h:outputLabel>
+						<br/>
+						<h:outputLabel styleClass="blue" value="Monitoreo Exacto S.A de C.V."></h:outputLabel>
+					</p:dialog>
 				</header> 
 			</section>
 	        

@@ -6,6 +6,8 @@ public class CampanaDTO {
 	private String cveCampana;
 	private String nombre;
 	private Date fechaalta;
+	private Date inicia;
+	private Date termina;
 	private Integer status;
 	private CliProDTO clipro;
 	private Long  numFotos;
@@ -45,5 +47,17 @@ public class CampanaDTO {
 	}
 	public void setFechaalta(Date fechaalta) {
 		this.fechaalta = fechaalta;
+	}
+	public Date getInicia() {
+		return inicia;
+	}
+	public void setInicia(Date inicia) {
+		this.inicia = inicia;
+	}
+	public Date getTermina() {
+		return termina;
+	}
+	public void setTermina(Date termina) {
+		this.termina = termina;
 	}
 }

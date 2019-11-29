@@ -10,7 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.monitor.filter.Filtros;
+import com.monitor.filter.FiltrosCampana;
 import com.monitor.filter.FiltrosSitios;
+import com.monitor.filter.FiltrosUsuario;
 import com.monitor.model.CliPro;
 
 public class SitioDao implements MonitorDao {
@@ -39,20 +41,54 @@ public class SitioDao implements MonitorDao {
 		queryString.append(" inner join Campana as c on cl.cveClipro = c.id.cveClipro");
 		queryString.append(" inner join Sitio as s on s.id.cveClipro = c.id.cveClipro and s.id.cveCampana = c.id.cveCampana");
 		queryString.append(" inner join Plaza as p on p.cvePlaza= s.id.cvePlaza");
+		queryString.append(" where 1=1 ");
 
-		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
-			queryString.append(" where ");
-			queryString.append(" lower(c.id.cveClipro) like lower(:cliente) ");
+//		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
+//			queryString.append(" and ");
+//			queryString.append(" lower(c.id.cveClipro) like lower(:cve_cliente) ");
+//		}
+//		if (((FiltrosSitios) filtrosSitios).getClipro() != null && ((FiltrosSitios) filtrosSitios).getClipro().length() > 0) {
+//			queryString.append(" and ");
+//			queryString.append(" lower(c.clipro.nombre) like lower(:cliente) ");
+//		}
+		if (((FiltrosSitios) filtrosSitios).getCveSitio() != null && ((FiltrosSitios) filtrosSitios).getCveSitio().length() > 0) {
+			queryString.append(" and ");
+			queryString.append(" lower(s.id.cveSitio) like lower(:cve_sitio) ");
+		}
+		if (((FiltrosSitios) filtrosSitios).getCvePlaza() != null && ((FiltrosSitios) filtrosSitios).getCvePlaza().length() > 0) {
+			queryString.append(" and ");
+			queryString.append(" lower(s.id.cvePlaza) like lower(:cve_plaza) ");
+		}
+		if (((FiltrosSitios) filtrosSitios).getCveCampana() != null && ((FiltrosSitios) filtrosSitios).getCveCampana().length() > 0) {
+			queryString.append(" and ");
+			queryString.append(" lower(s.id.cveCampana) like lower(:cve_campana) ");
 		}
 		
 		queryString.append(" order by s.id.cveSitio");
 
 		q = entityManager.createQuery(queryString.toString()).setHint("org.hibernate.cacheable", Boolean.FALSE);
 
-		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
-			CliPro clipro = new CliPro();
-			clipro.setCveClipro(((FiltrosSitios) filtrosSitios).getCveClipro()+"%");
-			q.setParameter("cliente", Arrays.asList(clipro));
+//		if (((FiltrosSitios) filtrosSitios).getCveClipro() != null && ((FiltrosSitios) filtrosSitios).getCveClipro().length() > 0) {
+//			CliPro clipro = new CliPro();
+//			clipro.setCveClipro(((FiltrosSitios) filtrosSitios).getCveClipro()+"%");
+//			q.setParameter("cve_cliente", Arrays.asList(clipro));
+//		}
+//		if (((FiltrosSitios) filtrosSitios).getClipro() != null && ((FiltrosSitios) filtrosSitios).getClipro().length() > 0) {
+//			CliPro clipro = new CliPro();
+//			clipro.setNombre(((FiltrosSitios) filtrosSitios).getClipro()+"%");
+//			q.setParameter("cliente", Arrays.asList(clipro));
+//		}
+		if (((FiltrosSitios) filtrosSitios).getCveSitio() != null && ((FiltrosSitios) filtrosSitios).getCveSitio().length() > 0) {
+			String cve_sitio = "%"+((FiltrosSitios) filtrosSitios).getCveSitio()+"%";
+			q.setParameter("cve_sitio", Arrays.asList(cve_sitio));
+		}
+		if (((FiltrosSitios) filtrosSitios).getCvePlaza() != null && ((FiltrosSitios) filtrosSitios).getCvePlaza().length() > 0) {
+			String cve_plaza = "%"+((FiltrosSitios) filtrosSitios).getCvePlaza()+"%";
+			q.setParameter("cve_plaza", Arrays.asList(cve_plaza));
+		}
+		if (((FiltrosSitios) filtrosSitios).getCveCampana() != null && ((FiltrosSitios) filtrosSitios).getCveCampana().length() > 0) {
+			String cve_campana = "%"+((FiltrosSitios) filtrosSitios).getCveCampana()+"%";
+			q.setParameter("cve_campana", Arrays.asList(cve_campana));
 		}
 		
 		return q.getResultList();
@@ -132,7 +168,7 @@ public class SitioDao implements MonitorDao {
 		entityManager.getTransaction().begin();
 		
 		Query q = null;
-		StringBuffer queryString = new StringBuffer("update Campana set");
+		StringBuffer queryString = new StringBuffer("update Sitio set");
 		
 		if (((FiltrosSitios) filtrosSitios).getUbicacion()!= null && ((FiltrosSitios) filtrosSitios).getUbicacion().length() > 0) {
 			queryString.append(" ubicacion = :ubicacion,");
@@ -141,7 +177,13 @@ public class SitioDao implements MonitorDao {
 			queryString.append(" iluminacion = :iluminacion,");
 		}
 		if (((FiltrosSitios) filtrosSitios).getStatus()!= null && (((FiltrosSitios) filtrosSitios).getStatus() > 0 && ((FiltrosSitios) filtrosSitios).getStatus() < 3)) {
-			queryString.append(" status = :status ");
+			queryString.append(" status = :status, ");
+		}
+		if (((FiltrosSitios) filtrosSitios).getCveCampana()!= null && ((FiltrosSitios) filtrosSitios).getCveCampana().length() > 0) {
+			queryString.append(" id.cveCampana = :cve_campana, ");
+		}
+		if (((FiltrosSitios) filtrosSitios).getCvePlaza()!= null && ((FiltrosSitios) filtrosSitios).getCvePlaza().length() > 0) {
+			queryString.append(" id.cvePlaza = :cve_plaza ");
 		}
 		queryString.append(" where cve_sitio = :cve_sitio");
 		
@@ -155,7 +197,13 @@ public class SitioDao implements MonitorDao {
 				q.setParameter("iluminacion", Arrays.asList(((FiltrosSitios) filtrosSitios).getIluminacion()));
 			}
 			if (((FiltrosSitios) filtrosSitios).getStatus()!= null && (((FiltrosSitios) filtrosSitios).getStatus() > 0 && ((FiltrosSitios) filtrosSitios).getStatus() < 3)) {
-				q.setParameter("status", Arrays.asList(((FiltrosSitios) filtrosSitios).getCveSitio()));
+				q.setParameter("status", Arrays.asList(((FiltrosSitios) filtrosSitios).getStatus()));
+			}
+			if (((FiltrosSitios) filtrosSitios).getCveCampana()!= null && ((FiltrosSitios) filtrosSitios).getCveCampana().length() > 0) {
+				q.setParameter("cve_campana", Arrays.asList(((FiltrosSitios) filtrosSitios).getCveCampana()));
+			}
+			if (((FiltrosSitios) filtrosSitios).getCvePlaza()!= null && ((FiltrosSitios) filtrosSitios).getCvePlaza().length() > 0) {
+				q.setParameter("cve_plaza", Arrays.asList(((FiltrosSitios) filtrosSitios).getCvePlaza()));
 			}
 			q.setParameter("cve_sitio", Arrays.asList(((FiltrosSitios) filtrosSitios).getCveSitio()));
 			
