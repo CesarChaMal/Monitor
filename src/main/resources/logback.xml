@@ -2,8 +2,10 @@
 <configuration>
 
 	<!--
+	<property name="logs" value="c:/logs" />
+	<property name="logs" value="monitor.log" />
 	<property name="logs" value="logs/" />
-    -->
+    	-->
 	<property name="logs" value="C:/IdeaProjects/Monitor/logs/" />
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
