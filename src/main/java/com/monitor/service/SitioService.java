@@ -22,20 +22,17 @@ public class SitioService {
 
 	public ArrayList<SitioDTO> consultaSitiosActivos(String cveClipro) {
 		ArrayList<Object[]> sitioList = (ArrayList<Object[]>)sitioDao.consultaSitiosActivos(cveClipro);
-		ArrayList<SitioDTO> sitioDTOList = util.getSitioDTO(sitioList);		
-		return sitioDTOList;
+		return util.getSitioDTO(sitioList);
 	}
 	
 	public <T> ArrayList<SitioDTO> consultarSitios(FiltrosSitios filtrosSitios) throws Exception {
 		ArrayList<T[]> sitiosList = (ArrayList<T[]>)sitioDao.consultar(filtrosSitios);
-		ArrayList<SitioDTO> sitioDTOList = util.getSitiosDTO(sitiosList);		
-		return sitioDTOList;
+		return util.getSitiosDTO(sitiosList);
 	}
 	
 	public <T> ArrayList<SitioDTO> consultarTreeSitios(FiltrosSitios filtrosSitios) throws Exception {
 		ArrayList<T[]> sitiosList = (ArrayList<T[]>)sitioDao.consultarTree(filtrosSitios);
-		ArrayList<SitioDTO> sitioDTOList = util.getSitiosTreeDTO(sitiosList);		
-		return sitioDTOList;
+		return util.getSitiosTreeDTO(sitiosList);
 	}
 	
 	public void eliminaSitio(FiltrosSitios filtrosSitios) throws Exception {

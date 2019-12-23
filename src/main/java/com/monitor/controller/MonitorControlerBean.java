@@ -104,13 +104,12 @@ public class MonitorControlerBean implements Serializable {
 		try {
 			System.out.println("se consultan las fotos");
 			fotolistMostrar = (ArrayList<FotoDTO>) fotoService.obtenerFotosPorUsuario(filtrosMonitor);
+            paginacionMonitor = new PaginacionMonitor();
+            paginacionMonitor.setModel(fotolistMostrar);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			LOGGER.error("Error: " , e);
 		}
-		paginacionMonitor = new PaginacionMonitor();
-		paginacionMonitor.setModel(fotolistMostrar);
-
 	}
 
 	public FiltrosMonitor getFiltrosMonitor() {
@@ -119,7 +118,6 @@ public class MonitorControlerBean implements Serializable {
 
 	public void setFiltrosMonitor(FiltrosMonitor filtrosMonitor) {
 		this.filtrosMonitor = filtrosMonitor;
-
 	}
 
 	public Persistencia getPersistencia() {

@@ -3,6 +3,8 @@ Monitor
 ###1. Maven dependencies
 
 ```shell
+echo $JAVA_HOME
+export JAVA_HOME="C:\Program Files\Java\jdk1.8.0_121"
 mvn clean
 mvn install:install-file -Dfile=oracle-jdbc/ojdbc14.jar -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -DgeneratePom=true
 mvn install -X -U
